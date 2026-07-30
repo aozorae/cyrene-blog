@@ -1,0 +1,17 @@
+node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+worker-configuration.d.ts
+wrangler.generated.jsonc
+AGENTS.md
+.admin-password.local
+*.tmp
+login-*.json
+.playwright-cli/
+output/playwright/
+
+.vercel
+.env*

@@ -3,8 +3,14 @@ name: Code quality
 on:
   push:
     branches: [ master ] # Adjust branches as needed
+    paths-ignore:
+      - 'admin/**'
+      - '.github/workflows/deploy-admin.yml'
   pull_request:
     branches: [ master ] # Adjust branches as needed
+    paths-ignore:
+      - 'admin/**'
+      - '.github/workflows/deploy-admin.yml'
 
 jobs:
   quality:

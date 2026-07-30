@@ -3,8 +3,14 @@ name: Build and Check
 on:
   push:
     branches: [ master ] # Adjust branches as needed
+    paths-ignore:
+      - 'admin/**'
+      - '.github/workflows/deploy-admin.yml'
   pull_request:
     branches: [ master ] # Adjust branches as needed
+    paths-ignore:
+      - 'admin/**'
+      - '.github/workflows/deploy-admin.yml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

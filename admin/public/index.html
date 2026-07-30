@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#09090b" />
+    <title>Firefly Admin</title>
+    <link rel="icon" href="/favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <main id="auth-screen" class="auth-layout">
+      <section class="auth-card" aria-labelledby="login-title">
+        <div class="brand-lockup">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M16 4c4.5 3.3 7.2 7.3 7.2 11.2A7.2 7.2 0 1 1 8.8 15.2C8.8 11.3 11.5 7.3 16 4Z" fill="currentColor"/><path d="M16 10.2c2.2 1.8 3.4 3.6 3.4 5.5a3.4 3.4 0 1 1-6.8 0c0-1.9 1.2-3.7 3.4-5.5Z" fill="#09090b"/></svg>
+          </span>
+          <span>FIREFLY <small>ADMIN</small></span>
+        </div>
+        <p class="eyebrow">BLOG CONTROL ROOM</p>
+        <h1 id="login-title">把博客交还给你。</h1>
+        <p class="auth-copy">在一个安静、清晰的工作台里管理站点设置，发布下一篇文章。</p>
+        <form id="login-form" class="stack-form">
+          <input class="sr-only" name="username" autocomplete="username" value="admin" tabindex="-1" aria-hidden="true" />
+          <label for="admin-password">管理密码</label>
+          <input id="admin-password" type="password" autocomplete="current-password" placeholder="输入后台密码" required />
+          <button class="button button-primary" type="submit">进入管理后台 <span aria-hidden="true">↗</span></button>
+          <p id="login-error" class="form-error" role="alert"></p>
+        </form>
+        <p class="auth-note">仅限管理员使用 · 配置变更会提交到 GitHub</p>
+      </section>
+    </main>
+
+    <main id="app-shell" class="app-shell hidden">
+      <aside class="sidebar">
+        <div class="brand-lockup brand-lockup-side">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 4c4.5 3.3 7.2 7.3 7.2 11.2A7.2 7.2 0 1 1 8.8 15.2C8.8 11.3 11.5 7.3 16 4Z" fill="currentColor"/><path d="M16 10.2c2.2 1.8 3.4 3.6 3.4 5.5a3.4 3.4 0 1 1-6.8 0c0-1.9 1.2-3.7 3.4-5.5Z" fill="#09090b"/></svg></span>
+          <span>FIREFLY <small>ADMIN</small></span>
+        </div>
+        <p class="sidebar-label">WORKSPACE</p>
+        <nav class="side-nav" aria-label="后台导航">
+           <button class="nav-item active" data-view="settings"><span class="nav-icon">◎</span><span>站点设置</span></button>
+          <button class="nav-item" data-view="studio"><span class="nav-icon">✦</span><span>配置工作室</span><span class="nav-pill">20+</span></button>
+          <button class="nav-item" data-view="article"><span class="nav-icon">＋</span><span>发布文章</span><span class="nav-pill">NEW</span></button>
+          <button class="nav-item" data-view="dynamic"><span class="nav-icon">◌</span><span>发布动态</span></button>
+          <button class="nav-item" data-view="pending"><span class="nav-icon">☷</span><span>待提交</span><span id="draft-count" class="nav-pill">0</span></button>
+          <button class="nav-item" data-view="activity"><span class="nav-icon">⌁</span><span>提交记录</span></button>
+        </nav>
+        <div class="sidebar-bottom">
+          <a id="blog-link" href="#" target="_blank" rel="noreferrer" class="sidebar-link hidden">查看博客 <span>↗</span></a>
+          <button id="logout-button" class="sidebar-link sidebar-logout">退出登录 <span>→</span></button>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="view-eyebrow">SITE SETTINGS</p>
+            <h2 id="view-title">站点设置</h2>
+          </div>
+          <button id="repo-settings" class="topbar-meta" type="button" title="更改 GitHub 仓库"><span class="status-dot"></span><span id="repo-meta">连接 GitHub 中…</span></button>
+        </header>
+
+        <div id="setup-gate" class="view hidden">
+          <div class="section-intro"><span class="section-kicker">FIRST RUN</span><p>连接一个你有权管理的 GitHub 博客仓库。仓库内容始终是发布后的真实来源。</p></div>
+          <form id="setup-form" class="panel setup-panel">
+            <div class="panel-heading"><div><p class="panel-kicker">REPOSITORY</p><h3>连接博客仓库</h3></div><span class="panel-index">S1</span></div>
+            <div class="field-grid">
+              <div class="field"><label for="setup-owner">仓库所有者</label><input id="setup-owner" required placeholder="your-name" /></div>
+              <div class="field"><label for="setup-repo">仓库名称</label><input id="setup-repo" required placeholder="my-blog" /></div>
+              <div class="field field-full"><label for="setup-branch">发布分支</label><input id="setup-branch" required value="main" /></div>
+            </div>
+            <div class="form-actions"><p id="setup-status" class="inline-status"></p><button id="setup-cancel" class="button button-quiet hidden" type="button">取消</button><button class="button button-primary" type="submit">验证并连接 <span>↗</span></button></div>
+          </form>
+        </div>
+
+        <div id="view-settings" class="view view-active">
+          <div class="section-intro"><span class="section-kicker">01 / FOUNDATION</span><p>先把博客的语气、身份和入口定下来。保存后会生成一个 GitHub 提交，博客由 Actions 自动部署。</p></div>
+          <form id="settings-form" class="settings-grid">
+            <section class="panel panel-wide">
+              <div class="panel-heading"><div><p class="panel-kicker">IDENTITY</p><h3>博客身份</h3></div><span class="panel-index">A1</span></div>
+              <div class="field-grid">
+                <div class="field"><label for="site-title">站点标题</label><input id="site-title" required maxlength="80" /></div>
+                <div class="field"><label for="site-subtitle">副标题</label><input id="site-subtitle" required maxlength="120" /></div>
+                <div class="field field-full"><label for="site-url">正式地址</label><input id="site-url" type="url" required placeholder="https://example.com" /></div>
+                <div class="field field-full"><label for="site-description">站点描述</label><textarea id="site-description" rows="3" maxlength="500"></textarea></div>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-heading"><div><p class="panel-kicker">PROFILE</p><h3>个人资料</h3></div><span class="panel-index">A2</span></div>
+              <div class="field"><label for="profile-name">显示名称</label><input id="profile-name" required maxlength="80" /></div>
+              <div class="field"><label for="profile-bio">个人签名</label><textarea id="profile-bio" rows="3" maxlength="180"></textarea></div>
+              <div class="field"><label for="github-url">GitHub 地址</label><input id="github-url" type="url" required /></div>
+            </section>
+            <section class="panel">
+              <div class="panel-heading"><div><p class="panel-kicker">ANNOUNCEMENT</p><h3>首页公告</h3></div><span class="panel-index">A3</span></div>
+              <div class="field"><label for="announcement">公告内容</label><textarea id="announcement" rows="4" maxlength="240"></textarea></div>
+              <div class="field"><label for="announcement-link">公告链接</label><input id="announcement-link" /></div>
+            </section>
+            <section class="panel panel-wide">
+              <div class="panel-heading"><div><p class="panel-kicker">NAVIGATION</p><h3>页面入口</h3></div><span class="panel-index">A4</span></div>
+              <p class="panel-help">音乐和动态保持开启。其他需要个人数据的页面先关闭，配置完成后随时可以重新打开。</p>
+              <div id="page-toggles" class="toggle-grid"></div>
+            </section>
+            <section class="panel panel-wide">
+              <div class="panel-heading"><div><p class="panel-kicker">SUPPORT</p><h3>打赏方式</h3></div><span class="panel-index">A5</span></div>
+              <p class="panel-help">这里不会存放模板作者的收款码。添加自己的二维码 URL 或外部收款链接后，再打开“打赏”页面入口。</p>
+              <div id="sponsor-methods" class="method-list"></div>
+              <button id="add-method" class="button button-quiet" type="button">＋ 添加打赏方式</button>
+            </section>
+            <div class="form-actions panel-wide"><p id="settings-status" class="inline-status"></p><button id="settings-draft-save" class="button button-quiet" type="button">保存草稿</button><button class="button button-primary" type="submit">提交到 GitHub <span>↗</span></button></div>
+          </form>
+        </div>
+
+        <div id="view-studio" class="view hidden">
+          <div class="section-intro"><span class="section-kicker">02 / CONFIG STUDIO</span><p>把 Firefly 文档里的配置入口集中到这里。选择一个配置卡片，直接填写表单并提交，不需要打开 TypeScript 文件。</p></div>
+          <section class="panel studio-toolbar"><div class="field"><label for="studio-config-select">配置模块</label><select id="studio-config-select"></select></div><div class="studio-toolbar-copy"><strong>结构化配置</strong><span>保存时只更新当前配置模块，并保留其他文件内容。</span></div></section>
+          <section class="panel"><div id="studio-editor" class="studio-editor"></div><div class="form-actions"><p id="studio-status" class="inline-status"></p><button id="studio-draft-save" class="button button-quiet" type="button">保存草稿</button><button id="studio-submit" class="button button-primary" type="button">提交到 GitHub <span>↗</span></button></div></section>
+        </div>
+
+        <div id="view-article" class="view hidden">
+          <div class="section-intro"><span class="section-kicker">02 / PUBLISH</span><p>从 GitHub 读取已发布文章，编辑期间可以保存到 D1 草稿，再明确提交到 GitHub。</p></div>
+          <form id="article-form" class="article-layout">
+            <section class="panel article-main"><div class="panel-heading"><div><p class="panel-kicker">ARTICLE EDITOR</p><h3 id="article-form-title">新文章</h3></div><button id="article-reset" class="button button-quiet compact-button" type="button">新建</button></div>
+              <div class="field"><label for="article-title">标题</label><input id="article-title" required maxlength="120" placeholder="给文章一个清晰的标题" /></div>
+              <div class="field"><label for="article-description">摘要</label><input id="article-description" maxlength="240" placeholder="会显示在文章卡片和 RSS 中" /></div>
+              <div class="field"><label for="article-content">正文（Markdown）</label><textarea id="article-content" class="article-editor" required placeholder="# 从这里开始\n\n记录你的想法、过程和结论。"></textarea></div>
+            </section>
+            <aside class="panel article-side"><div class="panel-heading"><div><p class="panel-kicker">METADATA</p><h3>文章信息</h3></div><span class="panel-index">B2</span></div>
+              <div class="field"><label for="article-slug">Slug（可选）</label><input id="article-slug" placeholder="自动根据标题生成" /></div>
+              <div class="field"><label for="article-directory">目录（可选）</label><input id="article-directory" placeholder="guide" /></div>
+              <div class="field"><label for="article-category">分类</label><input id="article-category" value="随笔" /></div>
+              <div class="field"><label for="article-tags">标签</label><input id="article-tags" placeholder="Astro, 学习笔记" /></div>
+              <div class="field"><label for="article-image">封面图片地址</label><input id="article-image" placeholder="https://... 或相对路径" /></div>
+              <div class="field"><label for="article-published">发布时间</label><input id="article-published" type="date" /></div>
+              <input id="article-original-path" type="hidden" /><input id="article-draft-id" type="hidden" />
+              <div class="publish-note"><strong>提交后会发生什么？</strong><span>后台创建 GitHub commit，静态托管平台检测到提交后自动部署。</span></div>
+              <p id="article-status" class="inline-status"></p><div class="button-stack"><button id="article-draft-save" class="button button-quiet button-full" type="button">保存草稿</button><button class="button button-primary button-full" type="submit">提交到 GitHub <span>↗</span></button></div>
+            </aside>
+          </form>
+          <section class="panel content-list-panel"><div class="panel-heading"><div><p class="panel-kicker">ARTICLE LIBRARY</p><h3>已发布文章</h3></div><span class="panel-index">B3</span></div><div id="article-list" class="content-list"></div></section>
+        </div>
+
+        <div id="view-dynamic" class="view hidden">
+          <div class="section-intro"><span class="section-kicker">03 / DYNAMIC</span><p>动态内容会写入 `src/content/dynamic/`，发布后由 GitHub Actions 自动构建；已有动态也可以在这里清理。</p></div>
+          <form id="dynamic-form" class="article-layout">
+            <section class="panel article-main"><div class="panel-heading"><div><p class="panel-kicker">NEW DYNAMIC</p><h3>发布一条动态</h3></div><span class="panel-index">D1</span></div><div class="field"><label for="dynamic-content">动态内容（Markdown）</label><textarea id="dynamic-content" class="article-editor" required placeholder="记录此刻的想法、链接或图片。"></textarea></div></section>
+            <aside class="panel article-side"><div class="panel-heading"><div><p class="panel-kicker">TIMESTAMP</p><h3>发布时间</h3></div><span class="panel-index">D2</span></div><div class="field"><label for="dynamic-published">发布时间（可选）</label><input id="dynamic-published" type="datetime-local" /></div><input id="dynamic-draft-id" type="hidden" /><div class="publish-note"><strong>提交后会发生什么？</strong><span>后台创建一条动态 Markdown 文件，静态托管平台自动部署。</span></div><p id="dynamic-status" class="inline-status"></p><div class="button-stack"><button id="dynamic-draft-save" class="button button-quiet button-full" type="button">保存草稿</button><button class="button button-primary button-full" type="submit">提交到 GitHub <span>↗</span></button></div></aside>
+          </form>
+          <section class="panel content-list-panel"><div class="panel-heading"><div><p class="panel-kicker">DYNAMIC FEED</p><h3>已有动态</h3></div><span class="panel-index">D3</span></div><div id="dynamic-list" class="content-list"></div></section>
+        </div>
+
+        <div id="view-pending" class="view hidden">
+          <div class="section-intro"><span class="section-kicker">STAGED CHANGES</span><p>这里列出保存在 D1 中、尚未提交到 GitHub 的文章、动态和配置草稿。</p></div>
+          <section class="panel"><div class="pending-toolbar"><label class="pending-select-all"><input id="pending-select-all" type="checkbox" /> 全选</label><button id="pending-submit" class="button button-primary" type="button">提交所选到 GitHub <span>↗</span></button></div><div id="pending-list" class="content-list"></div></section>
+        </div>
+
+        <div id="view-activity" class="view hidden">
+          <div class="section-intro"><span class="section-kicker">04 / ACTIVITY</span><p>所有配置保存、文章发布和动态发布都会留下简短记录。GitHub 提交是最终事实来源。</p></div>
+          <section class="panel"><div class="panel-heading"><div><p class="panel-kicker">GITHUB COMMITS</p><h3>最近提交</h3></div><span class="panel-index">C1</span></div><div id="commit-list" class="activity-list"></div></section>
+          <section class="panel"><div class="panel-heading"><div><p class="panel-kicker">AUDIT LOG</p><h3>后台操作</h3></div><span class="panel-index">C2</span></div><div id="audit-list" class="activity-list"></div></section>
+        </div>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <dialog id="source-dialog" class="source-dialog"><div class="dialog-heading"><strong id="source-title">源码</strong><button id="source-close" class="button button-quiet compact-button" type="button">关闭</button></div><pre id="source-content"></pre></dialog>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

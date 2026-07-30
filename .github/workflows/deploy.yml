@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - 'admin/**'
+      - '.github/workflows/deploy-admin.yml'
   workflow_dispatch:
 
 # Pages 部署需要的权限
