@@ -122,7 +122,7 @@ function formatDate(timestamp: number): string {
 							{formatDate(entry.published)}
 						</time>
 						{#if entry.pinned}
-							<span class="ml-auto inline-flex items-center gap-0.5 text-[10px] px-1 py-0.5 rounded bg-(--primary)/10 text-(--primary) font-medium">
+							<span class="ml-auto inline-flex items-center gap-0.5 text-[10px] px-1 py-0.5 rounded bg-(--primary-surface)/10 text-(--primary) font-medium">
 								<svg class="size-3" fill="currentColor" viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2z"/></svg>
 								{i18n(I18nKey.pinned)}
 							</span>

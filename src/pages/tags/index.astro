@@ -81,9 +81,9 @@ const topMaxCount = topTags.length > 0 ? topTags[0].count : 1;
                                     {t.count} {i18n(I18nKey.postsCount)}
                                 </span>
                             </div>
-                            <div class="h-2 rounded-full bg-(--primary)/10 overflow-hidden">
+                            <div class="h-2 rounded-full bg-(--primary-surface)/10 overflow-hidden">
                                 <div
-                                    class="h-full rounded-full bg-(--primary) transition-all duration-500"
+                                    class="h-full rounded-full bg-(--primary-surface) transition-all duration-500"
                                     style={`width: ${(t.count / topMaxCount) * 100}%`}
                                 />
                             </div>

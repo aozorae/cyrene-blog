@@ -29,7 +29,7 @@ const totalPosts = categories.reduce((sum, cat) => sum + cat.count, 0);
                     class="card-base p-6 flex items-center gap-4 group onload-animation"
                     style={`animation-delay: calc(var(--content-delay) + ${index * 50}ms);`}
                 >
-                    <div class="shrink-0 w-14 h-14 rounded-full bg-(--primary)/10 group-hover:bg-(--primary)/20 flex items-center justify-center transition-colors">
+                    <div class="shrink-0 w-14 h-14 rounded-full bg-(--primary-surface)/10 group-hover:bg-(--primary-surface)/20 flex items-center justify-center transition-colors">
                         <Icon is:inline
                             name="material-symbols:folder-open"
                             class="text-3xl text-(--primary)"

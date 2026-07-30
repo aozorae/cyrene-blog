@@ -277,9 +277,9 @@ body:has(#wallpaper-wrapper) .dropdown-content,
 body:has(#wallpaper-wrapper) .float-panel,
 body.wallpaper-transparent .dropdown-content,
 body.wallpaper-transparent .float-panel {
-    background: rgba(255, 255, 255, 0.95) !important;
+    background: color-mix(in srgb, var(--card-bg) 95%, transparent) !important;
     box-shadow: var(--shadow-md) !important;
-    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid var(--line-divider) !important;
 }
 
 /* 暗色主题 */
@@ -289,9 +289,9 @@ body.wallpaper-transparent .float-panel {
 :root.dark body:has(#wallpaper-wrapper) .float-panel,
 :root.dark body.wallpaper-transparent .dropdown-content,
 :root.dark body.wallpaper-transparent .float-panel {
-    background: rgba(23, 23, 23, 0.95) !important;
+    background: color-mix(in srgb, var(--card-bg) 95%, transparent) !important;
     box-shadow: var(--shadow-md) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid var(--line-divider) !important;
 }
 
 /* ============================================

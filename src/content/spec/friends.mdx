@@ -41,8 +41,8 @@ export const notes = [
                 class="w-full h-full object-cover"
               />
             </div>
-            <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-(--primary) flex items-center justify-center shadow">
-              <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-(--primary-surface) flex items-center justify-center shadow">
+              <svg class="w-3 h-3 text-(--primary-contrast)" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             </div>
           </div>
           <div>
@@ -79,7 +79,7 @@ export const notes = [
     <div class="rounded-2xl border border-(--line-divider) overflow-hidden flex flex-col">
       <div class="p-5 sm:p-6 flex flex-col flex-1">
         <h3 class="text-lg font-bold mb-5 flex items-center gap-2">
-          <span class="w-7 h-7 rounded-lg bg-(--primary)/10 flex items-center justify-center text-(--primary) text-sm">
+          <span class="w-7 h-7 rounded-lg bg-(--primary-surface)/10 flex items-center justify-center text-(--primary) text-sm">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
           </span>
           申请友链
@@ -89,7 +89,7 @@ export const notes = [
           {/* Step 1 */}
           <div class="flex gap-3.5">
             <div class="flex flex-col items-center">
-              <div class="w-7 h-7 rounded-full bg-(--primary) text-white text-xs font-bold flex items-center justify-center shrink-0">1</div>
+              <div class="w-7 h-7 rounded-full bg-(--primary-surface) text-(--primary-contrast) text-xs font-bold flex items-center justify-center shrink-0">1</div>
               <div class="w-0.5 flex-1 bg-(--line-divider) my-1.5"></div>
             </div>
             <div class="pb-4">
@@ -101,7 +101,7 @@ export const notes = [
           {/* Step 2 */}
           <div class="flex gap-3.5">
             <div class="flex flex-col items-center">
-              <div class="w-7 h-7 rounded-full bg-(--primary) text-white text-xs font-bold flex items-center justify-center shrink-0">2</div>
+              <div class="w-7 h-7 rounded-full bg-(--primary-surface) text-(--primary-contrast) text-xs font-bold flex items-center justify-center shrink-0">2</div>
               <div class="w-0.5 flex-1 bg-(--line-divider) my-1.5"></div>
             </div>
             <div class="pb-4">
@@ -120,7 +120,7 @@ export const notes = [
           {/* Step 3 */}
           <div class="flex gap-3.5">
             <div class="flex flex-col items-center">
-              <div class="w-7 h-7 rounded-full bg-(--primary) text-white text-xs font-bold flex items-center justify-center shrink-0">3</div>
+              <div class="w-7 h-7 rounded-full bg-(--primary-surface) text-(--primary-contrast) text-xs font-bold flex items-center justify-center shrink-0">3</div>
             </div>
             <div>
               <p class="font-semibold text-sm mb-1">等待审核</p>
@@ -142,7 +142,7 @@ export const notes = [
       <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
         {notes.map((item) => (
           <div class="flex items-baseline gap-2.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-(--primary) shrink-0 translate-y-[-2px]"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-(--primary-surface) shrink-0 translate-y-[-2px]"></span>
             <p><strong class="text-neutral-800 dark:text-neutral-200">{item.title}</strong>：{item.content}</p>
           </div>
         ))}

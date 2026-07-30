@@ -51,7 +51,7 @@ const description =
       <div class="mb-4">
         <div class="flex items-center gap-3 mb-3">
           <div
-            class="h-8 w-8 rounded-lg bg-(--primary) flex items-center justify-center text-white dark:text-black/70"
+            class="h-8 w-8 rounded-lg bg-(--primary-surface) flex items-center justify-center text-(--primary-contrast)"
           >
             <Icon is:inline name="material-symbols:group" class="text-[1.5rem]" />
           </div>
@@ -124,7 +124,7 @@ const description =
               class="friend-card group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden"
             >
               {/* 背景装饰 - 仅悬停显示 */}
-              <div class="absolute inset-0 bg-(--primary) opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none" />
+              <div class="absolute inset-0 bg-(--primary-surface) opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none" />
 
               {/* 头像 */}
               <div class="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">

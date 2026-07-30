@@ -376,7 +376,7 @@ const postUrlPrefix = url("/posts/");
           data-has-post="${hasPost}"
         >
           ${day || ''}
-          ${hasPost ? '<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-(--primary)"></span>' : ''}
+          ${hasPost ? '<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-(--primary-surface)"></span>' : ''}
           ${hasPost && count > 1 ? `<span class="absolute top-0 right-0 text-[10px] text-(--primary) font-bold">${count}</span>` : ''}
         </div>
       `;
@@ -420,7 +420,7 @@ const postUrlPrefix = url("/posts/");
         classes.push("text-neutral-700 dark:text-neutral-300");
       }
       
-      const dotHtml = hasPost ? '<span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-(--primary)"></span>' : '';
+      const dotHtml = hasPost ? '<span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-(--primary-surface)"></span>' : '';
       
       return `<div class="${classes.join(' ')}" data-month="${index}">${name}${dotHtml}</div>`;
     }).join('');
@@ -448,7 +448,7 @@ const postUrlPrefix = url("/posts/");
       } else {
         classes.push("text-neutral-700 dark:text-neutral-300");
       }
-      return `<div class="${classes.join(' ')}" data-year="${year}">${year}<span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-(--primary)"></span></div>`;
+      return `<div class="${classes.join(' ')}" data-year="${year}">${year}<span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-(--primary-surface)"></span></div>`;
     }).join('');
 
     container.querySelectorAll('[data-year]').forEach(el => {

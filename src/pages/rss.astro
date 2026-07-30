@@ -15,8 +15,8 @@ const recentPosts = posts.slice(0, 6);
         <!-- RSS 标题和介绍 -->
         <div class="card-base rounded-(--radius-large) p-8 mb-6">
             <div class="text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-(--primary) rounded-2xl mb-4">
-                    <Icon is:inline name="material-symbols:rss-feed" class="text-white text-3xl" />
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-(--primary-surface) rounded-2xl mb-4">
+                    <Icon is:inline name="material-symbols:rss-feed" class="text-(--primary-contrast) text-3xl" />
                 </div>
                 <div class="text-3xl font-bold text-(--primary) mb-3">{i18n(I18nKey.rss)}</div>
                 <p class="text-75 max-w-2xl mx-auto">
@@ -29,8 +29,8 @@ const recentPosts = posts.slice(0, 6);
         <div class="card-base rounded-(--radius-large) p-6 mb-6">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex items-center">
-                    <div class="w-12 h-12 bg-(--primary) rounded-xl flex items-center justify-center mr-4">
-                        <Icon is:inline name="material-symbols:link" class="text-white text-xl" />
+                    <div class="w-12 h-12 bg-(--primary-surface) rounded-xl flex items-center justify-center mr-4">
+                        <Icon is:inline name="material-symbols:link" class="text-(--primary-contrast) text-xl" />
                     </div>
                     <div>
                         <h3 class="font-semibold text-90 mb-1">{i18n(I18nKey.rssLink)}</h3>
@@ -43,7 +43,7 @@ const recentPosts = posts.slice(0, 6);
                     </code>
                     <button 
                         id="copy-rss-btn"
-                        class="px-4 py-2 bg-(--primary) text-white rounded-lg hover:opacity-80 transition-all duration-200 font-medium text-sm whitespace-nowrap"
+                        class="px-4 py-2 bg-(--primary-surface) text-(--primary-contrast) rounded-lg hover:opacity-80 transition-all duration-200 font-medium text-sm whitespace-nowrap"
                         data-url={`${Astro.site}rss.xml`}
                         data-copied-text={i18n(I18nKey.rssCopied)}
                         data-failed-text={i18n(I18nKey.rssCopyFailed)}
