@@ -5,50 +5,50 @@
 
 /* ===== 主题相关变量 ===== */
 :root
-  --primary: #963657
-  --primary-rgb: 150, 54, 87
-  --primary-surface: unquote("color-mix(in srgb, #C64D79 80%, #963657 20%)")
-  --primary-contrast: #FFFCFD
-  --primary-hover: #963657
+  --primary: #B65A7A
+  --primary-rgb: 182, 90, 122
+  --primary-surface: #D787A3
+  --primary-contrast: #3C3237
+  --primary-hover: #B65A7A
   --page-bg: #FFF7FA
   --card-bg: #FFFCFD
   --card-bg-transparent: unquote("rgb(255 252 253 / var(--card-transparent-opacity, 0.6))")
 
-  --btn-content: #963657
-  --btn-regular-bg: #F5CCDB
-  --btn-regular-bg-hover: #F1B8CD
-  --btn-regular-bg-active: #E68EAD
+  --btn-content: #87445B
+  --btn-regular-bg: #F7DDE7
+  --btn-regular-bg-hover: #F3D6E1
+  --btn-regular-bg-active: #E9ACC0
 
-  --btn-plain-bg-hover: #F9DFE9
-  --btn-plain-bg-active: #F5CCDB
+  --btn-plain-bg-hover: #FBEAF1
+  --btn-plain-bg-active: #F7DDE7
 
   --btn-card-bg-hover: #FDF0F5
-  --btn-card-bg-active: #F9DFE9
+  --btn-card-bg-active: #FBEAF1
 
   --enter-btn-bg: var(--btn-regular-bg)
   --enter-btn-bg-hover: var(--btn-regular-bg-hover)
   --enter-btn-bg-active: var(--btn-regular-bg-active)
   
   --deep-text: #3C3237
-  --title-active: #C64D79
+  --title-active: #B65A7A
   
-  --line-divider: #EEC4D3
-  --line-color: #EEC4D3
-  --meta-divider: unquote("color-mix(in srgb, #EEC4D3 78%, transparent)")
+  --line-divider: #EDD3DD
+  --line-color: #EDD3DD
+  --meta-divider: unquote("color-mix(in srgb, #EDD3DD 78%, transparent)")
   --content-meta: unquote("color-mix(in srgb, #3C3237 70%, transparent)")
 
   --inline-code-bg: var(--btn-regular-bg)
   --inline-code-color: var(--btn-content)
   --muted: #FDF0F5
-  --selection-bg: #F1B8CD
+  --selection-bg: #F3D6E1
   --codeblock-bg: oklch(0.17 0.015 var(--hue))
   --codeblock-topbar-bg: oklch(0.3 0.02 var(--hue))
   
   --license-block-bg: #FDF0F5
 
-  --link-underline: #F5CCDB
-  --link-hover: #F1B8CD
-  --link-active: #E68EAD
+  --link-underline: #F7DDE7
+  --link-hover: #F3D6E1
+  --link-active: #E9ACC0
   
   --float-panel-bg: #FFFCFD
 
@@ -74,15 +74,15 @@
   --admonitions-color-caution: oklch(0.6 0.2 25)
   
   /* TOC相关变量 */
-  --toc-badge-bg: #F5CCDB
-  --toc-btn-hover: #F1B8CD
-  --toc-btn-active: #E68EAD
-  --toc-indicator-bg: #F9DFE9
+  --toc-badge-bg: #F7DDE7
+  --toc-btn-hover: #F3D6E1
+  --toc-btn-active: #E9ACC0
+  --toc-indicator-bg: #FBEAF1
   --toc-width: calc((100vw - var(--page-width)) / 2 - 1rem)
-  --toc-item-active: #C64D79
+  --toc-item-active: #D787A3
 
   /* Live2D 消息框变量 */
-  --l2d-msg-bg: #E68EAD
+  --l2d-msg-bg: #E9ACC0
 
   /* 主题色选择条渐变 */
   --color-selection-bar: linear-gradient(to right, oklch(0.80 0.10 0), oklch(0.80 0.10 30), oklch(0.80 0.10 60), oklch(0.80 0.10 90), oklch(0.80 0.10 120), oklch(0.80 0.10 150), oklch(0.80 0.10 180), oklch(0.80 0.10 210), oklch(0.80 0.10 240), oklch(0.80 0.10 270), oklch(0.80 0.10 300), oklch(0.80 0.10 330), oklch(0.80 0.10 360))
@@ -93,43 +93,43 @@
 
 /* 暗色主题变量 */
 :root.dark
-  --primary: #F1B8CD
-  --primary-rgb: 241, 184, 205
-  --primary-surface: #F1B8CD
+  --primary: #F3C4D4
+  --primary-rgb: 243, 196, 212
+  --primary-surface: #F3C4D4
   --primary-contrast: #3C3237
-  --primary-hover: #E68EAD
+  --primary-hover: #E9ACC0
   --page-bg: #3C3237
   --card-bg: unquote("color-mix(in srgb, #3C3237 88%, #963657 12%)")
   --card-bg-transparent: unquote("rgb(60 50 55 / var(--card-transparent-opacity, 0.6))")
 
-  --btn-content: #F5CCDB
-  --btn-regular-bg: unquote("color-mix(in srgb, #3C3237 65%, #963657 35%)")
-  --btn-regular-bg-hover: unquote("color-mix(in srgb, #3C3237 50%, #963657 50%)")
-  --btn-regular-bg-active: #963657
+  --btn-content: #F7DDE7
+  --btn-regular-bg: unquote("color-mix(in srgb, #3C3237 65%, #B65A7A 35%)")
+  --btn-regular-bg-hover: unquote("color-mix(in srgb, #3C3237 50%, #B65A7A 50%)")
+  --btn-regular-bg-active: #B65A7A
 
-  --btn-plain-bg-hover: unquote("color-mix(in srgb, #3C3237 75%, #963657 25%)")
-  --btn-plain-bg-active: unquote("color-mix(in srgb, #3C3237 60%, #963657 40%)")
+  --btn-plain-bg-hover: unquote("color-mix(in srgb, #3C3237 75%, #B65A7A 25%)")
+  --btn-plain-bg-active: unquote("color-mix(in srgb, #3C3237 60%, #B65A7A 40%)")
 
-  --btn-card-bg-hover: unquote("color-mix(in srgb, #3C3237 85%, #963657 15%)")
-  --btn-card-bg-active: unquote("color-mix(in srgb, #3C3237 70%, #963657 30%)")
+  --btn-card-bg-hover: unquote("color-mix(in srgb, #3C3237 85%, #B65A7A 15%)")
+  --btn-card-bg-active: unquote("color-mix(in srgb, #3C3237 70%, #B65A7A 30%)")
 
   --deep-text: #FFF7FA
-  --title-active: #F1B8CD
-  --line-divider: unquote("color-mix(in srgb, #EEC4D3 22%, transparent)")
-  --line-color: unquote("color-mix(in srgb, #EEC4D3 28%, transparent)")
-  --meta-divider: unquote("color-mix(in srgb, #EEC4D3 36%, transparent)")
+  --title-active: #F3C4D4
+  --line-divider: unquote("color-mix(in srgb, #EDD3DD 22%, transparent)")
+  --line-color: unquote("color-mix(in srgb, #EDD3DD 28%, transparent)")
+  --meta-divider: unquote("color-mix(in srgb, #EDD3DD 36%, transparent)")
   --content-meta: unquote("color-mix(in srgb, #FFF7FA 68%, transparent)")
 
   --muted: unquote("color-mix(in srgb, #3C3237 82%, #963657 18%)")
-  --selection-bg: #963657
+  --selection-bg: #B65A7A
   --codeblock-bg: oklch(0.17 0.015 var(--hue))
   --codeblock-topbar-bg: oklch(0.12 0.015 var(--hue))
   
   --license-block-bg: var(--codeblock-bg)
 
-  --link-underline: #963657
-  --link-hover: #C64D79
-  --link-active: #E68EAD
+  --link-underline: #B65A7A
+  --link-hover: #D787A3
+  --link-active: #E9ACC0
   
   --float-panel-bg: var(--card-bg)
 
@@ -151,10 +151,10 @@
   --toc-btn-hover: var(--btn-regular-bg-hover)
   --toc-btn-active: var(--btn-regular-bg-active)
   --toc-indicator-bg: var(--btn-plain-bg-hover)
-  --toc-item-active: #E68EAD
+  --toc-item-active: #E9ACC0
 
   /* Live2D 消息框变量 - 暗色主题 */
-  --l2d-msg-bg: #963657
+  --l2d-msg-bg: #B65A7A
 
   /* 主题色选择条渐变 - 暗色主题 */
   --color-selection-bar: linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30), oklch(0.70 0.10 60), oklch(0.70 0.10 90), oklch(0.70 0.10 120), oklch(0.70 0.10 150), oklch(0.70 0.10 180), oklch(0.70 0.10 210), oklch(0.70 0.10 240), oklch(0.70 0.10 270), oklch(0.70 0.10 300), oklch(0.70 0.10 330), oklch(0.70 0.10 360))

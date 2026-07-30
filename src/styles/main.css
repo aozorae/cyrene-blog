@@ -452,10 +452,10 @@ body {
 
     .btn-regular-dark {
         @apply flex items-center justify-center
-        bg-[#963657] hover:bg-[#C64D79] active:bg-[#E68EAD] text-[#FFFCFD]
+        bg-[#E09AAF] hover:bg-[#DB8EA8] active:bg-[#D684A0] text-[#3C3237]
     }
     .btn-regular-dark.success {
-        @apply bg-[#C64D79]
+        @apply bg-[#D684A0]
     }
 }
 
