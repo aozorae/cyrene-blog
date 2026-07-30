@@ -1,84 +1,105 @@
-
-<img src="./docs/images/1131.png" width = "350" height = "500" alt="Firefly" align=right />
-
 <div align="center">
 
-# 流萤 / Firefly 
-> 一款清新美观的 Astro 静态博客主题模板
+# 昔涟 / Cyrene
+> 一款基于 Astro 与 Firefly 深度定制，并配有独立可视化后台的个人博客
 > 
 > ![Node.js >= 22](https://img.shields.io/badge/node.js-%3E%3D22-brightgreen) 
 ![pnpm >= 9](https://img.shields.io/badge/pnpm-%3E%3D9-blue)
 ![Astro](https://img.shields.io/badge/Astro-7.1.3-orange)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue)
 >
-> [![Stars](https://img.shields.io/github/stars/CuteLeaf/Firefly?style=social)](https://github.com/CuteLeaf/Firefly/stargazers)
-[![Forks](https://img.shields.io/github/forks/CuteLeaf/Firefly?style=social)](https://github.com/CuteLeaf/Firefly/network/members)
-[![Issues](https://img.shields.io/github/issues/CuteLeaf/Firefly)](https://github.com/CuteLeaf/Firefly/issues)
+> [![Stars](https://img.shields.io/github/stars/aozorae/cyrene-blog?style=social)](https://github.com/aozorae/cyrene-blog/stargazers)
+[![Forks](https://img.shields.io/github/forks/aozorae/cyrene-blog?style=social)](https://github.com/aozorae/cyrene-blog/network/members)
+[![Issues](https://img.shields.io/github/issues/aozorae/cyrene-blog)](https://github.com/aozorae/cyrene-blog/issues)
 > 
-> [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z41NQALY)
->
-> **QQ交流群：[1087127207](https://qm.qq.com/q/ZGsFa8qX2G)**
-> 
-> ![GitHub License](https://img.shields.io/github/license/CuteLeaf/Firefly)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/CuteLeaf/Firefly)
-[![爱发电打赏](https://img.shields.io/badge/爱发电-打赏作者-ff69b4.svg)](https://ifdian.net/a/cuteleaf)
+> ![GitHub License](https://img.shields.io/github/license/aozorae/cyrene-blog)
 
 </div>
 
-
 ---
+
 📖 README：
 **[简体中文](README.md)** | **[繁體中文](docs/README.zh-TW.md)** | **[English](README.en.md)** | **[日本語](docs/README.ja.md)** 
 
 🚀 快速指南：
-[**🖥️在线预览**](https://firefly.cuteleaf.cn/) /
-[**📝使用文档**](https://docs-firefly.cuteleaf.cn/) /
-[**🍀我的博客**](https://blog.cuteleaf.cn) 
+[**🖥️ 在线预览**](https://cyrene-blog.vercel.app/) /
+[**📝 使用文档**](https://github.com/aozorae/cyrene-docs) /
+[**📦 项目仓库**](https://github.com/aozorae/cyrene-blog)
 
 ⚡ 静态站点生成: 基于 Astro 的超快加载速度和 SEO 优化
 
-🎨 现代化设计: 简洁美观的界面，支持自定义主题色
+🎨 奶油樱花粉: 在 Firefly 原有布局上调整为更柔和、清爽的个人化配色
 
 📱 移动友好: 完美的响应式体验，移动端专项优化
 
-🔧 高度可配置: 大部分功能模块均可通过配置文件自定义
-
-<table width="100%" align="center">
-  <tr>
-    <td colspan="3" align="center">
-      <img src="./docs/images/1.webp" >
-      <br>横幅模式</td>
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><img src="./docs/images/3.webp" width="300"><br>透明模式</td>
-    <td align="center"><img src="./docs/images/2.webp" width="300"><br>全屏壁纸模式</td>
-    <td align="center"><img src="./docs/images/4.webp" width="300"><br>纯色模式</td>
-  </tr>
-</table>
-<img alt="Lighthouse" src="./docs/images/Lighthouse.png" />
+🧭 可视化后台: 不需要手动改配置文件，也能发布内容、管理草稿和调整站点
 
 >[!TIP]
 >
->Firefly 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。
+>Cyrene 是在 [Firefly](https://github.com/CuteLeaf/Firefly) 基础上继续定制的 Astro 个人博客。前端保留了 Firefly 丰富的页面、布局与 Markdown 能力，并调整为奶油樱花粉配色；同时新增独立的 Cloudflare Workers 管理后台，让不熟悉 Git、Markdown 和 TypeScript 的用户也能通过图形界面维护博客。
 >
->**如果你参考或使用了 Firefly 的组件设计和相关代码，请注明来自 Firefly。**
+>博客前端与管理后台相互独立。即使后台暂时不可用，已经部署的静态博客仍可正常访问。
 >
->Firefly 也保留了原版 fuwari 的布局，可根据自己的喜好在配置文件中自由切换。
+>GitHub 仓库仍是已发布文章、动态和配置的唯一真实来源；D1 只保存后台设置、草稿、登录限流和审计记录。
 >
->**更多布局配置及演示请查看：[Firefly 布局系统详解](https://firefly.cuteleaf.cn/posts/guide/firefly-layout-system/)**
->
->Firefly 支持 i18n 多语言 UI，但除了简体中文，其他语言均为 AI 翻译转换，如有错误，欢迎提交 [Pull Request](https://github.com/CuteLeaf/Firefly/pulls) 修正。
+>**更多使用说明请查看：[Cyrene 配置文档](https://github.com/aozorae/cyrene-docs)。**
+
+## 🧭 图形化管理后台
+
+Cyrene 的重点不只是博客前台，还包括一套面向日常使用的独立管理后台。登录后即可连接目标 GitHub 仓库与分支，通过侧栏完成内容发布、配置修改、草稿管理和提交记录查看，尽量把原本需要改代码、写 Frontmatter 和执行 Git 命令的工作变成表单操作。
+
+### 内容发布与管理
+
+- [x] **后台仪表盘** - 汇总文章、动态、草稿和提交数量，并展示最近提交与审计记录
+- [x] **文章发布** - 使用自托管 Vditor Markdown 编辑器，支持工具栏、桌面分屏预览、移动端单栏编辑、字数统计、正文回填和必填校验
+- [x] **完整文章字段** - 可填写标题、描述、Slug、目录、分类、标签、封面图和发布日期
+- [x] **动态发布** - 在后台编辑动态正文与发布时间，自动生成规范文件名和 Frontmatter
+- [x] **已发布文章管理** - 实时读取 GitHub 内容，支持查看、编辑和删除 Markdown 文章；MDX 内容保留源码查看入口
+- [x] **草稿与待提交** - 文章、动态和配置都可先保存到 D1，之后统一检查、编辑、删除或批量提交
+- [x] **冲突保护** - 提交前对比 GitHub 文件版本，发现外部修改时提示冲突，避免静默覆盖线上内容
+- [x] **提交与审计记录** - 查看 GitHub 提交记录和后台操作记录，便于追踪每次改动
+
+<!-- 后台截图占位 1：请在这里放置“仪表盘与完整侧栏”截图，建议使用 16:9 横图。 -->
+> **后台截图占位 1：仪表盘与侧栏总览（待补充）**
+
+<!-- 后台截图占位 2：请在这里放置“Vditor 文章编辑器”截图，建议同时展示表单与分屏预览。 -->
+> **后台截图占位 2：文章编辑与分屏预览（待补充）**
+
+### 5 大类 23 项图形化配置
+
+后台配置工作室只允许访问预先定义的配置白名单，避免管理接口变成任意文件读写入口。当前已经覆盖：
+
+| 分类 | 数量 | 可视化配置 |
+| :--- | :---: | :--- |
+| 基础配置 | 4 | 站点配置、个人资料、公告、背景壁纸 |
+| 基础组件 | 2 | 导航栏、侧边栏与组件 |
+| 功能配置 | 8 | 字体、代码块、文章封面、音乐播放器、评论系统、统计分析、Mermaid、PlantUML |
+| 页面 | 4 | 动态、友链、相册、打赏 |
+| 拓展功能 | 5 | 特效、页脚、页脚 HTML、许可证、看板娘模型 |
+
+复杂对象会以可折叠卡片呈现，默认显示标题、关键摘要和启停状态；需要调整时再展开详情，对第一次接触博客配置的用户更友好。
+
+<!-- 后台截图占位 3：请在这里放置“配置工作室”截图，建议展示左侧分类与右侧折叠表单。 -->
+> **后台截图占位 3：配置工作室与折叠表单（待补充）**
+
+### 发布方式
+
+```text
+后台表单操作 -> 保存 D1 草稿 -> 提交到 GitHub -> Vercel 自动构建博客
+```
+
+管理后台位于 `admin/`，作为独立 Cloudflare Worker 部署。它使用 GitHub Token 提交内容，但不会成为博客前端的运行时依赖；敏感信息通过 GitHub Secrets 和 Wrangler Secrets 注入，不写入源码。
 
 ## ✨ 功能特性
 
-### 核心功能
+### 前端核心功能
 
 - [x] **Astro + Tailwind CSS** - 基于现代技术栈的超快静态站点生成
 - [x] **流畅动画** - Swup 页面过渡动画，提供丝滑的浏览体验
 - [x] **响应式设计** - 完美适配桌面端、平板和移动设备
 - [x] **多语言支持** - i18n 国际化，UI 支持简体中文、繁体中文、英文、日文、俄语、韩文
 - [x] **全文搜索** - 基于 Pagefind 的客户端搜索，支持文章内容索引
+- [x] **奶油樱花粉配色** - 在原有布局基础上调整主题色、文字与组件视觉
 
 ### 个性化
 - [x] **动态侧边栏** - 支持配置单侧边栏、双侧边栏
@@ -90,7 +111,7 @@
 - [x] **壁纸模式切换** - 横幅壁纸、全屏壁纸、全屏透明壁纸、纯色背景
 - [x] **主题色自定义** - 360° 色相调节
 
-如果你有好用的功能和优化，请提交 [Pull Request](https://github.com/CuteLeaf/Firefly/pulls)
+如果你有好用的功能和优化，请提交 [Pull Request](https://github.com/aozorae/cyrene-blog/pulls)
 
 ## 🚀 快速开始
 
@@ -103,17 +124,17 @@
 
 1. **克隆仓库：**
    ```bash
-   git clone https://github.com/Cuteleaf/Firefly.git
-   cd Firefly
+   git clone https://github.com/aozorae/cyrene-blog.git
+   cd cyrene-blog
    ```
    
-   **先 [Fork](https://github.com/CuteLeaf/Firefly/fork) 到自己仓库再克隆（推荐），记得先点 Star 再 Fork 哦！**
+   **也可以先 [Fork](https://github.com/aozorae/cyrene-blog/fork) 到自己的仓库再克隆。**
 
    ```bash
-   git clone https://github.com/you-github-name/Firefly.git
-   cd Firefly
+   git clone https://github.com/your-github-name/cyrene-blog.git
+   cd cyrene-blog
    ```
-3. **安装依赖：**
+2. **安装依赖：**
    ```bash
    # 如果没有安装 pnpm，先安装
    npm install -g pnpm
@@ -122,10 +143,10 @@
    pnpm install
    ```
 
-4. **配置博客：**
+3. **配置博客：**
    - 编辑 `src/config/` 目录下的配置文件自定义博客设置
 
-5. **启动开发服务器：**
+4. **启动开发服务器：**
    ```bash
    pnpm dev
    ```
@@ -148,12 +169,16 @@ Cloudflare Workers 部署：[【不用服务器，无需备案，零成本搭建
 
    安装命令： `pnpm install`
 
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/CuteLeaf/Firefly&project-name=Firefly&repository-name=Firefly)
-   [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/CuteLeaf/Firefly)
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/aozorae/cyrene-blog&project-name=cyrene-blog&repository-name=cyrene-blog)
+   [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/aozorae/cyrene-blog)
+
+### 管理后台部署
+
+管理后台通过 `.github/workflows/deploy-admin.yml` 部署到 Cloudflare Workers。工作流会幂等创建或复用 D1、执行数据库迁移、部署 Worker，并注入 GitHub Token、管理员密码与会话密钥。完整说明见 [`admin/README.md`](./admin/README.md)。
 
 ## 📖 配置说明
 
-> 📚 **详细配置文档**: 查看 [Firefly 使用文档](https://docs-firefly.cuteleaf.cn/) 获取完整的配置指南
+> 📚 **详细配置文档**: 查看 [Cyrene 使用文档](https://github.com/aozorae/cyrene-docs) 获取后台入口、配置字段和部署架构说明
 
 ### 设置网站语言
 
@@ -270,7 +295,7 @@ location: China # 位置
 
 ## 🙏 致谢
 
-非常感谢 [saicaca](https://github.com/saicaca) 开发的 [fuwari](https://github.com/saicaca/fuwari) 模板，Firefly 就是基于这个模板二次开发
+Cyrene 基于 [CuteLeaf](https://github.com/CuteLeaf) 开发的 [Firefly](https://github.com/CuteLeaf/Firefly) 继续定制，而 Firefly 又基于 [saicaca](https://github.com/saicaca) 开发的 [fuwari](https://github.com/saicaca/fuwari) 二次开发。感谢两个项目的作者与社区贡献者，为本项目提供了完整的前端基础、设计思路和持续演进的可能。
 
 流萤部分相关图片素材版权归游戏 [《崩坏：星穹铁道》](https://sr.mihoyo.com/) 开发商 [米哈游](https://www.mihoyo.com/) 所有
 
@@ -282,6 +307,7 @@ location: China # 位置
 
 ### 灵感项目
 
+- [Firefly](https://github.com/CuteLeaf/Firefly)
 - [fuwari](https://github.com/saicaca/fuwari)
 - [hexo-theme-shoka](https://github.com/amehime/hexo-theme-shoka)
 - [astro-koharu](https://github.com/cosZone/astro-koharu)
@@ -295,7 +321,7 @@ location: China # 位置
 
 本项目遵循 [MIT license](https://mit-license.org/) 开源协议，详细查看 [LICENSE](./LICENSE) 文件
 
-最初 Fork 自 [saicaca/fuwari](https://github.com/saicaca/fuwari)，感谢原作者的贡献
+本项目代码沿袭自 [CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly) 与 [saicaca/fuwari](https://github.com/saicaca/fuwari)，感谢原作者与贡献者的工作。
 
 **版权声明：**
 - Copyright (c) 2024 [saicaca](https://github.com/saicaca) - [fuwari](https://github.com/saicaca/fuwari)
@@ -305,21 +331,15 @@ location: China # 位置
 
 ## 🍀 贡献者
 
-感谢以下贡献者对本项目做出的贡献，如有问题或建议，请提交 [Issue](https://github.com/CuteLeaf/Firefly/issues) 或 [Pull Request](https://github.com/CuteLeaf/Firefly/pulls)。
+感谢以下贡献者对 [Firefly](https://github.com/CuteLeaf/Firefly) 做出的贡献，他们的工作也构成了 Cyrene 前端的基础。如有问题或建议，请在当前仓库提交 [Issue](https://github.com/aozorae/cyrene-blog/issues) 或 [Pull Request](https://github.com/aozorae/cyrene-blog/pulls)。
 
 ><a href="https://github.com/CuteLeaf/Firefly/graphs/contributors">
 >  <img src="https://contrib.rocks/image?repo=CuteLeaf/Firefly" />
 ></a>
 
-感谢以下贡献者对原项目 [fuwari](https://github.com/saicaca/fuwari) 做出的贡献，为本项目奠定了基础。
-
-><a href="https://github.com/saicaca/fuwari/graphs/contributors">
->  <img src="https://contrib.rocks/image?repo=saicaca/fuwari" />
-></a>
-
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=CuteLeaf/Firefly&type=Date)](https://star-history.com/#CuteLeaf/Firefly&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=aozorae/cyrene-blog&type=Date)](https://star-history.com/#aozorae/cyrene-blog&Date)
 
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
