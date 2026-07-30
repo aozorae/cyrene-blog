@@ -1242,23 +1242,98 @@ textarea {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 12px;
-	padding: 8px 10px 8px 13px;
-	border-bottom: 1px solid var(--line);
+	gap: 8px;
+	padding: 7px 8px;
 	background: #f7f9fa;
 }
-.studio-array-card-heading > strong {
+.studio-array-card-toggle {
+	min-width: 0;
+	min-height: 40px;
+	display: grid;
+	grid-template-columns: 18px minmax(0, 1fr);
+	align-items: center;
+	gap: 8px;
+	flex: 1;
+	padding: 4px 6px;
+	border: 0;
+	border-radius: 4px;
+	background: transparent;
+	color: var(--ink);
+	text-align: left;
+}
+.studio-array-card-toggle:hover {
+	background: #eef2f3;
+}
+.studio-array-card-toggle:focus-visible,
+.studio-item-actions button:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 1px;
+}
+.studio-array-card-chevron {
+	width: 16px;
+	height: 16px;
+	color: var(--subtle);
+	transition: transform 0.15s ease;
+}
+.studio-array-card-toggle[aria-expanded="true"] .studio-array-card-chevron {
+	transform: rotate(90deg);
+}
+.studio-array-card-summary {
+	min-width: 0;
+	display: grid;
+	gap: 3px;
+}
+.studio-array-card-summary > strong {
 	min-width: 0;
 	overflow: hidden;
 	font-size: 12px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+.studio-array-card-meta {
+	min-width: 0;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	overflow: hidden;
+	color: var(--subtle);
+	font-size: 10px;
+}
+.studio-array-card-detail {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.studio-array-card-placeholder {
+	font-style: italic;
+}
+.studio-array-card-separator {
+	flex: 0 0 auto;
+	color: #aeb7bd;
+}
+.studio-array-card-status {
+	flex: 0 0 auto;
+	padding: 1px 5px;
+	border-radius: 4px;
+	background: #f1f3f5;
+	color: var(--subtle);
+	font-size: 9px;
+	font-weight: 700;
+}
+.studio-array-card-status.is-active {
+	background: var(--accent-soft);
+	color: var(--accent-strong);
+}
 .studio-array-card-body {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 12px;
 	padding: 13px;
+	border-top: 1px solid var(--line);
+}
+.studio-array-card-body[hidden] {
+	display: none;
 }
 .studio-item-actions {
 	display: inline-flex;

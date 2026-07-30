@@ -7,6 +7,7 @@ import {
 	getStudioObjectExtraFields,
 	isStudioFieldVisible,
 } from "./studio-field-schema.js";
+import { getStudioItemSummary } from "./studio-item-summary.js";
 
 let active = null;
 let boundContainer = null;
@@ -19,6 +20,7 @@ export function renderStudioForm(container, options) {
 		fieldInfo: options.fieldInfo,
 		escapeHtml: options.escapeHtml,
 		values: structuredClone(options.doc.exports || {}),
+		expandedItems: new WeakSet(),
 	};
 	bindContainer(container);
 	renderActiveForm();
@@ -103,7 +105,30 @@ function renderPrimitiveArrayItem(value, path, index) {
 function renderObjectArrayItem(item, path, index, depth) {
 	const itemPath = `${path}.${index}`;
 	const fields = renderObjectFields(item, itemPath, depth + 1);
-	return `<article class="studio-array-card"><div class="studio-array-card-heading"><strong>${active.escapeHtml(formatStudioItemTitle(item, index))}</strong>${renderArrayActions(path, index)}</div><div class="studio-array-card-body">${fields}</div></article>`;
+	const presentation = formatObjectArrayPresentation(itemPath, item, index);
+	const expanded = active.expandedItems.has(item);
+	const bodyId = `${fieldId(itemPath)}-details`;
+	const actionLabel = formatToggleActionLabel(expanded, presentation.title);
+	return `<article class="studio-array-card ${expanded ? "is-expanded" : ""}"><div class="studio-array-card-heading"><button class="studio-array-card-toggle" type="button" title="${active.escapeHtml(actionLabel)}" aria-label="${active.escapeHtml(actionLabel)}" aria-expanded="${expanded}" aria-controls="${bodyId}" data-studio-action="toggle" data-studio-item-path="${active.escapeHtml(itemPath)}"><svg class="icon studio-array-card-chevron" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg><span class="studio-array-card-summary"><strong>${active.escapeHtml(presentation.title)}</strong><span class="studio-array-card-meta">${presentation.meta}</span></span></button>${renderArrayActions(path, index)}</div><div id="${bodyId}" class="studio-array-card-body" ${expanded ? "" : "hidden"}>${fields}</div></article>`;
+}
+
+function formatObjectArrayPresentation(itemPath, item, index) {
+	const title = String(formatStudioItemTitle(item, index));
+	const summary = getStudioItemSummary(itemPath, item, title);
+	const details = summary.details
+		.map(
+			(value) =>
+				`<span class="studio-array-card-detail" title="${active.escapeHtml(value)}">${active.escapeHtml(value)}</span>`,
+		)
+		.join('<span class="studio-array-card-separator" aria-hidden="true">·</span>');
+	const placeholder =
+		!details && !summary.status
+			? '<span class="studio-array-card-detail studio-array-card-placeholder">未填写核心信息</span>'
+			: "";
+	const status = summary.status
+		? `<span class="studio-array-card-status ${summary.status.active ? "is-active" : ""}">${active.escapeHtml(summary.status.label)}</span>`
+		: "";
+	return { title, meta: `${details}${placeholder}${status}` };
 }
 
 function renderObjectFields(value, path, depth) {
@@ -206,6 +231,7 @@ function updateFieldFromInput(event) {
 		return;
 	}
 	syncControls(input.dataset.studioPath, value, input);
+	refreshObjectArrayPresentation(input);
 }
 
 function syncControls(path, value, source) {
@@ -227,12 +253,19 @@ function syncControls(path, value, source) {
 function handleFormAction(event) {
 	const button = event.target.closest("[data-studio-action]");
 	if (!button || !active?.container.contains(button)) return;
+	if (button.dataset.studioAction === "toggle") {
+		toggleObjectArrayItem(button);
+		return;
+	}
 	const path = button.dataset.studioArrayPath;
 	const items = getByPath(active.values, path);
 	if (!Array.isArray(items)) return;
 	const index = Number(button.dataset.studioIndex);
-	if (button.dataset.studioAction === "add")
-		items.push(getStudioArrayTemplate(path, items));
+	if (button.dataset.studioAction === "add") {
+		const item = getStudioArrayTemplate(path, items);
+		items.push(item);
+		if (item && typeof item === "object") active.expandedItems.add(item);
+	}
 	if (button.dataset.studioAction === "remove" && Number.isInteger(index))
 		items.splice(index, 1);
 	if (button.dataset.studioAction === "up" && index > 0)
@@ -240,6 +273,48 @@ function handleFormAction(event) {
 	if (button.dataset.studioAction === "down" && index < items.length - 1)
 		[items[index + 1], items[index]] = [items[index], items[index + 1]];
 	renderActiveForm();
+}
+
+function toggleObjectArrayItem(button) {
+	const item = getByPath(active.values, button.dataset.studioItemPath);
+	if (!item || typeof item !== "object") return;
+	const expanded = button.getAttribute("aria-expanded") !== "true";
+	if (expanded) active.expandedItems.add(item);
+	else active.expandedItems.delete(item);
+	button.setAttribute("aria-expanded", String(expanded));
+	const card = button.closest(".studio-array-card");
+	card?.classList.toggle("is-expanded", expanded);
+	const body = document.getElementById(button.getAttribute("aria-controls"));
+	if (body) body.hidden = !expanded;
+	const title = button.querySelector(".studio-array-card-summary strong")?.textContent || "项目";
+	const actionLabel = formatToggleActionLabel(expanded, title);
+	button.title = actionLabel;
+	button.setAttribute("aria-label", actionLabel);
+}
+
+function refreshObjectArrayPresentation(input) {
+	const card = input.closest(".studio-array-card");
+	const button = card?.querySelector(".studio-array-card-toggle");
+	const itemPath = button?.dataset.studioItemPath;
+	if (!button || !itemPath) return;
+	const item = getByPath(active.values, itemPath);
+	if (!item || typeof item !== "object") return;
+	const index = Number(itemPath.split(".").at(-1));
+	const presentation = formatObjectArrayPresentation(itemPath, item, index);
+	const title = button.querySelector(".studio-array-card-summary strong");
+	const meta = button.querySelector(".studio-array-card-meta");
+	if (title) title.textContent = presentation.title;
+	if (meta) meta.innerHTML = presentation.meta;
+	const actionLabel = formatToggleActionLabel(
+		button.getAttribute("aria-expanded") === "true",
+		presentation.title,
+	);
+	button.title = actionLabel;
+	button.setAttribute("aria-label", actionLabel);
+}
+
+function formatToggleActionLabel(expanded, title) {
+	return `${expanded ? "收起" : "展开"}“${title}”的详细设置`;
 }
 
 function getByPath(target, path) {

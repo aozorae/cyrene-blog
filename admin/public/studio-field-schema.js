@@ -699,14 +699,21 @@ export function isStudioFieldVisible(path, values) {
 
 export function formatStudioItemTitle(item, index) {
 	if (item && typeof item === "object") {
-		return (
-			item.title ||
-			item.name ||
-			item.label ||
-			item.id ||
-			item.type ||
-			`项目 ${index + 1}`
+		const value = [
+			item.title,
+			item.name,
+			item.label,
+			item.id,
+			item.type,
+			item.src,
+			item.path,
+			item.url,
+			item.action,
+		].find((candidate) =>
+			Array.isArray(candidate) ? candidate.length > 0 : String(candidate || "").trim(),
 		);
+		if (Array.isArray(value)) return value.join("、") || `项目 ${index + 1}`;
+		if (value !== undefined) return String(value);
 	}
 	return `项目 ${index + 1}`;
 }
