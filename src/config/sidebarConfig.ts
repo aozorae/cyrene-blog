@@ -194,8 +194,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 					image: {
 						src: "/assets/images/ad/ad1.webp",
 						alt: "广告横幅",
-						link: "https://haoka.lot-ml.com/plugreg.html?agentid=1423316",
-						external: true,
+						link: "/about/",
+						external: false,
 					},
 					// 是否允许关闭广告
 					closable: false,
@@ -220,12 +220,11 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件专属配置（广告内容直接在此配置）
 			specificConfig: {
 				ad: {
-					title: "支持博主",
-					content:
-						"如果您觉得本站内容对您有帮助，欢迎支持我们的创作！您的支持是我们持续更新的动力。",
+					title: "内容占位",
+					content: "这个位置将用于展示后续补充的内容。",
 					link: {
-						text: "支持一下",
-						url: "about/",
+						text: "查看站点介绍",
+						url: "/about/",
 						external: false,
 					},
 					closable: false,

@@ -1,5 +1,5 @@
 ---
-title: Firefly 文章加密
+title: 文章加密示例
 published: 1970-01-02
 description: 这是一篇密码保护的示例文章，用于演示文章加密功能。
 tags: [示例, 密码保护]
@@ -24,11 +24,11 @@ slug: encrypted-demo
 
 ## 图片
 
-![Firefly](./images/1.avif)
+![示例图片](./images/1.avif)
 
 ## GitHub 仓库卡片
 
-::github{repo="CuteLeaf/Firefly"}
+::github{repo="aozorae/cyrene-blog"}
 
 ## 提示框
 

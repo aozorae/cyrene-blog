@@ -2,9 +2,9 @@
 title: Markdown 扩展功能
 published: 1970-01-01
 updated: 1970-01-01
-description: "了解 Firefly 中的 Markdown 功能"
+description: "了解博客中的 Markdown 扩展功能"
 image: ""
-tags: [演示, 示例, Markdown, Firefly]
+tags: [演示, 示例, Markdown]
 category: "文章示例"
 slug: markdown-extended
 ---
@@ -13,17 +13,17 @@ slug: markdown-extended
 
 您可以添加链接到 GitHub 仓库的动态卡片，在页面加载时，仓库信息会从 GitHub API 获取。
 
-::github{repo="CuteLeaf/Firefly"}
+::github{repo="aozorae/cyrene-blog"}
 
-使用代码 `::github{repo="CuteLeaf/Firefly"}` 创建 GitHub 仓库卡片。
+使用代码 `::github{repo="aozorae/cyrene-blog"}` 创建 GitHub 仓库卡片。
 
 ```markdown
-::github{repo="CuteLeaf/Firefly"}
+::github{repo="aozorae/cyrene-blog"}
 ```
 
 ## 提醒框(Admonitions)配置
 
-Firefly 采用了 [rehype-callouts](https://github.com/lin-stephanie/rehype-callouts) 插件，支持了四种风格的提醒框主题：`GitHub`、`Obsidian`、`VitePress` 和 `Docusaurus`。您可以在 `src/config/siteConfig.ts` 中进行配置：
+当前博客采用 [rehype-callouts](https://github.com/lin-stephanie/rehype-callouts) 插件，支持四种风格的提醒框主题：`GitHub`、`Obsidian`、`VitePress` 和 `Docusaurus`。您可以在 `src/config/siteConfig.ts` 中进行配置：
 
 ```typescript
 // src/config/siteConfig.ts

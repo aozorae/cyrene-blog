@@ -1,8 +1,8 @@
 ---
 title: Markdown PlantUML 图表
 published: 1970-01-01
-description: 用于验证 Firefly 中 PlantUML 插件渲染、主题切换与交互能力的示例文章。
-tags: [PlantUML, Firefly, Markdown]
+description: 用于验证博客中 PlantUML 插件渲染、主题切换与交互能力的示例文章。
+tags: [PlantUML, Markdown]
 category: 文章示例
 slug: markdown-plantuml
 ---
@@ -17,7 +17,7 @@ PlantUML 是一种使用纯文本描述图表的工具。你只需要写一段�
 - 修改图只需要改文本，适合频繁迭代
 - 能和 Markdown 无缝结合，保持文档统一
 
-在 Firefly 中，`plantuml` 代码块会在构建阶段编码并生成服务器 SVG 地址，页面端再根据亮暗主题自动切换图源，并支持缩放、拖拽和全屏交互。
+在当前博客中，`plantuml` 代码块会在构建阶段编码并生成服务器 SVG 地址，页面端再根据亮暗主题自动切换图源，并支持缩放、拖拽和全屏交互。
 
 如果你想快速上手，可以记住这个最小模板：
 
@@ -106,7 +106,7 @@ rectangle 博客系统 {
 
 ```plantuml
 @startuml
-package "Firefly Site" {
+package "Cyrene Site" {
 	[Astro App] as App
 	[Markdown Parser] as Parser
 	[PlantUML Encoder] as Encoder
@@ -229,7 +229,7 @@ database Redis as 会话缓存
 
 Person(user, "博客访客", "阅读文章与搜索内容")
 
-System_Boundary(system, "Firefly Blog") {
+System_Boundary(system, "Cyrene Blog") {
 	Container(web, "Web App", "Astro + Svelte", "渲染页面与交互")
 	Container(worker, "SSR Worker", "Cloudflare Workers", "处理服务端渲染请求")
 	ContainerDb(content, "Content Store", "Markdown / Object Storage", "存储文章与资源元数据")
@@ -247,4 +247,3 @@ Rel(web, plantuml, "请求图表 SVG")
 LAYOUT_LEFT_RIGHT()
 @enduml
 ```
-

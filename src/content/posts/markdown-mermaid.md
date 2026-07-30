@@ -3,7 +3,7 @@ title: Markdown Mermaid 图表
 published: 1970-01-01
 pinned: false
 description: 一个包含 Mermaid 的 Markdown 博客文章简单示例。
-tags: [Markdown, 博客, Mermaid, Firefly]
+tags: [Markdown, 博客, Mermaid]
 category: 文章示例
 slug: markdown-mermaid
 ---
@@ -11,7 +11,7 @@ slug: markdown-mermaid
 
 本文演示如何在 Markdown 文档中使用 Mermaid 创建各种复杂图表，包括流程图、时序图、ER 图、类图、状态图、XY 图、甘特图、思维导图等。
 
-> Mermaid 图表由 [Merman](https://github.com/Latias94/merman) 实现。Firefly 在 Astro 构建阶段生成亮色和深色两套静态 SVG，无需在浏览器中加载 Mermaid 渲染运行时。可以前往 [Merman Playground](http://frankorz.com/merman/) 实时编辑语法并预览渲染结果。
+> Mermaid 图表由 [Merman](https://github.com/Latias94/merman) 实现。当前博客在 Astro 构建阶段生成亮色和深色两套静态 SVG，无需在浏览器中加载 Mermaid 渲染运行时。可以前往 [Merman Playground](http://frankorz.com/merman/) 实时编辑语法并预览渲染结果。
 
 ## 流程图示例
 
@@ -231,7 +231,7 @@ gantt
 
 ```mermaid
 mindmap
-  root((Firefly))
+  root((昔涟))
     内容
       技术文章
       生活记录
@@ -251,7 +251,7 @@ mindmap
 
 ```mermaid
 timeline
-    title Firefly 演进时间线
+    title 昔涟内容时间线
     2024 : 建立博客
          : 完成基础主题
     2025 : 加入搜索与图库

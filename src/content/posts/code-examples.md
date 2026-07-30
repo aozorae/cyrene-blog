@@ -1,9 +1,9 @@
 ---
-title: Firefly 代码块示例
+title: 代码块示例
 published: 1970-01-03
 pinned: false
-description: 在Firefly中使用表达性代码的代码块在 Markdown 中的外观。
-tags: [Markdown, Firefly]
+description: 展示表达性代码块在 Markdown 中的外观。
+tags: [Markdown, 代码块]
 category: 文章示例
 image: ./images/firefly3.avif
 slug: code-examples
@@ -407,7 +407,7 @@ yarn create astro
 
 ```js title="astro.config.mjs" showLineNumbers {2} ins={3}
 export default {
-  theme: "firefly",
+  theme: "cyrene",
   codeGroup: true,
 };
 ```
