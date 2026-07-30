@@ -8,6 +8,7 @@ import {
 	isStudioFieldVisible,
 } from "./studio-field-schema.js";
 import { getStudioItemSummary } from "./studio-item-summary.js";
+import { getStudioCollapsibleSection } from "./studio-section-collapse.js";
 
 let active = null;
 let boundContainer = null;
@@ -21,6 +22,7 @@ export function renderStudioForm(container, options) {
 		escapeHtml: options.escapeHtml,
 		values: structuredClone(options.doc.exports || {}),
 		expandedItems: new WeakSet(),
+		expandedSections: new Set(),
 	};
 	bindContainer(container);
 	renderActiveForm();
@@ -66,6 +68,7 @@ function renderValue(value, path, depth) {
 
 function renderObject(value, path, depth) {
 	const meta = fieldMeta(path, value);
+	const collapsible = getStudioCollapsibleSection(path, value);
 	const extras = getStudioObjectExtraFields(path);
 	const keys = [
 		...Object.keys(value),
@@ -77,11 +80,26 @@ function renderObject(value, path, depth) {
 			return renderValue(childValue, `${path}.${key}`, depth + 1);
 		})
 		.join("");
+	if (collapsible)
+		return renderCollapsibleObjectGroup(
+			fields || '<p class="studio-empty-inline">暂无可配置字段。</p>',
+			path,
+			depth,
+			meta,
+			collapsible,
+		);
 	return `<section class="studio-group ${depth ? "studio-nested" : ""}"><div class="studio-group-title"><strong>${active.escapeHtml(meta.label)}</strong><small>${active.escapeHtml(meta.help)}</small></div>${fields || '<p class="studio-empty-inline">暂无可配置字段。</p>'}</section>`;
+}
+
+function renderCollapsibleObjectGroup(fields, path, depth, meta, collapsible) {
+	const expanded = active.expandedSections.has(path);
+	const bodyId = `${fieldId(path)}-section-details`;
+	return `<section class="studio-group studio-collapsible-section ${expanded ? "is-expanded" : ""} ${depth ? "studio-nested" : ""}" data-studio-section="${active.escapeHtml(path)}"><div class="studio-group-title studio-collapsible-heading">${renderSectionToggle(path, bodyId, meta, collapsible, expanded)}</div><div id="${bodyId}" class="studio-group-body studio-collapsible-body" ${expanded ? "" : "hidden"}>${fields}</div></section>`;
 }
 
 function renderArray(items, path, depth) {
 	const meta = fieldMeta(path, items);
+	const collapsible = getStudioCollapsibleSection(path, items);
 	const primitive = items.every(
 		(item) => item === null || !["object", "function"].includes(typeof item),
 	);
@@ -92,7 +110,17 @@ function renderArray(items, path, depth) {
 				: renderObjectArrayItem(item, path, index, depth),
 		)
 		.join("");
+	if (collapsible) {
+		const expanded = active.expandedSections.has(path);
+		const bodyId = `${fieldId(path)}-section-details`;
+		return `<section class="studio-array studio-collapsible-section ${expanded ? "is-expanded" : ""} ${depth ? "studio-nested" : ""}" data-studio-array="${active.escapeHtml(path)}" data-studio-section="${active.escapeHtml(path)}"><div class="studio-array-heading studio-collapsible-heading">${renderSectionToggle(path, bodyId, meta, collapsible, expanded)}<button class="button button-primary compact-button" type="button" data-studio-action="add" data-studio-array-path="${active.escapeHtml(path)}">添加项目</button></div><div id="${bodyId}" class="studio-array-items studio-collapsible-body" ${expanded ? "" : "hidden"}>${rows || '<p class="studio-empty-inline">暂无项目，可以点击右上角添加。</p>'}</div></section>`;
+	}
 	return `<section class="studio-array ${depth ? "studio-nested" : ""}" data-studio-array="${active.escapeHtml(path)}"><div class="studio-array-heading"><div><strong>${active.escapeHtml(meta.label)}</strong><small>${active.escapeHtml(meta.help)}</small></div><button class="button button-primary compact-button" type="button" data-studio-action="add" data-studio-array-path="${active.escapeHtml(path)}">添加项目</button></div><div class="studio-array-items">${rows || '<p class="studio-empty-inline">暂无项目，可以点击右上角添加。</p>'}</div></section>`;
+}
+
+function renderSectionToggle(path, bodyId, meta, collapsible, expanded) {
+	const actionLabel = formatToggleActionLabel(expanded, meta.label);
+	return `<button class="studio-section-toggle" type="button" title="${active.escapeHtml(actionLabel)}" aria-label="${active.escapeHtml(actionLabel)}" aria-expanded="${expanded}" aria-controls="${bodyId}" data-studio-action="toggle-section" data-studio-section-path="${active.escapeHtml(path)}"><svg class="icon studio-section-chevron" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg><span class="studio-section-copy"><strong>${active.escapeHtml(meta.label)}</strong><small>${active.escapeHtml(meta.help)}</small><span class="studio-section-summary">${active.escapeHtml(collapsible.summary)}</span></span></button>`;
 }
 
 function renderPrimitiveArrayItem(value, path, index) {
@@ -232,6 +260,7 @@ function updateFieldFromInput(event) {
 	}
 	syncControls(input.dataset.studioPath, value, input);
 	refreshObjectArrayPresentation(input);
+	refreshCollapsibleSectionPresentation(input);
 }
 
 function syncControls(path, value, source) {
@@ -253,6 +282,10 @@ function syncControls(path, value, source) {
 function handleFormAction(event) {
 	const button = event.target.closest("[data-studio-action]");
 	if (!button || !active?.container.contains(button)) return;
+	if (button.dataset.studioAction === "toggle-section") {
+		toggleCollapsibleSection(button);
+		return;
+	}
 	if (button.dataset.studioAction === "toggle") {
 		toggleObjectArrayItem(button);
 		return;
@@ -265,6 +298,7 @@ function handleFormAction(event) {
 		const item = getStudioArrayTemplate(path, items);
 		items.push(item);
 		if (item && typeof item === "object") active.expandedItems.add(item);
+		if (getStudioCollapsibleSection(path, items)) active.expandedSections.add(path);
 	}
 	if (button.dataset.studioAction === "remove" && Number.isInteger(index))
 		items.splice(index, 1);
@@ -273,6 +307,23 @@ function handleFormAction(event) {
 	if (button.dataset.studioAction === "down" && index < items.length - 1)
 		[items[index + 1], items[index]] = [items[index], items[index + 1]];
 	renderActiveForm();
+}
+
+function toggleCollapsibleSection(button) {
+	const path = button.dataset.studioSectionPath;
+	if (!path) return;
+	const expanded = button.getAttribute("aria-expanded") !== "true";
+	if (expanded) active.expandedSections.add(path);
+	else active.expandedSections.delete(path);
+	button.setAttribute("aria-expanded", String(expanded));
+	const section = button.closest(".studio-collapsible-section");
+	section?.classList.toggle("is-expanded", expanded);
+	const body = document.getElementById(button.getAttribute("aria-controls"));
+	if (body) body.hidden = !expanded;
+	const title = button.querySelector(".studio-section-copy strong")?.textContent || "配置项";
+	const actionLabel = formatToggleActionLabel(expanded, title);
+	button.title = actionLabel;
+	button.setAttribute("aria-label", actionLabel);
 }
 
 function toggleObjectArrayItem(button) {
@@ -311,6 +362,16 @@ function refreshObjectArrayPresentation(input) {
 	);
 	button.title = actionLabel;
 	button.setAttribute("aria-label", actionLabel);
+}
+
+function refreshCollapsibleSectionPresentation(input) {
+	const section = input.closest(".studio-collapsible-section");
+	const button = section?.querySelector(".studio-section-toggle");
+	const path = button?.dataset.studioSectionPath;
+	if (!button || !path) return;
+	const collapsible = getStudioCollapsibleSection(path, getByPath(active.values, path));
+	const summary = button.querySelector(".studio-section-summary");
+	if (collapsible && summary) summary.textContent = collapsible.summary;
 }
 
 function formatToggleActionLabel(expanded, title) {

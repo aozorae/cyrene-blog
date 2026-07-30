@@ -1008,6 +1008,65 @@ textarea {
 	font-weight: 400;
 	line-height: 1.5;
 }
+.studio-group-body {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 13px;
+}
+.studio-collapsible-heading {
+	min-width: 0;
+}
+.studio-section-toggle {
+	min-width: 0;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 18px minmax(0, 1fr);
+	align-items: center;
+	gap: 8px;
+	padding: 5px 6px;
+	border: 0;
+	border-radius: 4px;
+	background: transparent;
+	color: var(--ink);
+	text-align: left;
+}
+.studio-section-toggle:hover {
+	background: #eef2f3;
+}
+.studio-section-toggle:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 1px;
+}
+.studio-section-chevron {
+	width: 16px;
+	height: 16px;
+	color: var(--subtle);
+	transition: transform 0.15s ease;
+}
+.studio-section-toggle[aria-expanded="true"] .studio-section-chevron {
+	transform: rotate(90deg);
+}
+.studio-section-copy {
+	min-width: 0;
+	display: grid;
+	gap: 2px;
+}
+.studio-section-copy strong {
+	color: var(--accent);
+	font-size: 12px;
+}
+.studio-section-copy small {
+	margin: 0;
+}
+.studio-section-summary {
+	color: var(--muted);
+	font-size: 10px;
+	font-weight: 650;
+}
+.studio-collapsible-body[hidden] {
+	display: none;
+}
 .studio-field {
 	display: grid;
 	gap: 7px;
@@ -1195,6 +1254,9 @@ textarea {
 }
 .studio-array-heading > div {
 	min-width: 0;
+}
+.studio-array-heading > .studio-section-toggle {
+	flex: 1;
 }
 .studio-array-heading strong {
 	color: var(--accent);
@@ -1786,7 +1848,8 @@ a.activity-row:hover {
 	.toggle-grid,
 	.studio-group,
 	.studio-form-body,
-	.studio-array-card-body {
+	.studio-array-card-body,
+	.studio-group-body {
 		grid-template-columns: 1fr;
 	}
 	.field-full,
@@ -1814,6 +1877,14 @@ a.activity-row:hover {
 	.studio-array-heading {
 		align-items: stretch;
 		flex-direction: column;
+	}
+	.studio-array-heading > .studio-section-toggle {
+		width: 100%;
+	}
+	.studio-collapsible-section:not(.is-expanded)
+		> .studio-array-heading
+		> .compact-button {
+		display: none;
 	}
 	.studio-guide-link {
 		align-self: flex-start;
