@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#f0f3f8" />
     <title>昔涟管理后台</title>
     <link rel="icon" href="/favicon.png" />
+    <link rel="stylesheet" href="/vendor/vditor/dist/index.css" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -41,6 +42,7 @@
             <p id="nav-overview-label" class="sidebar-label">概览</p>
             <button class="nav-item active" data-view="dashboard" title="仪表盘"><svg class="icon" aria-hidden="true"><use href="/icons.svg#layout-dashboard"></use></svg><span>仪表盘</span></button>
             <button class="nav-item" data-view="article" title="发布文章"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-plus-2"></use></svg><span>发布文章</span></button>
+            <button class="nav-item" data-view="articles" title="已发布文章"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-text"></use></svg><span>已发布文章</span></button>
             <button class="nav-item" data-view="dynamic" title="发布动态"><svg class="icon" aria-hidden="true"><use href="/icons.svg#message-square-plus"></use></svg><span>发布动态</span></button>
           </section>
 
@@ -103,7 +105,7 @@
             <section class="panel dashboard-quick-panel">
               <div class="panel-heading"><div><h3>快捷访问</h3><p>继续常用的内容与配置工作。</p></div></div>
               <div class="quick-grid">
-                <button class="quick-action" type="button" data-quick-view="article"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-plus-2"></use></svg></span><span><strong>发布文章</strong><small>创建或编辑 Markdown 文章</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
+                <button class="quick-action" type="button" data-quick-view="article"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-plus-2"></use></svg></span><span><strong>发布文章</strong><small>创建新的 Markdown 文章</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
                 <button class="quick-action" type="button" data-quick-view="dynamic"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#message-square-plus"></use></svg></span><span><strong>发布动态</strong><small>记录一条新的站点动态</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
                 <button class="quick-action" type="button" data-quick-view="studio" data-quick-group="foundation"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#settings-2"></use></svg></span><span><strong>基础配置</strong><small>站点、资料、公告与壁纸</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
                 <button class="quick-action" type="button" data-quick-view="studio" data-quick-group="features"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#sliders-horizontal"></use></svg></span><span><strong>功能配置</strong><small>字体、代码、音乐与图表</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
@@ -147,12 +149,16 @@
         </div>
 
         <div id="view-article" class="view hidden">
-          <div class="section-intro"><span class="section-kicker">内容</span><p>从 GitHub 读取已发布文章，编辑期间可以保存到 D1 草稿，再明确提交到 GitHub。</p></div>
+          <div class="section-intro"><span class="section-kicker">内容</span><p>编写文章并保存到 D1 草稿，确认后再提交到 GitHub。</p></div>
           <form id="article-form" class="article-layout">
-            <section class="panel article-main"><div class="panel-heading"><div><h3 id="article-form-title">新文章</h3><p>使用 Markdown 编写正文内容。</p></div><button id="article-reset" class="button button-quiet compact-button" type="button">新建</button></div><div class="field"><label for="article-title">标题</label><input id="article-title" required maxlength="120" placeholder="给文章一个清晰的标题" /></div><div class="field"><label for="article-description">摘要</label><input id="article-description" maxlength="240" placeholder="会显示在文章卡片和 RSS 中" /></div><div class="field"><label for="article-content">正文（Markdown）</label><textarea id="article-content" class="article-editor" required placeholder="# 从这里开始\n\n记录你的想法、过程和结论。"></textarea></div></section>
+            <section class="panel article-main"><div class="panel-heading"><div><h3 id="article-form-title">新文章</h3><p>使用 Vditor 编写和预览 Markdown 正文。</p></div><button id="article-reset" class="button button-quiet compact-button" type="button">新建</button></div><div class="field"><label for="article-title">标题</label><input id="article-title" required maxlength="120" placeholder="给文章一个清晰的标题" /></div><div class="field"><label for="article-description">摘要</label><input id="article-description" maxlength="240" placeholder="会显示在文章卡片和 RSS 中" /></div><div class="field"><label id="article-content-label">正文（Markdown）</label><div id="article-content-editor" class="article-editor-shell" aria-labelledby="article-content-label"></div><textarea id="article-content" hidden></textarea></div></section>
             <aside class="panel article-side"><div class="panel-heading"><div><h3>文章信息</h3><p>设置路径、分类和展示信息。</p></div></div><div class="field"><label for="article-slug">Slug（可选）</label><input id="article-slug" placeholder="自动根据标题生成" /></div><div class="field"><label for="article-directory">目录（可选）</label><input id="article-directory" placeholder="guide" /></div><div class="field"><label for="article-category">分类</label><input id="article-category" value="随笔" /></div><div class="field"><label for="article-tags">标签</label><input id="article-tags" placeholder="Astro, 学习笔记" /></div><div class="field"><label for="article-image">封面图片地址</label><input id="article-image" placeholder="https://... 或相对路径" /></div><div class="field"><label for="article-published">发布时间</label><input id="article-published" type="date" /></div><input id="article-original-path" type="hidden" /><input id="article-draft-id" type="hidden" /><div class="publish-note"><strong>提交后会发生什么？</strong><span>后台创建 GitHub commit，静态托管平台检测到提交后自动部署。</span></div><p id="article-status" class="inline-status"></p><div class="button-stack"><button id="article-draft-save" class="button button-quiet button-full" type="button">保存草稿</button><button class="button button-primary button-full" type="submit">提交到 GitHub</button></div></aside>
           </form>
-          <section class="panel content-list-panel"><div class="panel-heading"><div><h3>已发布文章</h3><p>实时读取 GitHub 仓库中的文章。</p></div></div><div id="article-list" class="content-list"></div></section>
+        </div>
+
+        <div id="view-articles" class="view hidden">
+          <div class="section-intro"><span class="section-kicker">内容</span><p>实时读取 GitHub 仓库中的文章，可在这里查看、编辑或删除已发布内容。</p></div>
+          <section class="panel content-list-panel"><div class="panel-heading"><div><h3>已发布文章</h3><p>GitHub 仓库是已发布内容的真实来源。</p></div></div><div id="article-list" class="content-list"></div></section>
         </div>
 
         <div id="view-dynamic" class="view hidden">
@@ -175,6 +181,8 @@
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <dialog id="source-dialog" class="source-dialog"><div class="dialog-heading"><strong id="source-title">源码</strong><button id="source-close" class="button button-quiet compact-button" type="button">关闭</button></div><pre id="source-content"></pre></dialog>
+    <script id="vditorIconScript" src="/vendor/vditor/dist/js/icons/ant.js"></script>
+    <script src="/vendor/vditor/dist/index.min.js"></script>
     <script src="/app.js" type="module"></script>
   </body>
 </html>

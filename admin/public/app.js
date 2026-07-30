@@ -1,4 +1,12 @@
+import {
+	ensureArticleEditor,
+	focusArticleEditor,
+	getArticleContent,
+	resetArticleContent,
+	setArticleContent,
+} from "./article-editor.js";
 import { findStudioGroup, findStudioGroupByPath } from "./studio-catalog.js";
+import { collectStudioFormValues, renderStudioForm } from "./studio-form.js";
 
 const $ = (selector) => document.querySelector(selector);
 const authScreen = $("#auth-screen");
@@ -420,7 +428,7 @@ const FIELD_GUIDE = {
 	weight: { label: "排序权重", help: "数值越大越靠前，用于控制列表排序。" },
 	albums: {
 		label: "相册列表",
-		help: "相册数据使用 JSON 编辑，包含名称、图片和访问限制。",
+		help: "逐项管理相册名称、图片目录、日期和访问限制。",
 	},
 	location: { label: "拍摄地点", help: "相册或照片拍摄、创作的地点。" },
 	password: { label: "访问密码", help: "为该相册设置访问密码；留空则不加密。" },
@@ -546,15 +554,6 @@ function fieldInfo(path) {
 			help: `高级配置参数“${key}”。请保留此名称以便与主题配置核对。`,
 		}
 	);
-}
-
-function setNested(target, path, value) {
-	const parts = path.split(".");
-	let cursor = target;
-	parts.slice(0, -1).forEach((part) => {
-		cursor = cursor[part];
-	});
-	cursor[parts.at(-1)] = value;
 }
 
 function revealApp() {
@@ -711,84 +710,16 @@ function renderStudioDocument() {
 		container.innerHTML = '<p class="empty-copy">正在读取配置模块…</p>';
 		return;
 	}
-	const docsFooter = "";
-	const blocks = [];
-	const renderValue = (value, path, depth = 0) => {
-		const field = fieldInfo(path);
-		if (Array.isArray(value)) {
-			const primitive = value.every(
-				(item) =>
-					item === null ||
-					["string", "number", "boolean"].includes(typeof item),
-			);
-			const content = primitive
-				? value.map((item) => String(item ?? "")).join("\n")
-				: JSON.stringify(value, null, 2);
-			blocks.push(
-				`<div class="studio-field ${depth ? "studio-nested" : ""}"><label>${escapeHtml(field.label)}<small>${escapeHtml(field.help)} ${primitive ? "一行填写一个值。" : "请按 JSON 格式编辑。"}</small></label><textarea data-studio-type="${primitive ? "lines" : "json"}" data-studio-path="${escapeHtml(path)}" rows="${Math.min(10, Math.max(3, content.split("\n").length))}">${escapeHtml(content)}</textarea></div>`,
-			);
-			return;
-		}
-		if (value && typeof value === "object") {
-			blocks.push(
-				`<div class="studio-group ${depth ? "studio-nested" : ""}"><div class="studio-group-title"><strong>${escapeHtml(field.label)}</strong><small>${escapeHtml(field.help)}</small></div>`,
-			);
-			Object.entries(value).forEach(([key, child]) =>
-				renderValue(child, `${path}.${key}`, depth + 1),
-			);
-			blocks.push("</div>");
-			return;
-		}
-		const type =
-			typeof value === "boolean"
-				? "boolean"
-				: typeof value === "number"
-					? "number"
-					: "string";
-		const input =
-			type === "boolean"
-				? `<input type="checkbox" data-studio-type="boolean" data-studio-path="${escapeHtml(path)}" ${value ? "checked" : ""} />`
-				: `<input type="${type === "number" ? "number" : "text"}" data-studio-type="${type}" data-studio-path="${escapeHtml(path)}" value="${escapeHtml(value ?? "")}" />`;
-		blocks.push(
-			`<div class="studio-field ${depth ? "studio-nested" : ""}"><label>${escapeHtml(field.label)}<small>${escapeHtml(field.help)}</small></label>${input}</div>`,
-		);
-	};
-	if (doc.text) {
-		container.innerHTML = `<div class="studio-copy"><strong>${escapeHtml(navigationItem?.label || doc.title)}</strong><span>${escapeHtml(doc.description)}</span><small>${escapeHtml(doc.path)}</small></div><div class="studio-field"><label>页脚 HTML 内容</label><textarea data-studio-type="text" data-studio-path="content" rows="16">${escapeHtml(doc.exports?.content || "")}</textarea></div>${docsFooter}`;
-		return;
-	}
-	Object.entries(doc.exports || {}).forEach(([key, value]) =>
-		renderValue(value, key),
-	);
-	container.innerHTML = `<div class="studio-copy"><strong>${escapeHtml(navigationItem?.label || doc.title)}</strong><span>${escapeHtml(doc.description)}</span><small>${escapeHtml(doc.path)}</small></div>${blocks.join("")}${docsFooter}`;
+	renderStudioForm(container, {
+		doc,
+		navigationTitle: navigationItem?.label || doc.title,
+		fieldInfo,
+		escapeHtml,
+	});
 }
 
 function collectStudioValues() {
-	const doc = state.studio[state.studioIndex];
-	const values = structuredClone(doc.exports || {});
-	document.querySelectorAll("[data-studio-path]").forEach((input) => {
-		const type = input.dataset.studioType;
-		let value;
-		if (type === "boolean") value = input.checked;
-		else if (type === "number")
-			value = input.value === "" ? 0 : Number(input.value);
-		else if (type === "lines")
-			value = input.value
-				.split("\n")
-				.map((line) => line.trim())
-				.filter(Boolean);
-		else if (type === "json") {
-			try {
-				value = JSON.parse(input.value);
-			} catch {
-				throw new Error(
-					`字段“${fieldInfo(input.dataset.studioPath).label}”不是有效 JSON。`,
-				);
-			}
-		} else value = input.value;
-		setNested(values, input.dataset.studioPath, value);
-	});
-	return values;
+	return collectStudioFormValues();
 }
 
 function slugify(value) {
@@ -812,7 +743,7 @@ function collectArticle() {
 		image: $("#article-image").value,
 		published: $("#article-published").value,
 		originalPath: $("#article-original-path").value,
-		content: $("#article-content").value,
+		content: getArticleContent(),
 	};
 }
 
@@ -823,6 +754,7 @@ function articleTargetPath(input) {
 
 function resetArticleForm() {
 	$("#article-form").reset();
+	resetArticleContent();
 	$("#article-category").value = "随笔";
 	$("#article-published").value = new Date().toISOString().slice(0, 10);
 	$("#article-original-path").value = "";
@@ -843,7 +775,7 @@ function populateArticle(input, revision = null, draftId = "") {
 	$("#article-image").value = input.image || "";
 	$("#article-published").value = String(input.published || "").slice(0, 10);
 	$("#article-original-path").value = input.originalPath || input.path || "";
-	$("#article-content").value = input.content || "";
+	setArticleContent(input.content || "");
 	$("#article-draft-id").value = draftId;
 	$("#article-form-title").textContent = `编辑：${input.title || "未命名文章"}`;
 	state.articleRevision = revision;
@@ -1213,12 +1145,18 @@ function switchView(view, studioGroup = state.studioGroup) {
 		.forEach((item) =>
 			item.classList.toggle("hidden", item.id !== `view-${view}`),
 		);
+	if (view === "article") {
+		ensureArticleEditor().catch((error) =>
+			setStatus("#article-status", error.message, "error"),
+		);
+	}
 	const group = findStudioGroup(state.studioGroup);
 	const copy = {
 		dashboard: ["OVERVIEW", "仪表盘", "layout-dashboard"],
 		settings: ["LEGACY SETTINGS", "兼容设置", "settings-2"],
 		studio: [group.eyebrow, group.label, group.icon],
 		article: ["CONTENT", "发布文章", "file-plus-2"],
+		articles: ["CONTENT", "已发布文章", "file-text"],
 		dynamic: ["CONTENT", "发布动态", "message-square-plus"],
 		pending: ["DRAFTS", "待提交", "list-checks"],
 		activity: ["ACTIVITY", "提交记录", "history"],
@@ -1371,6 +1309,11 @@ $("#article-draft-save").addEventListener("click", async (event) => {
 });
 $("#article-form").addEventListener("submit", async (event) => {
 	event.preventDefault();
+	if (!getArticleContent().trim()) {
+		setStatus("#article-status", "请先填写文章正文。", "error");
+		focusArticleEditor();
+		return;
+	}
 	const button = event.submitter;
 	setBusy(button, true);
 	setStatus("#article-status", "提交中…");

@@ -13,7 +13,7 @@ function withSecurityHeaders(response: Response): Response {
 	secured.headers.set("Referrer-Policy", "same-origin");
 	secured.headers.set("X-Frame-Options", "DENY");
 	secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
-	secured.headers.set("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
+	secured.headers.set("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
 	return secured;
 }
 

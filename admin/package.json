@@ -3,13 +3,17 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "wrangler dev",
+		"sync-vditor": "node scripts/sync-vditor-assets.mjs",
+		"dev": "pnpm sync-vditor && wrangler dev",
 		"check": "tsc --noEmit",
-		"deploy": "wrangler deploy"
+		"deploy": "pnpm sync-vditor && wrangler deploy"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^5.20260721.1",
 		"typescript": "^5.8.3",
 		"wrangler": "^4.107.1"
+	},
+	"dependencies": {
+		"vditor": "^3.11.2"
 	}
 }
