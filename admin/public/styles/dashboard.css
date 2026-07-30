@@ -1,0 +1,135 @@
+.dashboard-stats {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 12px;
+	margin-bottom: 12px;
+}
+.stat-card {
+	min-height: 112px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 20px;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: #ffffff;
+}
+.stat-icon {
+	width: 42px;
+	height: 42px;
+	display: grid;
+	place-items: center;
+	flex: 0 0 auto;
+	border-radius: 50%;
+	background: #f3f5f7;
+	color: #565f6b;
+}
+.stat-icon .icon {
+	width: 20px;
+	height: 20px;
+}
+.stat-card > span:last-child {
+	display: grid;
+	gap: 3px;
+}
+.stat-card small {
+	color: var(--muted);
+	font-size: 12px;
+}
+.stat-card strong {
+	color: var(--ink);
+	font-size: 25px;
+	line-height: 1;
+	font-weight: 650;
+}
+.dashboard-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+	gap: 12px;
+}
+.dashboard-feed-panel {
+	min-height: 310px;
+}
+.quick-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	border: 1px solid var(--line);
+	border-radius: 6px;
+	overflow: hidden;
+}
+.quick-action {
+	min-height: 100px;
+	display: grid;
+	grid-template-columns: 40px minmax(0, 1fr) 18px;
+	align-items: center;
+	gap: 13px;
+	padding: 16px;
+	border: 0;
+	border-right: 1px solid var(--line);
+	border-bottom: 1px solid var(--line);
+	background: #ffffff;
+	color: var(--ink);
+	text-align: left;
+}
+.quick-action:nth-child(2n) {
+	border-right: 0;
+}
+.quick-action:nth-last-child(-n + 2) {
+	border-bottom: 0;
+}
+.quick-action:hover {
+	background: #fafcfd;
+}
+.quick-icon {
+	width: 40px;
+	height: 40px;
+	display: grid;
+	place-items: center;
+	border-radius: 6px;
+	background: var(--accent-soft);
+	color: var(--accent);
+}
+.quick-action > span:nth-child(2) {
+	min-width: 0;
+	display: grid;
+	gap: 4px;
+}
+.quick-action strong {
+	font-size: 13px;
+}
+.quick-action small {
+	overflow: hidden;
+	color: var(--muted);
+	font-size: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.quick-arrow {
+	width: 16px;
+	height: 16px;
+	color: #a3aab3;
+}
+.repository-details {
+	margin: 0;
+	display: grid;
+}
+.repository-details div {
+	display: grid;
+	grid-template-columns: 64px minmax(0, 1fr);
+	gap: 12px;
+	padding: 12px 0;
+	border-bottom: 1px solid var(--line);
+}
+.repository-details dt {
+	color: var(--muted);
+	font-size: 11px;
+}
+.repository-details dd {
+	margin: 0;
+	overflow-wrap: anywhere;
+	font-size: 12px;
+	font-weight: 650;
+}
+.repository-panel .button {
+	margin-top: 18px;
+}

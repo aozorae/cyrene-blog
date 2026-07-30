@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f0f3f8" />
+		<title>兼容设置 · 昔涟管理后台</title>
+		<link rel="icon" href="/favicon.png" />
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<main id="app-shell" class="app-shell hidden">
+			<aside id="admin-sidebar" class="sidebar"></aside>
+			<section class="workspace">
+				<header id="admin-topbar" class="topbar"></header>
+				<div class="view">
+					<div class="section-intro"><span class="section-kicker">兼容设置</span><p>此页面用于继续编辑旧版本保存的站点设置草稿。</p></div>
+					<form id="settings-form" class="settings-grid">
+						<section class="panel panel-wide"><div class="panel-heading"><div><h3>博客身份</h3></div></div><div class="field-grid"><div class="field"><label for="site-title">站点标题</label><input id="site-title" required maxlength="80" /></div><div class="field"><label for="site-subtitle">副标题</label><input id="site-subtitle" required maxlength="120" /></div><div class="field field-full"><label for="site-url">正式地址</label><input id="site-url" type="url" required placeholder="https://example.com" /></div><div class="field field-full"><label for="site-description">站点描述</label><textarea id="site-description" rows="3" maxlength="500"></textarea></div></div></section>
+						<section class="panel"><div class="panel-heading"><div><h3>个人资料</h3></div></div><div class="field"><label for="profile-name">显示名称</label><input id="profile-name" required maxlength="80" /></div><div class="field"><label for="profile-bio">个人签名</label><textarea id="profile-bio" rows="3" maxlength="180"></textarea></div><div class="field"><label for="github-url">GitHub 地址</label><input id="github-url" type="url" required /></div></section>
+						<section class="panel"><div class="panel-heading"><div><h3>首页公告</h3></div></div><div class="field"><label for="announcement">公告内容</label><textarea id="announcement" rows="4" maxlength="240"></textarea></div><div class="field"><label for="announcement-link">公告链接</label><input id="announcement-link" /></div></section>
+						<section class="panel panel-wide"><div class="panel-heading"><div><h3>页面入口</h3></div></div><div id="page-toggles" class="toggle-grid"></div></section>
+						<section class="panel panel-wide"><div class="panel-heading"><div><h3>打赏方式</h3></div></div><div id="sponsor-methods" class="method-list"></div><button id="add-method" class="button button-quiet" type="button">添加打赏方式</button></section>
+						<div class="form-actions panel-wide"><p id="settings-status" class="inline-status"></p><button id="settings-draft-save" class="button button-quiet" type="button">保存草稿</button><button class="button button-primary" type="submit">提交到 GitHub</button></div>
+					</form>
+				</div>
+			</section>
+		</main>
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+		<script src="/pages/settings.js" type="module"></script>
+	</body>
+</html>

@@ -1,0 +1,174 @@
+.settings-grid,
+.activity-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+.article-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.72fr);
+	align-items: start;
+	gap: 12px;
+}
+.field-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 15px 12px;
+}
+.field-full {
+	grid-column: 1 / -1;
+}
+.toggle-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 8px;
+}
+.toggle-card {
+	min-height: 70px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px;
+	border: 1px solid var(--line);
+	border-radius: 6px;
+	background: #ffffff;
+	cursor: pointer;
+}
+.toggle-card strong,
+.toggle-card small {
+	display: block;
+}
+.toggle-card strong {
+	color: var(--ink);
+	font-size: 12px;
+}
+.toggle-card small {
+	margin-top: 3px;
+	color: var(--subtle);
+	font-size: 10px;
+}
+.toggle-card input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+.toggle-card i {
+	width: 32px;
+	height: 18px;
+	flex: 0 0 auto;
+	position: relative;
+	border-radius: 999px;
+	background: #cbd1d8;
+	transition: background 0.15s ease;
+}
+.toggle-card i::after {
+	content: "";
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #ffffff;
+	transition: transform 0.15s ease;
+}
+.toggle-card input:checked + i {
+	background: var(--solid);
+}
+.toggle-card input:checked + i::after {
+	transform: translateX(14px);
+}
+.method-list {
+	display: grid;
+	gap: 10px;
+}
+.method-row {
+	padding: 14px;
+	border: 1px solid var(--line);
+	border-radius: 6px;
+	background: #fafbfc;
+}
+.method-row-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+.method-number {
+	width: 24px;
+	height: 24px;
+	display: inline-grid;
+	place-items: center;
+	border-radius: 50%;
+	background: var(--accent-soft);
+	color: var(--accent);
+	font-size: 11px;
+	font-weight: 800;
+}
+.remove-method {
+	border: 0;
+	background: transparent;
+	color: var(--subtle);
+	font-size: 11px;
+}
+.remove-method:hover {
+	color: var(--danger);
+}
+.form-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+	padding-top: 4px;
+}
+.form-actions .inline-status {
+	margin-right: auto;
+}
+.setup-panel {
+	max-width: 720px;
+}
+.setup-panel .form-actions {
+	margin-top: 20px;
+}
+.button-stack {
+	display: grid;
+	gap: 8px;
+}
+.article-editor,
+.article-editor-shell {
+	min-height: 460px;
+	font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+	font-size: 13px;
+	line-height: 1.7;
+}
+.article-editor-shell.vditor {
+	border-color: var(--line-strong);
+	border-radius: 6px;
+	overflow: hidden;
+	background: #ffffff;
+}
+.article-editor-shell .vditor-toolbar {
+	border-color: var(--line);
+	background: #fafbfc;
+}
+.article-editor-shell .vditor-toolbar__item button {
+	color: var(--muted);
+}
+.article-editor-shell .vditor-toolbar__item button:hover,
+.article-editor-shell .vditor-toolbar__item button.vditor-menu--current {
+	color: var(--accent);
+}
+.article-editor-shell .vditor-sv,
+.article-editor-shell .vditor-preview {
+	background: #ffffff;
+}
+.article-editor-shell .vditor-sv__marker {
+	color: var(--accent);
+}
+.article-side {
+	position: sticky;
+	top: 92px;
+}

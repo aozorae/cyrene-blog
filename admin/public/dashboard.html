@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f0f3f8" />
+		<title>仪表盘 · 昔涟管理后台</title>
+		<link rel="icon" href="/favicon.png" />
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<main id="app-shell" class="app-shell hidden">
+			<aside id="admin-sidebar" class="sidebar"></aside>
+			<section class="workspace">
+				<header id="admin-topbar" class="topbar"></header>
+				<div class="view">
+					<section class="dashboard-stats" aria-label="内容概览">
+						<article class="stat-card"><span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-text"></use></svg></span><span><small>已发布文章</small><strong id="dashboard-article-count">0</strong></span></article>
+						<article class="stat-card"><span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#message-square"></use></svg></span><span><small>已发布动态</small><strong id="dashboard-dynamic-count">0</strong></span></article>
+						<article class="stat-card"><span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#archive"></use></svg></span><span><small>待提交草稿</small><strong id="dashboard-draft-count">0</strong></span></article>
+						<article class="stat-card"><span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#git-commit-horizontal"></use></svg></span><span><small>最近提交</small><strong id="dashboard-commit-count">0</strong></span></article>
+					</section>
+					<div class="dashboard-grid">
+						<section class="panel dashboard-quick-panel">
+							<div class="panel-heading"><div><h3>快捷访问</h3><p>继续常用的内容与配置工作。</p></div></div>
+							<div class="quick-grid">
+								<a class="quick-action" href="/article.html"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-plus-2"></use></svg></span><span><strong>发布文章</strong><small>创建新的 Markdown 文章</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></a>
+								<a class="quick-action" href="/dynamic.html"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#message-square-plus"></use></svg></span><span><strong>发布动态</strong><small>记录一条新的站点动态</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></a>
+								<a class="quick-action" href="/studio.html?group=foundation"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#settings-2"></use></svg></span><span><strong>基础配置</strong><small>站点、资料、公告与壁纸</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></a>
+								<a class="quick-action" href="/studio.html?group=features"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#sliders-horizontal"></use></svg></span><span><strong>功能配置</strong><small>字体、代码、音乐与图表</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></a>
+							</div>
+						</section>
+						<section class="panel repository-panel">
+							<div class="panel-heading"><div><h3>当前仓库</h3><p>后台从这里实时读取已发布内容。</p></div></div>
+							<dl class="repository-details"><div><dt>仓库</dt><dd id="dashboard-repository">读取中…</dd></div><div><dt>分支</dt><dd id="dashboard-branch">—</dd></div></dl>
+							<a class="button button-quiet button-full" href="/setup.html?return=%2Fdashboard.html">更改仓库设置</a>
+						</section>
+						<section class="panel dashboard-feed-panel"><div class="panel-heading"><div><h3>最近提交</h3><p>GitHub 仓库中的最新变更。</p></div><a class="text-button" href="/activity.html">查看全部</a></div><div id="dashboard-commit-list" class="activity-list"></div></section>
+						<section class="panel dashboard-feed-panel"><div class="panel-heading"><div><h3>后台动态</h3><p>最近的配置与内容操作。</p></div></div><div id="dashboard-audit-list" class="activity-list"></div></section>
+					</div>
+				</div>
+			</section>
+		</main>
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+		<script src="/pages/dashboard.js" type="module"></script>
+	</body>
+</html>

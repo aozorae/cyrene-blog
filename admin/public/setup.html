@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f0f3f8" />
+		<title>仓库设置 · 昔涟管理后台</title>
+		<link rel="icon" href="/favicon.png" />
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<main id="app-shell" class="app-shell hidden">
+			<aside id="admin-sidebar" class="sidebar"></aside>
+			<section class="workspace">
+				<header id="admin-topbar" class="topbar"></header>
+				<div class="view">
+					<div class="section-intro"><span class="section-kicker">仓库设置</span><p>连接一个你有权管理的 GitHub 博客仓库。仓库内容始终是发布后的真实来源。</p></div>
+					<form id="setup-form" class="panel setup-panel">
+						<div class="panel-heading"><div><p class="panel-kicker">GitHub 仓库</p><h3>连接博客仓库</h3></div></div>
+						<div class="field-grid"><div class="field"><label for="setup-owner">仓库所有者</label><input id="setup-owner" required placeholder="your-name" /></div><div class="field"><label for="setup-repo">仓库名称</label><input id="setup-repo" required placeholder="my-blog" /></div><div class="field field-full"><label for="setup-branch">发布分支</label><input id="setup-branch" required value="main" /></div></div>
+						<div class="form-actions"><p id="setup-status" class="inline-status"></p><a id="setup-cancel" class="button button-quiet hidden" href="/dashboard.html">取消</a><button class="button button-primary" type="submit">验证并连接</button></div>
+					</form>
+				</div>
+			</section>
+		</main>
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+		<script src="/pages/setup.js" type="module"></script>
+	</body>
+</html>
