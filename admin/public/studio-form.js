@@ -90,7 +90,7 @@ function renderArray(items, path, depth) {
 				: renderObjectArrayItem(item, path, index, depth),
 		)
 		.join("");
-	return `<section class="studio-array ${depth ? "studio-nested" : ""}" data-studio-array="${active.escapeHtml(path)}"><div class="studio-array-heading"><div><strong>${active.escapeHtml(meta.label)}</strong><small>${active.escapeHtml(meta.help)}</small></div><button class="button button-quiet compact-button" type="button" data-studio-action="add" data-studio-array-path="${active.escapeHtml(path)}">添加项目</button></div><div class="studio-array-items">${rows || '<p class="studio-empty-inline">暂无项目，可以点击右上角添加。</p>'}</div></section>`;
+	return `<section class="studio-array ${depth ? "studio-nested" : ""}" data-studio-array="${active.escapeHtml(path)}"><div class="studio-array-heading"><div><strong>${active.escapeHtml(meta.label)}</strong><small>${active.escapeHtml(meta.help)}</small></div><button class="button button-primary compact-button" type="button" data-studio-action="add" data-studio-array-path="${active.escapeHtml(path)}">添加项目</button></div><div class="studio-array-items">${rows || '<p class="studio-empty-inline">暂无项目，可以点击右上角添加。</p>'}</div></section>`;
 }
 
 function renderPrimitiveArrayItem(value, path, index) {
