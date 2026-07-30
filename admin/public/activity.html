@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f0f3f8" />
+		<title>提交记录 · 昔涟管理后台</title>
+		<link rel="icon" href="/favicon.png" />
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<main id="app-shell" class="app-shell hidden"><aside id="admin-sidebar" class="sidebar"></aside><section class="workspace"><header id="admin-topbar" class="topbar"></header><div class="view"><div class="section-intro"><span class="section-kicker">记录</span><p>配置保存、文章发布和动态发布都会留下记录，GitHub 提交是最终事实来源。</p></div><div class="activity-grid"><section class="panel"><div class="panel-heading"><div><h3>最近提交</h3><p>GitHub 仓库中的提交记录。</p></div></div><div id="commit-list" class="activity-list"></div></section><section class="panel"><div class="panel-heading"><div><h3>后台操作</h3><p>管理后台最近执行的操作。</p></div></div><div id="audit-list" class="activity-list"></div></section></div></div></section></main>
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+		<script src="/pages/activity.js" type="module"></script>
+	</body>
+</html>

@@ -5,7 +5,8 @@
 	"scripts": {
 		"sync-vditor": "node scripts/sync-vditor-assets.mjs",
 		"dev": "pnpm sync-vditor && wrangler dev",
-		"check": "tsc --noEmit",
+		"check:frontend": "node scripts/check-frontend.mjs",
+		"check": "node scripts/check-frontend.mjs && tsc --noEmit",
 		"deploy": "pnpm sync-vditor && wrangler deploy"
 	},
 	"devDependencies": {

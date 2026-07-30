@@ -1,188 +1,30 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f0f3f8" />
-    <title>昔涟管理后台</title>
-    <link rel="icon" href="/favicon.png" />
-    <link rel="stylesheet" href="/vendor/vditor/dist/index.css" />
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <main id="auth-screen" class="auth-layout">
-      <section class="auth-card" aria-labelledby="login-title">
-        <div class="brand-lockup">
-          <span class="brand-mark" aria-hidden="true">C</span>
-          <span>CYRENE <small>ADMIN</small></span>
-        </div>
-        <p class="eyebrow">BLOG MANAGEMENT</p>
-        <h1 id="login-title">管理你的博客</h1>
-        <p class="auth-copy">连接 GitHub 仓库，整理站点配置并发布新的内容。</p>
-        <form id="login-form" class="stack-form">
-          <input class="sr-only" name="username" autocomplete="username" value="admin" tabindex="-1" aria-hidden="true" />
-          <label for="admin-password">管理密码</label>
-          <input id="admin-password" type="password" autocomplete="current-password" placeholder="输入后台密码" required />
-          <button class="button button-primary" type="submit">进入管理后台</button>
-          <p id="login-error" class="form-error" role="alert"></p>
-        </form>
-        <p class="auth-note">配置与内容提交到 GitHub 后由静态托管平台自动部署。</p>
-      </section>
-    </main>
-
-    <main id="app-shell" class="app-shell hidden">
-      <aside class="sidebar">
-        <div class="brand-lockup brand-lockup-side">
-          <span class="brand-mark" aria-hidden="true">C</span>
-          <span>CYRENE <small>ADMIN</small></span>
-        </div>
-
-        <nav class="side-nav" aria-label="后台导航">
-          <section class="nav-section" aria-labelledby="nav-overview-label">
-            <p id="nav-overview-label" class="sidebar-label">概览</p>
-            <button class="nav-item active" data-view="dashboard" title="仪表盘"><svg class="icon" aria-hidden="true"><use href="/icons.svg#layout-dashboard"></use></svg><span>仪表盘</span></button>
-            <button class="nav-item" data-view="article" title="发布文章"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-plus-2"></use></svg><span>发布文章</span></button>
-            <button class="nav-item" data-view="articles" title="已发布文章"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-text"></use></svg><span>已发布文章</span></button>
-            <button class="nav-item" data-view="dynamic" title="发布动态"><svg class="icon" aria-hidden="true"><use href="/icons.svg#message-square-plus"></use></svg><span>发布动态</span></button>
-          </section>
-
-          <section class="nav-section" aria-labelledby="nav-config-label">
-            <p id="nav-config-label" class="sidebar-label">配置</p>
-            <button class="nav-item" data-view="studio" data-studio-group="foundation" title="基础配置"><svg class="icon" aria-hidden="true"><use href="/icons.svg#settings-2"></use></svg><span>基础配置</span></button>
-            <button class="nav-item" data-view="studio" data-studio-group="components" title="基础组件"><svg class="icon" aria-hidden="true"><use href="/icons.svg#panels-top-left"></use></svg><span>基础组件</span></button>
-            <button class="nav-item" data-view="studio" data-studio-group="features" title="功能配置"><svg class="icon" aria-hidden="true"><use href="/icons.svg#sliders-horizontal"></use></svg><span>功能配置</span><span class="nav-pill">8</span></button>
-            <button class="nav-item" data-view="studio" data-studio-group="pages" title="页面"><svg class="icon" aria-hidden="true"><use href="/icons.svg#files"></use></svg><span>页面</span></button>
-            <button class="nav-item" data-view="studio" data-studio-group="extensions" title="拓展功能"><svg class="icon" aria-hidden="true"><use href="/icons.svg#puzzle"></use></svg><span>拓展功能</span></button>
-          </section>
-
-          <section class="nav-section" aria-labelledby="nav-records-label">
-            <p id="nav-records-label" class="sidebar-label">记录</p>
-            <button class="nav-item" data-view="pending" title="待提交"><svg class="icon" aria-hidden="true"><use href="/icons.svg#list-checks"></use></svg><span>待提交</span><span id="draft-count" class="nav-pill">0</span></button>
-            <button class="nav-item" data-view="activity" title="提交记录"><svg class="icon" aria-hidden="true"><use href="/icons.svg#history"></use></svg><span>提交记录</span></button>
-          </section>
-        </nav>
-
-        <div class="sidebar-bottom">
-          <div class="admin-identity"><span class="admin-avatar">A</span><span><strong>Administrator</strong><small>博客管理员</small></span></div>
-          <div class="sidebar-actions">
-            <a id="blog-link" href="#" target="_blank" rel="noreferrer" class="sidebar-action hidden" title="查看博客"><svg class="icon" aria-hidden="true"><use href="/icons.svg#external-link"></use></svg><span>查看博客</span></a>
-            <button id="logout-button" class="sidebar-action" type="button" title="退出登录"><svg class="icon" aria-hidden="true"><use href="/icons.svg#log-out"></use></svg><span>退出</span></button>
-          </div>
-        </div>
-      </aside>
-
-      <section class="workspace">
-        <header class="topbar">
-          <div class="topbar-heading">
-            <span class="topbar-icon" aria-hidden="true"><svg class="icon"><use id="view-icon" href="/icons.svg#layout-dashboard"></use></svg></span>
-            <div><p class="eyebrow" id="view-eyebrow">OVERVIEW</p><h2 id="view-title">仪表盘</h2></div>
-          </div>
-          <button id="repo-settings" class="topbar-meta" type="button" title="更改 GitHub 仓库"><svg class="icon" aria-hidden="true"><use href="/icons.svg#settings"></use></svg><span id="repo-meta">连接 GitHub 中…</span></button>
-        </header>
-
-        <div id="setup-gate" class="view hidden">
-          <div class="section-intro"><span class="section-kicker">首次设置</span><p>连接一个你有权管理的 GitHub 博客仓库。仓库内容始终是发布后的真实来源。</p></div>
-          <form id="setup-form" class="panel setup-panel">
-            <div class="panel-heading"><div><p class="panel-kicker">GitHub 仓库</p><h3>连接博客仓库</h3></div></div>
-            <div class="field-grid">
-              <div class="field"><label for="setup-owner">仓库所有者</label><input id="setup-owner" required placeholder="your-name" /></div>
-              <div class="field"><label for="setup-repo">仓库名称</label><input id="setup-repo" required placeholder="my-blog" /></div>
-              <div class="field field-full"><label for="setup-branch">发布分支</label><input id="setup-branch" required value="main" /></div>
-            </div>
-            <div class="form-actions"><p id="setup-status" class="inline-status"></p><button id="setup-cancel" class="button button-quiet hidden" type="button">取消</button><button class="button button-primary" type="submit">验证并连接</button></div>
-          </form>
-        </div>
-
-        <div id="view-dashboard" class="view view-active">
-          <section class="dashboard-stats" aria-label="内容概览">
-            <article class="stat-card"><span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-text"></use></svg></span><span><small>已发布文章</small><strong id="dashboard-article-count">0</strong></span></article>
-            <article class="stat-card"><span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#message-square"></use></svg></span><span><small>已发布动态</small><strong id="dashboard-dynamic-count">0</strong></span></article>
-            <article class="stat-card"><span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#archive"></use></svg></span><span><small>待提交草稿</small><strong id="dashboard-draft-count">0</strong></span></article>
-            <article class="stat-card"><span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#git-commit-horizontal"></use></svg></span><span><small>最近提交</small><strong id="dashboard-commit-count">0</strong></span></article>
-          </section>
-
-          <div class="dashboard-grid">
-            <section class="panel dashboard-quick-panel">
-              <div class="panel-heading"><div><h3>快捷访问</h3><p>继续常用的内容与配置工作。</p></div></div>
-              <div class="quick-grid">
-                <button class="quick-action" type="button" data-quick-view="article"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#file-plus-2"></use></svg></span><span><strong>发布文章</strong><small>创建新的 Markdown 文章</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
-                <button class="quick-action" type="button" data-quick-view="dynamic"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#message-square-plus"></use></svg></span><span><strong>发布动态</strong><small>记录一条新的站点动态</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
-                <button class="quick-action" type="button" data-quick-view="studio" data-quick-group="foundation"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#settings-2"></use></svg></span><span><strong>基础配置</strong><small>站点、资料、公告与壁纸</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
-                <button class="quick-action" type="button" data-quick-view="studio" data-quick-group="features"><span class="quick-icon"><svg class="icon" aria-hidden="true"><use href="/icons.svg#sliders-horizontal"></use></svg></span><span><strong>功能配置</strong><small>字体、代码、音乐与图表</small></span><svg class="icon quick-arrow" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg></button>
-              </div>
-            </section>
-
-            <section class="panel repository-panel">
-              <div class="panel-heading"><div><h3>当前仓库</h3><p>后台从这里实时读取已发布内容。</p></div></div>
-              <dl class="repository-details"><div><dt>仓库</dt><dd id="dashboard-repository">读取中…</dd></div><div><dt>分支</dt><dd id="dashboard-branch">—</dd></div></dl>
-              <button class="button button-quiet button-full" type="button" data-repository-settings>更改仓库设置</button>
-            </section>
-
-            <section class="panel dashboard-feed-panel">
-              <div class="panel-heading"><div><h3>最近提交</h3><p>GitHub 仓库中的最新变更。</p></div><button class="text-button" type="button" data-quick-view="activity">查看全部</button></div>
-              <div id="dashboard-commit-list" class="activity-list"></div>
-            </section>
-
-            <section class="panel dashboard-feed-panel">
-              <div class="panel-heading"><div><h3>后台动态</h3><p>最近的配置与内容操作。</p></div></div>
-              <div id="dashboard-audit-list" class="activity-list"></div>
-            </section>
-          </div>
-        </div>
-
-        <div id="view-settings" class="view hidden">
-          <div class="section-intro"><span class="section-kicker">兼容设置</span><p>此页面用于继续编辑旧版本保存的站点设置草稿。</p></div>
-          <form id="settings-form" class="settings-grid">
-            <section class="panel panel-wide"><div class="panel-heading"><div><h3>博客身份</h3></div></div><div class="field-grid"><div class="field"><label for="site-title">站点标题</label><input id="site-title" required maxlength="80" /></div><div class="field"><label for="site-subtitle">副标题</label><input id="site-subtitle" required maxlength="120" /></div><div class="field field-full"><label for="site-url">正式地址</label><input id="site-url" type="url" required placeholder="https://example.com" /></div><div class="field field-full"><label for="site-description">站点描述</label><textarea id="site-description" rows="3" maxlength="500"></textarea></div></div></section>
-            <section class="panel"><div class="panel-heading"><div><h3>个人资料</h3></div></div><div class="field"><label for="profile-name">显示名称</label><input id="profile-name" required maxlength="80" /></div><div class="field"><label for="profile-bio">个人签名</label><textarea id="profile-bio" rows="3" maxlength="180"></textarea></div><div class="field"><label for="github-url">GitHub 地址</label><input id="github-url" type="url" required /></div></section>
-            <section class="panel"><div class="panel-heading"><div><h3>首页公告</h3></div></div><div class="field"><label for="announcement">公告内容</label><textarea id="announcement" rows="4" maxlength="240"></textarea></div><div class="field"><label for="announcement-link">公告链接</label><input id="announcement-link" /></div></section>
-            <section class="panel panel-wide"><div class="panel-heading"><div><h3>页面入口</h3></div></div><div id="page-toggles" class="toggle-grid"></div></section>
-            <section class="panel panel-wide"><div class="panel-heading"><div><h3>打赏方式</h3></div></div><div id="sponsor-methods" class="method-list"></div><button id="add-method" class="button button-quiet" type="button">添加打赏方式</button></section>
-            <div class="form-actions panel-wide"><p id="settings-status" class="inline-status"></p><button id="settings-draft-save" class="button button-quiet" type="button">保存草稿</button><button class="button button-primary" type="submit">提交到 GitHub</button></div>
-          </form>
-        </div>
-
-        <div id="view-studio" class="view hidden">
-          <div class="section-intro"><span id="studio-section-kicker" class="section-kicker">基础配置</span><p id="studio-section-description">管理站点身份、个人资料、公告和背景壁纸。</p></div>
-          <section class="panel studio-toolbar"><div class="studio-toolbar-heading"><strong>配置文件</strong><span>切换后将从 GitHub 实时读取对应文件。</span></div><div id="studio-config-tabs" class="studio-tabs" role="tablist" aria-label="配置文件"></div></section>
-          <section class="panel studio-panel"><div id="studio-editor" class="studio-editor"></div><div class="form-actions"><p id="studio-status" class="inline-status"></p><button id="studio-draft-save" class="button button-quiet" type="button">保存草稿</button><button id="studio-submit" class="button button-primary" type="button">提交到 GitHub</button></div></section>
-        </div>
-
-        <div id="view-article" class="view hidden">
-          <div class="section-intro"><span class="section-kicker">内容</span><p>编写文章并保存到 D1 草稿，确认后再提交到 GitHub。</p></div>
-          <form id="article-form" class="article-layout">
-            <section class="panel article-main"><div class="panel-heading"><div><h3 id="article-form-title">新文章</h3><p>使用 Vditor 编写和预览 Markdown 正文。</p></div><button id="article-reset" class="button button-quiet compact-button" type="button">新建</button></div><div class="field"><label for="article-title">标题</label><input id="article-title" required maxlength="120" placeholder="给文章一个清晰的标题" /></div><div class="field"><label for="article-description">摘要</label><input id="article-description" maxlength="240" placeholder="会显示在文章卡片和 RSS 中" /></div><div class="field"><label id="article-content-label">正文（Markdown）</label><div id="article-content-editor" class="article-editor-shell" aria-labelledby="article-content-label"></div><textarea id="article-content" hidden></textarea></div></section>
-            <aside class="panel article-side"><div class="panel-heading"><div><h3>文章信息</h3><p>设置路径、分类和展示信息。</p></div></div><div class="field"><label for="article-slug">Slug（可选）</label><input id="article-slug" placeholder="自动根据标题生成" /></div><div class="field"><label for="article-directory">目录（可选）</label><input id="article-directory" placeholder="guide" /></div><div class="field"><label for="article-category">分类</label><input id="article-category" value="随笔" /></div><div class="field"><label for="article-tags">标签</label><input id="article-tags" placeholder="Astro, 学习笔记" /></div><div class="field"><label for="article-image">封面图片地址</label><input id="article-image" placeholder="https://... 或相对路径" /></div><div class="field"><label for="article-published">发布时间</label><input id="article-published" type="date" /></div><input id="article-original-path" type="hidden" /><input id="article-draft-id" type="hidden" /><div class="publish-note"><strong>提交后会发生什么？</strong><span>后台创建 GitHub commit，静态托管平台检测到提交后自动部署。</span></div><p id="article-status" class="inline-status"></p><div class="button-stack"><button id="article-draft-save" class="button button-quiet button-full" type="button">保存草稿</button><button class="button button-primary button-full" type="submit">提交到 GitHub</button></div></aside>
-          </form>
-        </div>
-
-        <div id="view-articles" class="view hidden">
-          <div class="section-intro"><span class="section-kicker">内容</span><p>实时读取 GitHub 仓库中的文章，可在这里查看、编辑或删除已发布内容。</p></div>
-          <section class="panel content-list-panel"><div class="panel-heading"><div><h3>已发布文章</h3><p>GitHub 仓库是已发布内容的真实来源。</p></div></div><div id="article-list" class="content-list"></div></section>
-        </div>
-
-        <div id="view-dynamic" class="view hidden">
-          <div class="section-intro"><span class="section-kicker">动态</span><p>动态内容会写入 `src/content/dynamic/`，提交后由静态托管平台自动部署。</p></div>
-          <form id="dynamic-form" class="article-layout"><section class="panel article-main"><div class="panel-heading"><div><h3>发布一条动态</h3><p>使用 Markdown 记录简短内容。</p></div></div><div class="field"><label for="dynamic-content">动态内容（Markdown）</label><textarea id="dynamic-content" class="article-editor" required placeholder="记录此刻的想法、链接或图片。"></textarea></div></section><aside class="panel article-side"><div class="panel-heading"><div><h3>发布时间</h3><p>留空时使用当前时间。</p></div></div><div class="field"><label for="dynamic-published">发布时间（可选）</label><input id="dynamic-published" type="datetime-local" /></div><input id="dynamic-draft-id" type="hidden" /><div class="publish-note"><strong>提交后会发生什么？</strong><span>后台创建一条动态 Markdown 文件，静态托管平台自动部署。</span></div><p id="dynamic-status" class="inline-status"></p><div class="button-stack"><button id="dynamic-draft-save" class="button button-quiet button-full" type="button">保存草稿</button><button class="button button-primary button-full" type="submit">提交到 GitHub</button></div></aside></form>
-          <section class="panel content-list-panel"><div class="panel-heading"><div><h3>已有动态</h3><p>实时读取 GitHub 仓库中的动态。</p></div></div><div id="dynamic-list" class="content-list"></div></section>
-        </div>
-
-        <div id="view-pending" class="view hidden">
-          <div class="section-intro"><span class="section-kicker">草稿</span><p>这里列出保存在 D1 中、尚未提交到 GitHub 的文章、动态和配置草稿。</p></div>
-          <section class="panel"><div class="pending-toolbar"><label class="pending-select-all"><input id="pending-select-all" type="checkbox" /> 全选</label><button id="pending-submit" class="button button-primary" type="button">提交所选到 GitHub</button></div><div id="pending-list" class="content-list"></div></section>
-        </div>
-
-        <div id="view-activity" class="view hidden">
-          <div class="section-intro"><span class="section-kicker">记录</span><p>配置保存、文章发布和动态发布都会留下记录，GitHub 提交是最终事实来源。</p></div>
-          <div class="activity-grid"><section class="panel"><div class="panel-heading"><div><h3>最近提交</h3><p>GitHub 仓库中的提交记录。</p></div></div><div id="commit-list" class="activity-list"></div></section><section class="panel"><div class="panel-heading"><div><h3>后台操作</h3><p>管理后台最近执行的操作。</p></div></div><div id="audit-list" class="activity-list"></div></section></div>
-        </div>
-      </section>
-    </main>
-
-    <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <dialog id="source-dialog" class="source-dialog"><div class="dialog-heading"><strong id="source-title">源码</strong><button id="source-close" class="button button-quiet compact-button" type="button">关闭</button></div><pre id="source-content"></pre></dialog>
-    <script id="vditorIconScript" src="/vendor/vditor/dist/js/icons/ant.js"></script>
-    <script src="/vendor/vditor/dist/index.min.js"></script>
-    <script src="/app.js" type="module"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f0f3f8" />
+		<title>登录 · 昔涟管理后台</title>
+		<link rel="icon" href="/favicon.png" />
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<main class="auth-layout">
+			<section class="auth-card" aria-labelledby="login-title">
+				<div class="brand-lockup"><span class="brand-mark" aria-hidden="true">C</span><span>CYRENE <small>ADMIN</small></span></div>
+				<p class="eyebrow">BLOG MANAGEMENT</p>
+				<h1 id="login-title">管理你的博客</h1>
+				<p class="auth-copy">连接 GitHub 仓库，整理站点配置并发布新的内容。</p>
+				<form id="login-form" class="stack-form">
+					<input class="sr-only" name="username" autocomplete="username" value="admin" tabindex="-1" aria-hidden="true" />
+					<label for="admin-password">管理密码</label>
+					<input id="admin-password" type="password" autocomplete="current-password" placeholder="输入后台密码" required />
+					<button class="button button-primary" type="submit">进入管理后台</button>
+					<p id="login-error" class="form-error" role="alert"></p>
+				</form>
+				<p class="auth-note">配置与内容提交到 GitHub 后由静态托管平台自动部署。</p>
+			</section>
+		</main>
+		<script src="/pages/login.js" type="module"></script>
+	</body>
 </html>

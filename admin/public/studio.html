@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f0f3f8" />
+		<title>博客配置 · 昔涟管理后台</title>
+		<link rel="icon" href="/favicon.png" />
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<main id="app-shell" class="app-shell hidden">
+			<aside id="admin-sidebar" class="sidebar"></aside>
+			<section class="workspace">
+				<header id="admin-topbar" class="topbar"></header>
+				<div class="view">
+					<div class="section-intro"><span id="studio-section-kicker" class="section-kicker">基础配置</span><p id="studio-section-description">管理站点身份、个人资料、公告和背景壁纸。</p></div>
+					<section class="panel studio-toolbar"><div class="studio-toolbar-heading"><strong>配置文件</strong><span>切换后将从 GitHub 实时读取对应文件。</span></div><div id="studio-config-tabs" class="studio-tabs" role="tablist" aria-label="配置文件"></div></section>
+					<section class="panel studio-panel"><div id="studio-editor" class="studio-editor"></div><div class="form-actions"><p id="studio-status" class="inline-status"></p><button id="studio-draft-save" class="button button-quiet" type="button">保存草稿</button><button id="studio-submit" class="button button-primary" type="button">提交到 GitHub</button></div></section>
+				</div>
+			</section>
+		</main>
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+		<script src="/pages/studio.js" type="module"></script>
+	</body>
+</html>

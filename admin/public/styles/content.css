@@ -1,0 +1,215 @@
+.content-list-panel {
+	margin-top: 12px;
+}
+.content-list {
+	display: grid;
+}
+.content-row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 18px;
+	padding: 14px 0;
+	border-bottom: 1px solid var(--line);
+}
+.content-row:last-child {
+	border-bottom: 0;
+}
+.content-row-main {
+	min-width: 0;
+	display: grid;
+	gap: 4px;
+}
+.content-row-main strong {
+	color: var(--ink);
+	font-size: 13px;
+}
+.content-row-main small {
+	color: var(--subtle);
+	font-size: 10px;
+}
+.content-row-main p {
+	max-height: 42px;
+	margin: 2px 0 0;
+	overflow: hidden;
+	color: var(--muted);
+	font-size: 12px;
+	white-space: pre-wrap;
+}
+.row-actions {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 7px;
+}
+.pending-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 12px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid var(--line);
+}
+.pending-select-all {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+.pending-select-all input,
+.pending-checkbox {
+	width: 17px;
+	height: 17px;
+	accent-color: var(--accent);
+}
+.pending-row {
+	align-items: center;
+}
+.publish-note {
+	display: grid;
+	gap: 5px;
+	margin: 20px 0;
+	padding: 12px;
+	border-left: 3px solid var(--accent);
+	background: var(--accent-soft);
+	color: var(--muted);
+	font-size: 11px;
+}
+.publish-note strong {
+	color: var(--accent-strong);
+	font-size: 12px;
+}
+
+.activity-list {
+	display: grid;
+}
+.activity-row {
+	min-height: 58px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 4px;
+	border-bottom: 1px solid var(--line);
+	transition: background 0.15s ease;
+}
+.activity-row:last-child {
+	border-bottom: 0;
+}
+a.activity-row:hover {
+	background: #fafbfc;
+}
+.activity-mark {
+	width: 30px;
+	height: 30px;
+	display: grid;
+	place-items: center;
+	flex: 0 0 auto;
+	border-radius: 50%;
+	background: var(--accent-soft);
+	color: var(--accent);
+	font-size: 12px;
+	font-weight: 800;
+}
+.activity-mark .icon {
+	width: 15px;
+	height: 15px;
+}
+.activity-content {
+	min-width: 0;
+	display: grid;
+	gap: 2px;
+}
+.activity-content strong {
+	overflow: hidden;
+	color: var(--ink);
+	font-size: 12px;
+	font-weight: 650;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.activity-content small {
+	color: var(--subtle);
+	font-size: 10px;
+}
+.empty-copy {
+	margin: 14px 0;
+	color: var(--subtle);
+	font-size: 12px;
+}
+
+.source-dialog {
+	width: min(900px, calc(100vw - 32px));
+	max-height: 86vh;
+	padding: 18px;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: #ffffff;
+	color: var(--ink);
+}
+.source-dialog::backdrop {
+	background: rgba(24, 31, 40, 0.55);
+}
+.dialog-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 12px;
+}
+.source-dialog pre {
+	max-height: 68vh;
+	overflow: auto;
+	margin: 0;
+	padding: 15px;
+	border: 1px solid var(--line);
+	border-radius: 6px;
+	background: #f7f9fb;
+	color: #2d333b;
+	white-space: pre-wrap;
+	font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+	font-size: 12px;
+	line-height: 1.65;
+}
+.toast {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	z-index: 30;
+	max-width: min(360px, calc(100vw - 40px));
+	padding: 12px 14px;
+	border: 1px solid #bfe5dd;
+	border-radius: 6px;
+	background: var(--accent-soft);
+	color: var(--accent-strong);
+	box-shadow: 0 12px 36px rgba(30, 44, 59, 0.15);
+	font-size: 12px;
+	opacity: 0;
+	transform: translateY(10px);
+	pointer-events: none;
+	transition:
+		opacity 0.18s ease,
+		transform 0.18s ease;
+}
+.toast[data-type="error"] {
+	border-color: #efc5ca;
+	background: #fff6f7;
+	color: var(--danger);
+}
+.toast-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+.is-busy::after {
+	content: "";
+	width: 13px;
+	height: 13px;
+	border: 2px solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+	animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
