@@ -612,7 +612,7 @@ $effect(() => {
 				<Icon icon={tab.icon} class="text-[0.875rem] shrink-0"></Icon>
 				<span class="truncate">{tab.label}</span>
 				{#if activeTab === tab.key}
-					<div class="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-(--primary-surface)"></div>
+					<div class="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-(--primary)"></div>
 				{/if}
 			</button>
 		{/each}
@@ -711,7 +711,7 @@ $effect(() => {
 					<Icon icon="material-symbols:border-outer-rounded" class="text-[1.25rem] shrink-0"></Icon>
 					<span class="text-sm flex-1">{i18n(I18nKey.cardBorder)}</span>
 					<div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-						 class:bg-(--primary-surface)={cardBorderEnabled}
+						 class:bg-(--primary)={cardBorderEnabled}
 						 class:bg-(--btn-regular-bg-active)={!cardBorderEnabled}>
 						<div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
 							 class:left-0.5={!cardBorderEnabled}
@@ -728,7 +728,7 @@ $effect(() => {
 					<Icon icon="material-symbols:palette" class="text-[1.25rem] shrink-0"></Icon>
 					<span class="text-sm flex-1">{i18n(I18nKey.cardFollowTheme)}</span>
 					<div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-						 class:bg-(--primary-surface)={cardFollowThemeEnabled}
+						 class:bg-(--primary)={cardFollowThemeEnabled}
 						 class:bg-(--btn-regular-bg-active)={!cardFollowThemeEnabled}>
 						<div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
 							 class:left-0.5={!cardFollowThemeEnabled}
@@ -856,7 +856,7 @@ $effect(() => {
 					<Icon icon="material-symbols:titlecase-rounded" class="text-[1.25rem] shrink-0"></Icon>
 					<span class="text-sm flex-1">{i18n(I18nKey.wallpaperTitle)}</span>
 					<div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-						 class:bg-(--primary-surface)={bannerTitleEnabled}
+						 class:bg-(--primary)={bannerTitleEnabled}
 						 class:bg-(--btn-regular-bg-active)={!bannerTitleEnabled}>
 						<div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
 							 class:left-0.5={!bannerTitleEnabled}
@@ -874,7 +874,7 @@ $effect(() => {
 					<Icon icon="material-symbols:view-carousel-outline" class="text-[1.25rem] shrink-0"></Icon>
 					<span class="text-sm flex-1">{i18n(I18nKey.wallpaperCarousel)}</span>
 					<div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-						 class:bg-(--primary-surface)={bannerCarouselEnabled}
+						 class:bg-(--primary)={bannerCarouselEnabled}
 						 class:bg-(--btn-regular-bg-active)={!bannerCarouselEnabled}>
 						<div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
 							 class:left-0.5={!bannerCarouselEnabled}
@@ -892,7 +892,7 @@ $effect(() => {
 					<Icon icon="material-symbols:airwave-rounded" class="text-[1.25rem] shrink-0"></Icon>
 					<span class="text-sm flex-1">{i18n(I18nKey.wavesAnimation)}</span>
 					<div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-						 class:bg-(--primary-surface)={wavesEnabled}
+						 class:bg-(--primary)={wavesEnabled}
 						 class:bg-(--btn-regular-bg-active)={!wavesEnabled}>
 						<div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
 							 class:left-0.5={!wavesEnabled}
@@ -910,7 +910,7 @@ $effect(() => {
 					<Icon icon="material-symbols:gradient" class="text-[1.25rem] shrink-0"></Icon>
 					<span class="text-sm flex-1">{i18n(I18nKey.gradientTransition)}</span>
 					<div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-						 class:bg-(--primary-surface)={gradientEnabled}
+						 class:bg-(--primary)={gradientEnabled}
 						 class:bg-(--btn-regular-bg-active)={!gradientEnabled}>
 						<div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
 							 class:left-0.5={!gradientEnabled}
@@ -944,7 +944,7 @@ $effect(() => {
 				<Icon icon="mdi:flower-poppy" class="text-[1.25rem] shrink-0"></Icon>
 				<span class="text-sm flex-1">{i18n(I18nKey.sakuraEffect)}</span>
 				<div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-					 class:bg-(--primary-surface)={sakuraEnabled}
+					 class:bg-(--primary)={sakuraEnabled}
 					 class:bg-(--btn-regular-bg-active)={!sakuraEnabled}>
 					<div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
 						 class:left-0.5={!sakuraEnabled}

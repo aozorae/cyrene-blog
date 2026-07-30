@@ -53,10 +53,6 @@ html {
     scroll-behavior: smooth;
 }
 
-body {
-    color: var(--deep-text);
-}
-
 /* 页面顶部渐变高光效果 */
 .top-gradient-highlight {
     position: fixed;
@@ -295,7 +291,7 @@ body {
         @apply transition-colors duration-150 rounded-md p-1.5 -m-1.5 expand-animation;
     }
     .float-panel {
-        @apply top-21 rounded-(--radius-large) overflow-hidden bg-(--card-bg) transition-colors duration-150 shadow-xl border border-(--line-divider)
+        @apply top-21 rounded-(--radius-large) overflow-hidden bg-(--card-bg) transition-colors duration-150 shadow-xl border border-black/5 dark:border-white/10
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
@@ -312,13 +308,11 @@ body {
         active:bg-(--btn-card-bg-active)
     }
     .btn-card.disabled {
-        @apply pointer-events-none;
-        color: color-mix(in srgb, var(--deep-text) 10%, transparent);
+        @apply pointer-events-none text-black/10 dark:text-white/10
     }
     .btn-plain {
         @apply transition-colors duration-150 relative flex items-center justify-center bg-none
-        hover:text-(--primary);
-        color: color-mix(in srgb, var(--deep-text) 75%, transparent);
+        text-black/75 hover:text-(--primary) dark:text-white/75 dark:hover:text-(--primary);
         &:not(.scale-animation) {
             @apply hover:bg-(--btn-plain-bg-hover) active:bg-(--btn-plain-bg-active)
         }
@@ -331,7 +325,7 @@ body {
     }
     .btn-regular {
         @apply transition-colors duration-150 flex items-center justify-center bg-(--btn-regular-bg) hover:bg-(--btn-regular-bg-hover) active:bg-(--btn-regular-bg-active)
-        text-(--btn-content)
+        text-(--btn-content) dark:text-white/75
     }
 
     .link-underline {
@@ -357,19 +351,19 @@ body {
 
 
     .text-90 {
-        color: color-mix(in srgb, var(--deep-text) 90%, transparent);
+        @apply text-black/90 dark:text-white/90
     }
     .text-75 {
-        color: color-mix(in srgb, var(--deep-text) 75%, transparent);
+        @apply text-black/75 dark:text-white/75
     }
     .text-50 {
-        color: color-mix(in srgb, var(--deep-text) 50%, transparent);
+        @apply text-black/50 dark:text-white/50
     }
     .text-30 {
-        color: color-mix(in srgb, var(--deep-text) 30%, transparent);
+        @apply text-black/30 dark:text-white/30
     }
     .text-25 {
-        color: color-mix(in srgb, var(--deep-text) 25%, transparent);
+        @apply text-black/25 dark:text-white/25
     }
 
     /* 下拉菜单样式 */
@@ -392,12 +386,11 @@ body {
     }
 
     .dropdown-content {
-        @apply bg-(--card-bg) rounded-(--radius-large) shadow-xl border border-(--line-divider) py-2 min-w-48;
+        @apply bg-(--card-bg) rounded-(--radius-large) shadow-xl border border-black/5 dark:border-white/10 py-2 min-w-48;
     }
 
     .dropdown-item {
-        @apply flex items-center justify-between px-4 py-2.5 hover:text-(--primary) hover:bg-(--btn-plain-bg-hover) transition-colors duration-150 font-medium;
-        color: color-mix(in srgb, var(--deep-text) 75%, transparent);
+        @apply flex items-center justify-between px-4 py-2.5 text-black/75 dark:text-white/75 hover:text-(--primary) hover:bg-(--btn-plain-bg-hover) transition-colors duration-150 font-medium;
     }
 
     .dropdown-item:first-child {
@@ -452,10 +445,11 @@ body {
 
     .btn-regular-dark {
         @apply flex items-center justify-center
-        bg-[#E09AAF] hover:bg-[#DB8EA8] active:bg-[#D684A0] text-[#3C3237]
+        bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
+        dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))]
     }
     .btn-regular-dark.success {
-        @apply bg-[#D684A0]
+        @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))]
     }
 }
 
@@ -521,7 +515,7 @@ body {
 }
 
 .post-list-layout-switch button.active {
-  @apply bg-(--primary-surface) text-(--primary-contrast);
+  @apply bg-(--primary) text-white;
 }
 
 .post-list-layout-switch button:not(.active) {

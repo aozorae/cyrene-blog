@@ -40,7 +40,7 @@ const widgetId =
 <div class="flex items-center gap-2 mb-2 px-1">
     <!-- Circular Cover -->
     <div class="relative shrink-0 w-14 h-14 group">
-            <div class="w-full h-full rounded-full overflow-hidden shadow-lg border-2 border-white dark:border-neutral-700 relative z-10 bg-(--primary-surface)/10 flex items-center justify-center">
+            <div class="w-full h-full rounded-full overflow-hidden shadow-lg border-2 border-white dark:border-neutral-700 relative z-10 bg-(--primary)/10 flex items-center justify-center">
             <Icon is:inline name="material-symbols:music-note-rounded" class="text-2xl text-(--primary) opacity-40 absolute" aria-hidden="true" />
             <img class="music-cover w-full h-full object-cover animate-spin-slow relative z-10 opacity-0 transition-opacity duration-300" src="" alt={i18n(I18nKey.musicCover)} style="animation-play-state: paused;" />
             </div>
@@ -83,7 +83,7 @@ const widgetId =
                 </button>
                 <div class="w-16 transition-all duration-300 ease-out flex items-center">
                     <div class="vol-container h-1 w-16 bg-neutral-300/50 dark:bg-neutral-500/40 rounded-full cursor-pointer relative ml-1" role="slider" aria-label={i18n(I18nKey.musicVolume)} aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
-                        <div class="vol-bar absolute left-0 top-0 h-full bg-(--primary-surface) rounded-full w-[70%]"></div>
+                        <div class="vol-bar absolute left-0 top-0 h-full bg-(--primary) rounded-full w-[70%]"></div>
                     </div>
                 </div>
             </div>
@@ -94,9 +94,9 @@ const widgetId =
 <!-- Progress Bar (Slim) -->
 <div class="px-1">
     <div class="progress-container relative w-full h-1 bg-neutral-300/60 dark:bg-neutral-500/40 rounded-full cursor-pointer touch-none mb-2 group mt-2" role="slider" aria-label={i18n(I18nKey.musicProgress)} aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-        <div class="progress-bar absolute left-0 top-0 h-full bg-(--primary-surface) rounded-full w-0 transition-[width] duration-100"></div>
+        <div class="progress-bar absolute left-0 top-0 h-full bg-(--primary) rounded-full w-0 transition-[width] duration-100"></div>
         <!-- Hover Thumb -->
-        <div class="progress-thumb absolute top-1/2 -mt-1.5 -ml-1.5 w-3 h-3 bg-(--primary-surface) ring-2 ring-white dark:ring-neutral-800 rounded-full shadow-sm scale-0 group-hover:scale-100 transition-transform duration-200"></div>
+        <div class="progress-thumb absolute top-1/2 -mt-1.5 -ml-1.5 w-3 h-3 bg-(--primary) ring-2 ring-white dark:ring-neutral-800 rounded-full shadow-sm scale-0 group-hover:scale-100 transition-transform duration-200"></div>
     </div>
 </div>
 
@@ -166,11 +166,11 @@ const widgetId =
     <div class="w-8 h-8 rounded-md overflow-hidden shrink-0 relative bg-neutral-200 dark:bg-neutral-700">
         <img src="" class="item-cover w-full h-full object-cover" loading="lazy" alt="" />
         <!-- Active Indicator overlay with animated equalizer / play icon -->
-        <div class="item-active-overlay absolute inset-0 bg-(--primary-surface)/20 hidden items-center justify-center">
+        <div class="item-active-overlay absolute inset-0 bg-(--primary)/20 hidden items-center justify-center">
             <div class="eq-bars flex items-end gap-[2px] h-3.5">
-                <span class="eq-bar w-[3px] bg-(--primary-surface) rounded-sm"></span>
-                <span class="eq-bar w-[3px] bg-(--primary-surface) rounded-sm"></span>
-                <span class="eq-bar w-[3px] bg-(--primary-surface) rounded-sm"></span>
+                <span class="eq-bar w-[3px] bg-(--primary) rounded-sm"></span>
+                <span class="eq-bar w-[3px] bg-(--primary) rounded-sm"></span>
+                <span class="eq-bar w-[3px] bg-(--primary) rounded-sm"></span>
             </div>
             <svg class="eq-play-icon text-(--primary) hidden" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </div>
@@ -264,7 +264,7 @@ const widgetId =
 
     function updatePlayStateUI(isPlaying) {
         if (isPlaying) {
-            ui.btnPlay.classList.add('bg-(--primary-surface)', 'text-(--primary-contrast)', 'hover:brightness-110');
+            ui.btnPlay.classList.add('bg-(--primary)', 'text-white', 'hover:brightness-110');
             ui.btnPlay.classList.remove('bg-(--btn-regular-bg)', 'hover:bg-(--btn-regular-bg-hover)', 'active:bg-(--btn-regular-bg-active)', 'text-(--primary)');
             ui.iconPlay.classList.add('hidden');
             ui.iconPause.classList.remove('hidden');
@@ -272,7 +272,7 @@ const widgetId =
             ui.btnPlay.setAttribute('aria-label', cfg.i18n.pause);
             ui.btnPlay.title = cfg.i18n.pause;
         } else {
-            ui.btnPlay.classList.remove('bg-(--primary-surface)', 'text-(--primary-contrast)', 'hover:brightness-110');
+            ui.btnPlay.classList.remove('bg-(--primary)', 'text-white', 'hover:brightness-110');
             ui.btnPlay.classList.add('bg-(--btn-regular-bg)', 'hover:bg-(--btn-regular-bg-hover)', 'active:bg-(--btn-regular-bg-active)', 'text-(--primary)');
             ui.iconPlay.classList.remove('hidden');
             ui.iconPause.classList.add('hidden');
@@ -362,7 +362,7 @@ const widgetId =
     }
 
     // ── Virtual scroll helpers (absolute-position based) ──────
-    var PRIMARY_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#B65A7A';
+    var PRIMARY_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#6366f1';
 
     function vsApplyActiveStyle(el, isActive) {
         var overlay = el.querySelector('.item-active-overlay');

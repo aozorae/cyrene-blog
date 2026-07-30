@@ -101,7 +101,7 @@ function getTypeColor(seasonType: number): string {
 		<div class="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
 			<div class="p-3">
 				<p class="mb-2 line-clamp-3 text-xs text-white/90 leading-relaxed">{anime.overview || i18n(I18nKey.animeNoOverview)}</p>
-				<button class="w-full rounded-lg bg-(--primary-surface) px-3 py-1.5 text-xs font-medium text-(--primary-contrast) transition-colors hover:bg-(--primary-surface)/80">
+				<button class="w-full rounded-lg bg-(--primary) px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-(--primary)/80">
 					{i18n(I18nKey.animeViewDetails)}
 				</button>
 			</div>

@@ -184,8 +184,7 @@
   }
 
   th {
-    @apply font-semibold text-(--btn-content) border-b border-(--line-color);
-    background-color: #F3D6E1;
+    @apply bg-(--btn-regular-bg) font-semibold text-(--btn-content) border-b border-(--line-color);
   }
 
   td {
@@ -193,7 +192,7 @@
   }
 
   tr:nth-child(even) td {
-    background-color: #FBECEF;
+    @apply bg-(--btn-plain-bg-active);
   }
 }
 
@@ -203,7 +202,7 @@ body.wallpaper-transparent .custom-md {
   }
 
   th {
-    background-color: color-mix(in oklch, #F3D6E1 72%, transparent);
+    background-color: color-mix(in oklch, var(--btn-regular-bg) 72%, transparent);
   }
 
   td {
@@ -211,27 +210,6 @@ body.wallpaper-transparent .custom-md {
   }
 
   tr:nth-child(even) td {
-    background-color: color-mix(in oklch, #FBECEF 68%, transparent);
-  }
-}
-
-/* 暗色模式继续使用主题交互色，避免浅色表头削弱文字对比度 */
-:root.dark .custom-md {
-  th {
-    background-color: var(--btn-regular-bg-hover);
-  }
-
-  tr:nth-child(even) td {
-    background-color: var(--btn-card-bg-active);
-  }
-}
-
-:root.dark body.wallpaper-transparent .custom-md {
-  th {
-    background-color: color-mix(in oklch, var(--btn-regular-bg-hover) 72%, transparent);
-  }
-
-  tr:nth-child(even) td {
-    background-color: color-mix(in oklch, var(--btn-card-bg-active) 68%, transparent);
+    background-color: color-mix(in oklch, var(--btn-plain-bg-active) 68%, transparent);
   }
 }

@@ -38,7 +38,7 @@ function getQrLqipProps(qrCode: string) {
       <!-- 页面标题和描述 -->
       <div class="mb-8">
         <div class="flex items-center gap-3 mb-3">
-            <div class="h-8 w-8 rounded-lg bg-(--primary-surface) flex items-center justify-center text-(--primary-contrast)">
+            <div class="h-8 w-8 rounded-lg bg-(--primary) flex items-center justify-center text-white dark:text-black/70">
                 <Icon is:inline name="material-symbols:favorite" class="text-[1.5rem]"></Icon>
             </div>
           <div class="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
@@ -51,7 +51,7 @@ function getQrLqipProps(qrCode: string) {
           </p>
         )}
         {sponsorConfig.usage && (
-          <div class="mb-8 p-4 rounded-lg bg-(--primary-surface)/8 dark:bg-(--btn-regular-bg) border border-(--primary)/30 dark:border-none backdrop-blur-xs shadow-xs usage-info-box">
+          <div class="mb-8 p-4 rounded-lg bg-(--primary)/8 dark:bg-(--btn-regular-bg) border border-(--primary)/30 dark:border-none backdrop-blur-xs shadow-xs usage-info-box">
             <div class="flex items-start gap-2">
               <Icon is:inline name="material-symbols:info-outline" class="text-(--primary) text-lg shrink-0 mt-0.5" />
               <p class="text-sm text-neutral-700 dark:text-neutral-200 leading-relaxed">
@@ -103,7 +103,7 @@ function getQrLqipProps(qrCode: string) {
                             href={method.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-(--primary-surface) text-(--primary-contrast) rounded-lg font-medium hover:bg-(--primary-surface)/90 active:scale-95 transition-all"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-(--primary) text-white dark:text-black/70 rounded-lg font-medium hover:bg-(--primary)/90 active:scale-95 transition-all"
                           >
                             <span>{i18n(I18nKey.sponsorGoTo)}</span>
                             <Icon is:inline name="fa7-solid:arrow-up-right-from-square" class="text-sm" />
@@ -122,7 +122,7 @@ function getQrLqipProps(qrCode: string) {
       <div class="card-base z-10 px-9 py-6 relative w-full">
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center gap-3">
-            <div class="h-8 w-8 rounded-lg bg-(--primary-surface)/10 flex items-center justify-center">
+            <div class="h-8 w-8 rounded-lg bg-(--primary)/10 flex items-center justify-center">
               <Icon is:inline name="material-symbols:emoji-people-rounded" class="text-[1.25rem] text-(--primary)" />
             </div>
             <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
@@ -153,7 +153,7 @@ function getQrLqipProps(qrCode: string) {
 
                 <!-- 首字母头像（作为兜底，图片加载失败也会显示这个） -->
                 <div 
-                  class={`w-9 h-9 rounded-full bg-(--primary-surface)/10 flex items-center justify-center shrink-0 group-hover:bg-(--primary-surface)/20 transition-colors ${sponsor.avatar ? 'hidden' : ''}`}
+                  class={`w-9 h-9 rounded-full bg-(--primary)/10 flex items-center justify-center shrink-0 group-hover:bg-(--primary)/20 transition-colors ${sponsor.avatar ? 'hidden' : ''}`}
                 >
                   <span class="text-sm font-bold text-(--primary)">{sponsor.name.charAt(0)}</span>
                 </div>
@@ -205,7 +205,6 @@ function getQrLqipProps(qrCode: string) {
     background-color: oklch(from var(--primary) l c h / 0.15) !important;
   }
 </style>
-
 <style is:global>
   .sponsor-grid {
     display: grid;

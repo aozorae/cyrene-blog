@@ -59,7 +59,7 @@
 
 .dynamic-page-header h2 {
 	margin: 0;
-	color: var(--deep-text);
+	color: rgb(0 0 0 / 90%);
 	font-size: 1.5rem;
 	font-weight: 700;
 	line-height: 1.25;
@@ -106,7 +106,7 @@ dynamic-feed {
 	border-radius: var(--radius-large);
 	outline: none;
 	background: transparent;
-	color: var(--deep-text);
+	color: rgb(0 0 0 / 90%);
 	padding: 0.625rem 1rem 0.625rem 2.75rem;
 	font-size: 0.9rem;
 }
@@ -146,7 +146,7 @@ dynamic-feed {
 	border-radius: var(--radius-large);
 	outline: none;
 	background: var(--card-bg);
-	color: var(--deep-text);
+	color: rgb(0 0 0 / 90%);
 	color-scheme: light;
 	padding: 0.625rem 2.25rem 0.625rem 2.35rem;
 	font-size: 0.9rem;
@@ -155,7 +155,7 @@ dynamic-feed {
 
 .dynamic-year-select select option {
 	background: var(--card-bg);
-	color: var(--deep-text);
+	color: rgb(0 0 0 / 90%);
 }
 
 .dynamic-year-select select:focus {
@@ -215,7 +215,7 @@ dynamic-feed {
 	width: fit-content;
 	max-width: 100%;
 	overflow: hidden;
-	color: var(--deep-text);
+	color: rgb(0 0 0 / 90%);
 	text-decoration: none;
 }
 
@@ -327,7 +327,7 @@ dynamic-feed {
 	max-width: 100%;
 	overflow-wrap: anywhere;
 	margin: 0.875rem 0 0 3.75rem;
-	color: var(--deep-text);
+	color: rgb(0 0 0 / 90%);
 	font-size: 0.98rem;
 	line-height: 1.75;
 }
@@ -701,7 +701,7 @@ dynamic-feed {
 :root.dark .dynamic-page-header h2,
 :root.dark .dynamic-author,
 :root.dark .dynamic-content {
-	color: var(--deep-text);
+	color: rgb(255 255 255 / 90%);
 }
 
 :root.dark .dynamic-author:hover {
@@ -711,13 +711,13 @@ dynamic-feed {
 :root.dark .dynamic-search input,
 :root.dark .dynamic-year-select select {
 	background: transparent;
-	color: var(--deep-text);
+	color: rgb(255 255 255 / 90%);
 	color-scheme: dark;
 }
 
 :root.dark .dynamic-year-select select option {
 	background: var(--card-bg);
-	color: var(--deep-text);
+	color: rgb(255 255 255 / 90%);
 }
 
 /* 透明模式适配 */

@@ -134,7 +134,7 @@
 	background: color-mix(in oklab, var(--toc-indicator-bg), transparent);
 	border-radius: 0.875rem;
 	transition: top 0.18s ease, height 0.18s ease, opacity 0.14s ease;
-	box-shadow: 0 6px 18px -14px color-mix(in oklab, var(--primary) 35%, transparent);
+	box-shadow: 0 6px 18px -14px color-mix(in oklab, var(--primary) 55%, transparent);
 	z-index: -1;
 }
 

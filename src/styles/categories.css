@@ -24,12 +24,12 @@
   border-color: color-mix(in srgb, var(--primary) 25%, transparent);
 }
 .category-pill[data-active] {
-  background: var(--primary-surface);
-  color: var(--primary-contrast);
+  background: var(--primary);
+  color: white;
   border-color: transparent;
 }
 .category-pill[data-active] .pill-count {
-  background: color-mix(in srgb, var(--primary-contrast) 20%, transparent);
+  background: rgba(255, 255, 255, 0.2);
   opacity: 0.9;
 }
 .category-pill[data-soft-active] {
@@ -47,10 +47,10 @@
   color: color-mix(in srgb, var(--primary) 100%, var(--btn-content));
 }
 .category-pill[data-active]:hover {
-  background: var(--primary-surface);
+  background: var(--primary);
   opacity: 0.9;
 }
 .category-pill[data-category-name=""][data-active],
 .category-pill[data-category-name=""][data-active]:hover {
-  color: var(--primary-contrast);
+  color: white;
 }
