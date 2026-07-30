@@ -213,7 +213,8 @@
 		gap: 2px;
 	}
 	.studio-copy,
-	.studio-array-heading {
+	.studio-array-heading,
+	.studio-guide-footer {
 		align-items: stretch;
 		flex-direction: column;
 	}
@@ -227,6 +228,10 @@
 	}
 	.studio-guide-link {
 		align-self: flex-start;
+	}
+	.studio-guide-footer .studio-guide-link {
+		align-self: stretch;
+		justify-content: center;
 	}
 	.studio-range-control,
 	.studio-range-control:has(.studio-color-swatch) {

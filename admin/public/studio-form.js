@@ -45,17 +45,17 @@ function renderActiveForm() {
 	const { container, doc, navigationTitle, escapeHtml } = active;
 	const guide = getStudioDocumentGuide(doc.path);
 	const guideLink = guide
-		? `<a class="studio-guide-link" href="${escapeHtml(guide)}" target="_blank" rel="noreferrer"><svg class="icon" aria-hidden="true"><use href="/icons.svg#external-link"></use></svg><span>查看配置说明</span></a>`
+		? `<aside class="studio-guide-footer" aria-label="配置文档"><div><strong>Cyrene 配置文档</strong><span>查看本页字段的取值、示例、默认行为和注意事项。</span></div><a class="studio-guide-link" href="${escapeHtml(guide)}" target="_blank" rel="noreferrer"><svg class="icon" aria-hidden="true"><use href="/icons.svg#external-link"></use></svg><span>查看对应文档</span></a></aside>`
 		: "";
-	const header = `<div class="studio-copy"><div><strong>${escapeHtml(navigationTitle || doc.title)}</strong><span>${escapeHtml(doc.description)}</span><small>${escapeHtml(doc.path)}</small></div>${guideLink}</div>`;
+	const header = `<div class="studio-copy"><div><strong>${escapeHtml(navigationTitle || doc.title)}</strong><span>${escapeHtml(doc.description)}</span><small>${escapeHtml(doc.path)}</small></div></div>`;
 	if (doc.text) {
-		container.innerHTML = `${header}<div class="studio-field studio-html-field"><label>页脚 HTML 内容<small>这是高级自定义内容，保持原 HTML 形式保存；不需要配置时可以留空。</small></label><textarea data-studio-kind="string" data-studio-path="content" rows="16">${escapeHtml(active.values.content || "")}</textarea></div>`;
+		container.innerHTML = `${header}<div class="studio-field studio-html-field"><label>页脚 HTML 内容<small>这是高级自定义内容，保持原 HTML 形式保存；不需要配置时可以留空。</small></label><textarea data-studio-kind="string" data-studio-path="content" rows="16">${escapeHtml(active.values.content || "")}</textarea></div>${guideLink}`;
 		return;
 	}
 	const body = Object.entries(active.values)
 		.map(([key, value]) => renderValue(value, key, 0))
 		.join("");
-	container.innerHTML = `${header}<div class="studio-form-body">${body || '<p class="empty-copy">这个文件没有可编辑的配置项。</p>'}</div>`;
+	container.innerHTML = `${header}<div class="studio-form-body">${body || '<p class="empty-copy">这个文件没有可编辑的配置项。</p>'}</div>${guideLink}`;
 }
 
 function renderValue(value, path, depth) {

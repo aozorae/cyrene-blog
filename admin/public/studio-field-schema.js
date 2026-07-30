@@ -1,50 +1,40 @@
 const choice = (value, label) => ({ value, label });
 
+const DOCUMENTATION_BASE_URL = "https://cyrene-docs.vercel.app";
+const docsGuide = (path) => `${DOCUMENTATION_BASE_URL}${path}`;
+
 const DOCUMENT_GUIDES = {
-	"src/config/siteConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/site.html",
-	"src/config/profileConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/profile.html",
-	"src/config/navBarConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/navbar.html",
-	"src/config/sidebarConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/sidebar.html",
-	"src/config/announcementConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/announcement.html",
-	"src/config/backgroundWallpaper.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/wallpaper.html",
-	"src/config/musicConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/music.html",
-	"src/config/commentConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/comment.html",
-	"src/config/fontConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/font.html",
-	"src/config/coverImageConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/cover-image.html",
-	"src/config/dynamicConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/dynamic.html",
-	"src/config/friendsConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/friends.html",
-	"src/config/galleryConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/gallery.html",
-	"src/config/sponsorConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/sponsor.html",
-	"src/config/effectsConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/effects.html",
-	"src/config/expressiveCodeConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/code-block.html",
-	"src/config/mermaidConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/mermaid.html",
-	"src/config/plantumlConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/plantuml.html",
-	"src/config/pioConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/pio.html",
-	"src/config/footerConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/footer.html",
-	"src/config/FooterConfig.html":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/footer.html",
-	"src/config/licenseConfig.ts":
-		"https://docs-firefly.cuteleaf.cn/zh/guide/license.html",
+	"src/config/siteConfig.ts": docsGuide("/guide/config-foundation#site-config"),
+	"src/config/profileConfig.ts": docsGuide("/guide/config-foundation#profile"),
+	"src/config/announcementConfig.ts": docsGuide(
+		"/guide/config-foundation#announcement",
+	),
+	"src/config/backgroundWallpaper.ts": docsGuide(
+		"/guide/config-foundation#background-wallpaper",
+	),
+	"src/config/navBarConfig.ts": docsGuide("/guide/config-components#navbar"),
+	"src/config/sidebarConfig.ts": docsGuide("/guide/config-components#sidebar"),
+	"src/config/fontConfig.ts": docsGuide("/guide/config-features#font"),
+	"src/config/expressiveCodeConfig.ts": docsGuide(
+		"/guide/config-features#code-block",
+	),
+	"src/config/coverImageConfig.ts": docsGuide(
+		"/guide/config-features#cover-image",
+	),
+	"src/config/musicConfig.ts": docsGuide("/guide/config-features#music-player"),
+	"src/config/commentConfig.ts": docsGuide("/guide/config-features#comments"),
+	"src/config/analyticsConfig.ts": docsGuide("/guide/config-features#analytics"),
+	"src/config/mermaidConfig.ts": docsGuide("/guide/config-features#mermaid"),
+	"src/config/plantumlConfig.ts": docsGuide("/guide/config-features#plantuml"),
+	"src/config/dynamicConfig.ts": docsGuide("/guide/config-pages#dynamic"),
+	"src/config/friendsConfig.ts": docsGuide("/guide/config-pages#friends"),
+	"src/config/galleryConfig.ts": docsGuide("/guide/config-pages#gallery"),
+	"src/config/sponsorConfig.ts": docsGuide("/guide/config-pages#sponsor"),
+	"src/config/effectsConfig.ts": docsGuide("/guide/config-extensions#effects"),
+	"src/config/footerConfig.ts": docsGuide("/guide/config-extensions#footer"),
+	"src/config/FooterConfig.html": docsGuide("/guide/config-extensions#footer-html"),
+	"src/config/licenseConfig.ts": docsGuide("/guide/config-extensions#license"),
+	"src/config/pioConfig.ts": docsGuide("/guide/config-extensions#mascot"),
 };
 
 const PATH_SCHEMAS = {

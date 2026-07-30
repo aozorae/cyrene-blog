@@ -83,6 +83,30 @@
 	line-height: 1.5;
 	overflow-wrap: anywhere;
 }
+.studio-guide-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 18px;
+	padding: 14px 15px;
+	border: 1px solid #cce9e3;
+	border-radius: 6px;
+	background: #f1fbf8;
+}
+.studio-guide-footer > div {
+	min-width: 0;
+	display: grid;
+	gap: 3px;
+}
+.studio-guide-footer strong {
+	color: var(--ink);
+	font-size: 12px;
+}
+.studio-guide-footer span {
+	color: var(--muted);
+	font-size: 10px;
+	line-height: 1.5;
+}
 .studio-guide-link {
 	min-height: 32px;
 	display: inline-flex;
@@ -104,6 +128,11 @@
 .studio-guide-link .icon {
 	width: 14px;
 	height: 14px;
+}
+.studio-guide-link span {
+	color: inherit;
+	font-size: inherit;
+	line-height: inherit;
 }
 .studio-form-body {
 	display: grid;
