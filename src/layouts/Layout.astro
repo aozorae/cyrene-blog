@@ -291,8 +291,21 @@ const siteLang = lang.replace("_", "-");
         isDark ? darkTheme : lightTheme
       );
 
-      // Load the hue from local storage
-      const hue = localStorage.getItem("hue") || configHue;
+      // 迁移仍沿用旧默认值 165 的浏览器；用户主动选择的其他色相继续保留
+      const hueStorageKey = "hue";
+      const hueDefaultStorageKey = "hueDefault";
+      const legacyDefaultHue = "165";
+      const configHueValue = String(configHue);
+      const storedDefaultHue = localStorage.getItem(hueDefaultStorageKey);
+      const storedHue = localStorage.getItem(hueStorageKey);
+      if (storedDefaultHue !== configHueValue) {
+        if (storedHue === (storedDefaultHue || legacyDefaultHue)) {
+          localStorage.removeItem(hueStorageKey);
+        }
+        localStorage.setItem(hueDefaultStorageKey, configHueValue);
+      }
+
+      const hue = localStorage.getItem(hueStorageKey) || configHueValue;
       document.documentElement.style.setProperty("--hue", hue);
 
       // 设置卡片透明度（全屏透明模式下使用），优先使用用户自定义值

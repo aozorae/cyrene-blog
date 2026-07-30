@@ -28,13 +28,36 @@ declare global {
 }
 
 export function getDefaultHue(): number {
-	const fallback = "250";
+	const fallback = String(siteConfig.themeColor.hue);
 	// 检查是否在浏览器环境中
 	if (typeof document === "undefined") {
 		return Number.parseInt(fallback, 10);
 	}
 	const configCarrier = document.getElementById("config-carrier");
 	return Number.parseInt(configCarrier?.dataset.hue || fallback, 10);
+}
+
+const HUE_STORAGE_KEY = "hue";
+const HUE_DEFAULT_STORAGE_KEY = "hueDefault";
+const LEGACY_DEFAULT_HUE = "165";
+
+function migrateStoredHue(defaultHue: number): void {
+	if (typeof window === "undefined" || !window.localStorage) {
+		return;
+	}
+
+	const defaultHueValue = String(defaultHue);
+	const storedDefaultHue = localStorage.getItem(HUE_DEFAULT_STORAGE_KEY);
+	if (storedDefaultHue === defaultHueValue) {
+		return;
+	}
+
+	// 旧版本会把默认色相也写入本地存储，只迁移仍跟随旧默认值的用户
+	const storedHue = localStorage.getItem(HUE_STORAGE_KEY);
+	if (storedHue === (storedDefaultHue || LEGACY_DEFAULT_HUE)) {
+		localStorage.removeItem(HUE_STORAGE_KEY);
+	}
+	localStorage.setItem(HUE_DEFAULT_STORAGE_KEY, defaultHueValue);
 }
 
 export function getDefaultTheme(): LIGHT_DARK_MODE {
@@ -66,8 +89,10 @@ export function getHue(): number {
 	if (typeof window === "undefined" || !window.localStorage) {
 		return getDefaultHue();
 	}
-	const stored = localStorage.getItem("hue");
-	return stored ? Number.parseInt(stored, 10) : getDefaultHue();
+	const defaultHue = getDefaultHue();
+	migrateStoredHue(defaultHue);
+	const stored = localStorage.getItem(HUE_STORAGE_KEY);
+	return stored ? Number.parseInt(stored, 10) : defaultHue;
 }
 
 export function setHue(hue: number): void {
@@ -79,7 +104,8 @@ export function setHue(hue: number): void {
 	) {
 		return;
 	}
-	localStorage.setItem("hue", String(hue));
+	localStorage.setItem(HUE_DEFAULT_STORAGE_KEY, String(getDefaultHue()));
+	localStorage.setItem(HUE_STORAGE_KEY, String(hue));
 	const r = document.querySelector(":root") as HTMLElement;
 	if (!r) {
 		return;
