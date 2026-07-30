@@ -1,16 +1,22 @@
 import { HttpError } from "./response";
 
-const COOKIE_NAME = "__Host-firefly_admin_session";
+const COOKIE_NAME = "__Host-cyrene_admin_session";
 const SESSION_TTL_SECONDS = 60 * 60 * 12;
 
 function toBase64Url(bytes: Uint8Array): string {
 	let binary = "";
 	for (const byte of bytes) binary += String.fromCharCode(byte);
-	return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+	return btoa(binary)
+		.replace(/\+/g, "-")
+		.replace(/\//g, "_")
+		.replace(/=+$/g, "");
 }
 
 function fromBase64Url(value: string): Uint8Array {
-	const base64 = value.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(value.length / 4) * 4, "=");
+	const base64 = value
+		.replace(/-/g, "+")
+		.replace(/_/g, "/")
+		.padEnd(Math.ceil(value.length / 4) * 4, "=");
 	const binary = atob(base64);
 	return Uint8Array.from(binary, (char) => char.charCodeAt(0));
 }
@@ -34,7 +40,11 @@ async function sign(payload: string, secret: string): Promise<string> {
 	return toBase64Url(new Uint8Array(signature));
 }
 
-async function verifySignature(payload: string, signature: string, secret: string): Promise<boolean> {
+async function verifySignature(
+	payload: string,
+	signature: string,
+	secret: string,
+): Promise<boolean> {
 	try {
 		return await crypto.subtle.verify(
 			"HMAC",
@@ -47,7 +57,10 @@ async function verifySignature(payload: string, signature: string, secret: strin
 	}
 }
 
-export async function verifyPassword(password: string, expected: string): Promise<boolean> {
+export async function verifyPassword(
+	password: string,
+	expected: string,
+): Promise<boolean> {
 	const [actualHash, expectedHash] = await Promise.all([
 		crypto.subtle.digest("SHA-256", new TextEncoder().encode(password)),
 		crypto.subtle.digest("SHA-256", new TextEncoder().encode(expected)),
@@ -56,7 +69,8 @@ export async function verifyPassword(password: string, expected: string): Promis
 	const expectedBytes = new Uint8Array(expectedHash);
 	if (actual.length !== expectedBytes.length) return false;
 	let difference = 0;
-	for (let index = 0; index < actual.length; index += 1) difference |= actual[index] ^ expectedBytes[index];
+	for (let index = 0; index < actual.length; index += 1)
+		difference |= actual[index] ^ expectedBytes[index];
 	return difference === 0;
 }
 
@@ -67,9 +81,15 @@ export async function createSession(secret: string): Promise<string> {
 	return `${payload}.${signature}`;
 }
 
-export async function hasValidSession(request: Request, secret: string): Promise<boolean> {
+export async function hasValidSession(
+	request: Request,
+	secret: string,
+): Promise<boolean> {
 	const cookieHeader = request.headers.get("cookie") || "";
-	const cookie = cookieHeader.split(";").map((part) => part.trim()).find((part) => part.startsWith(`${COOKIE_NAME}=`));
+	const cookie = cookieHeader
+		.split(";")
+		.map((part) => part.trim())
+		.find((part) => part.startsWith(`${COOKIE_NAME}=`));
 	if (!cookie) return false;
 	const value = cookie.slice(COOKIE_NAME.length + 1);
 	const [expiresAt, signature] = value.split(".");
@@ -99,6 +119,10 @@ export function assertSameOrigin(request: Request): void {
 		throw new HttpError(403, "ORIGIN_REJECTED", "请求来源格式无效。");
 	}
 	if ((origin || refererOrigin) !== expected) {
-		throw new HttpError(403, "ORIGIN_REJECTED", "请求来源未被允许。原因：后台只接受同站操作，避免跨站提交配置。");
+		throw new HttpError(
+			403,
+			"ORIGIN_REJECTED",
+			"请求来源未被允许。原因：后台只接受同站操作，避免跨站提交配置。",
+		);
 	}
 }

@@ -1,4 +1,4 @@
-# Firefly Admin Worker
+# Cyrene Admin Worker
 
 该目录是博客仓库内的独立 Cloudflare Worker 管理后台。博客本身仍按仓库根目录的静态构建方式部署，不依赖本 Worker、D1 或管理 API。
 
