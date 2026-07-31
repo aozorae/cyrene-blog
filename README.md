@@ -61,6 +61,8 @@ Cyrene 的重点不只是博客前台，还包括一套面向日常使用的独�
 
 ![Cyrene 管理后台内容发布：仪表盘、文章编辑器与页面管理](./docs/images/admin-content-overview.webp)
 
+<p align="center"><strong>上方：仪表盘</strong> · <strong>左下：文章编辑器</strong> · <strong>右下：页面管理</strong></p>
+
 ### 发布方式
 
 ```text
