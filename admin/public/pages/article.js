@@ -1,18 +1,17 @@
-import {
-	ensureArticleEditor,
-	focusArticleEditor,
-	getArticleContent,
-	resetArticleContent,
-	setArticleContent,
-} from "../article-editor.js";
 import { api } from "../core/api.js";
 import { findDraft, saveDraftRecord, submitDraftIds } from "../core/drafts.js";
 import { initializeAdminPage, pageQuery } from "../core/page.js";
 import { $, setBusy, setStatus, showToast } from "../core/ui.js";
 import { articleBaseRevision } from "../features/draft-revisions.js";
+import { createMarkdownEditor } from "../features/markdown-editor.js";
 
 let articleSha = null;
 let articleRevision = null;
+const articleEditor = createMarkdownEditor({
+	editorId: "article-content-editor",
+	sourceId: "article-content",
+	placeholder: "# 从这里开始\n\n记录你的想法、过程和结论。",
+});
 
 function slugify(value) {
 	return (
@@ -35,7 +34,7 @@ function collectArticle() {
 		image: $("#article-image").value,
 		published: $("#article-published").value,
 		originalPath: $("#article-original-path").value,
-		content: getArticleContent(),
+		content: articleEditor.getValue(),
 	};
 }
 
@@ -46,7 +45,7 @@ function articleTargetPath(input) {
 
 function resetArticleForm() {
 	$("#article-form").reset();
-	resetArticleContent();
+	articleEditor.reset();
 	$("#article-category").value = "随笔";
 	$("#article-published").value = new Date().toISOString().slice(0, 10);
 	$("#article-original-path").value = "";
@@ -67,7 +66,7 @@ function populateArticle(input, revision = null, draftId = "") {
 	$("#article-image").value = input.image || "";
 	$("#article-published").value = String(input.published || "").slice(0, 10);
 	$("#article-original-path").value = input.originalPath || input.path || "";
-	setArticleContent(input.content || "");
+	articleEditor.setValue(input.content || "");
 	$("#article-draft-id").value = draftId;
 	$("#article-form-title").textContent = `编辑：${input.title || "未命名文章"}`;
 	articleRevision = revision;
@@ -101,13 +100,13 @@ async function main() {
 	if (!context) return;
 	resetArticleForm();
 	try {
-		await ensureArticleEditor();
+		await articleEditor.ensure();
 		const draft = findDraft(context.drafts, pageQuery().get("draft"), "article");
 		const path = pageQuery().get("path");
 		if (draft) populateArticle(draft.payload.input, draft.baseRevision, draft.id);
 		else if (path) {
 			const article = await api(`/api/article?path=${encodeURIComponent(path)}`);
-			if (!article.editable) throw new Error("MDX 文章包含组件代码，请从已发布文章页面查看源码并前往 GitHub 编辑。");
+			if (!article.editable) throw new Error("MDX 文章包含组件代码，请从管理内容页面查看源码并前往 GitHub 编辑。");
 			articleSha = article.sha;
 			populateArticle({ ...article, originalPath: article.path }, { [article.path]: article.sha });
 		}
@@ -130,9 +129,9 @@ async function main() {
 	});
 	$("#article-form").addEventListener("submit", async (event) => {
 		event.preventDefault();
-		if (!getArticleContent().trim()) {
+		if (!articleEditor.getValue().trim()) {
 			setStatus("#article-status", "请先填写文章正文。", "error");
-			focusArticleEditor();
+			articleEditor.focus();
 			return;
 		}
 		setBusy(event.submitter, true);

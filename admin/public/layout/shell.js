@@ -6,7 +6,7 @@ const NAVIGATION = [
 		items: [
 			{ id: "dashboard", label: "仪表盘", icon: "layout-dashboard", href: "/dashboard.html" },
 			{ id: "article", label: "发布文章", icon: "file-plus-2", href: "/article.html" },
-			{ id: "articles", label: "已发布文章", icon: "file-text", href: "/articles.html" },
+			{ id: "articles", label: "管理内容", icon: "file-text", href: "/articles.html" },
 			{ id: "dynamic", label: "发布动态", icon: "message-square-plus", href: "/dynamic.html" },
 		],
 	},

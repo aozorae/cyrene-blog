@@ -207,6 +207,13 @@
 	.article-editor-shell {
 		min-height: 330px;
 	}
+	.content-management-heading {
+		align-items: stretch;
+		flex-direction: column;
+	}
+	.content-mode-switch {
+		width: 100%;
+	}
 	.studio-toolbar-heading {
 		align-items: flex-start;
 		flex-direction: column;

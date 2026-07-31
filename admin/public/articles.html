@@ -4,12 +4,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#f0f3f8" />
-		<title>已发布文章 · 昔涟管理后台</title>
+		<title>管理内容 · 昔涟管理后台</title>
 		<link rel="icon" href="/favicon.png" />
 		<link rel="stylesheet" href="/styles.css" />
 	</head>
 	<body>
-		<main id="app-shell" class="app-shell hidden"><aside id="admin-sidebar" class="sidebar"></aside><section class="workspace"><header id="admin-topbar" class="topbar"></header><div class="view"><div class="section-intro"><span class="section-kicker">内容</span><p>实时读取 GitHub 仓库中的文章，可在这里查看、编辑或删除已发布内容。</p></div><section class="panel content-list-panel"><div class="panel-heading"><div><h3>已发布文章</h3><p>GitHub 仓库是已发布内容的真实来源。</p></div></div><div id="article-list" class="content-list"></div></section></div></section></main>
+		<main id="app-shell" class="app-shell hidden"><aside id="admin-sidebar" class="sidebar"></aside><section class="workspace"><header id="admin-topbar" class="topbar"></header><div class="view"><div class="section-intro"><span class="section-kicker">内容</span><p>实时读取 GitHub 仓库中的文章和动态，在一个页面完成已发布内容管理。</p></div><section class="panel content-list-panel"><div class="panel-heading content-management-heading"><div><h3 id="content-list-title">管理文章</h3><p id="content-list-description">查看、编辑或删除已发布文章。</p></div><div id="content-mode-switch" class="content-mode-switch" data-mode="articles" role="tablist" aria-label="内容类型"><button id="content-mode-articles" class="content-mode-option is-active" type="button" role="tab" aria-selected="true" aria-controls="content-list" data-content-mode="articles">文章</button><button id="content-mode-dynamics" class="content-mode-option" type="button" role="tab" aria-selected="false" aria-controls="content-list" tabindex="-1" data-content-mode="dynamics">动态</button></div></div><div id="content-list" class="content-list" role="tabpanel" aria-labelledby="content-mode-articles" aria-live="polite"></div></section></div></section></main>
 		<div id="toast" class="toast" role="status" aria-live="polite"></div>
 		<dialog id="source-dialog" class="source-dialog"><div class="dialog-heading"><strong id="source-title">源码</strong><button id="source-close" class="button button-quiet compact-button" type="button">关闭</button></div><pre id="source-content"></pre></dialog>
 		<script src="/pages/articles.js" type="module"></script>

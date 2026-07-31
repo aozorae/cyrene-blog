@@ -1,11 +1,15 @@
-import { api } from "../core/api.js";
 import { findDraft, saveDraftRecord, submitDraftIds } from "../core/drafts.js";
 import { initializeAdminPage, pageQuery } from "../core/page.js";
 import { $, setBusy, setStatus, showToast } from "../core/ui.js";
-import { renderContentList } from "../features/content-list.js";
 import { targetBaseRevision } from "../features/draft-revisions.js";
+import { createMarkdownEditor } from "../features/markdown-editor.js";
 
 let dynamicRevision = null;
+const dynamicEditor = createMarkdownEditor({
+	editorId: "dynamic-content-editor",
+	sourceId: "dynamic-content",
+	placeholder: "记录此刻的想法、链接或图片。",
+});
 
 function dynamicInput() {
 	let local = $("#dynamic-published").value;
@@ -14,7 +18,7 @@ function dynamicInput() {
 		$("#dynamic-published").value = local;
 	}
 	return {
-		content: $("#dynamic-content").value,
+		content: dynamicEditor.getValue(),
 		published: `${local.replace("T", " ")}:00`,
 	};
 }
@@ -42,39 +46,20 @@ async function saveDynamicDraft() {
 	return result.draft;
 }
 
-async function loadDynamics() {
-	const dynamics = await api("/api/dynamics");
-	renderContentList($("#dynamic-list"), dynamics, {
-		onDelete: async (path, button) => {
-			if (!window.confirm("确定删除这条动态吗？删除会立即创建 GitHub 提交。")) return;
-			setBusy(button, true);
-			try {
-				const result = await api(`/api/dynamics?path=${encodeURIComponent(path)}`, { method: "DELETE" });
-				showToast(result.message);
-				await loadDynamics();
-			} catch (error) {
-				showToast(error.message, "error");
-			} finally {
-				setBusy(button, false);
-			}
-		},
-	});
-}
-
 async function main() {
 	const context = await initializeAdminPage({ id: "dynamic", eyebrow: "CONTENT", title: "发布动态", icon: "message-square-plus" });
 	if (!context) return;
 	const draft = findDraft(context.drafts, pageQuery().get("draft"), "dynamic");
 	if (draft) {
-		$("#dynamic-content").value = draft.payload.input.content || "";
+		dynamicEditor.setValue(draft.payload.input.content || "");
 		$("#dynamic-published").value = String(draft.payload.input.published || "").replace(" ", "T").slice(0, 16);
 		$("#dynamic-draft-id").value = draft.id;
 		dynamicRevision = draft.baseRevision;
 	}
 	try {
-		await loadDynamics();
+		await dynamicEditor.ensure();
 	} catch (error) {
-		showToast(error.message, "error");
+		setStatus("#dynamic-status", error.message, "error");
 	}
 
 	$("#dynamic-draft-save").addEventListener("click", async (event) => {
@@ -91,6 +76,11 @@ async function main() {
 	});
 	$("#dynamic-form").addEventListener("submit", async (event) => {
 		event.preventDefault();
+		if (!dynamicEditor.getValue().trim()) {
+			setStatus("#dynamic-status", "请先填写动态内容。", "error");
+			dynamicEditor.focus();
+			return;
+		}
 		setBusy(event.submitter, true);
 		setStatus("#dynamic-status", "提交中…");
 		try {

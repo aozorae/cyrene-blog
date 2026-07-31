@@ -6,6 +6,7 @@
 		<meta name="theme-color" content="#f0f3f8" />
 		<title>发布动态 · 昔涟管理后台</title>
 		<link rel="icon" href="/favicon.png" />
+		<link rel="stylesheet" href="/vendor/vditor/dist/index.css" />
 		<link rel="stylesheet" href="/styles.css" />
 	</head>
 	<body>
@@ -16,14 +17,15 @@
 				<div class="view">
 					<div class="section-intro"><span class="section-kicker">动态</span><p>动态内容会写入 <code>src/content/dynamic/</code>，提交后由静态托管平台自动部署。</p></div>
 					<form id="dynamic-form" class="article-layout">
-						<section class="panel article-main"><div class="panel-heading"><div><h3>发布一条动态</h3><p>使用 Markdown 记录简短内容。</p></div></div><div class="field"><label for="dynamic-content">动态内容（Markdown）</label><textarea id="dynamic-content" class="article-editor" required placeholder="记录此刻的想法、链接或图片。"></textarea></div></section>
+						<section class="panel article-main"><div class="panel-heading"><div><h3>发布一条动态</h3><p>使用 Vditor 编写和预览 Markdown 内容。</p></div></div><div class="field"><label id="dynamic-content-label">动态内容（Markdown）</label><div id="dynamic-content-editor" class="article-editor-shell" aria-labelledby="dynamic-content-label"></div><textarea id="dynamic-content" hidden></textarea></div></section>
 						<aside class="panel article-side"><div class="panel-heading"><div><h3>发布时间</h3><p>留空时使用当前时间。</p></div></div><div class="field"><label for="dynamic-published">发布时间（可选）</label><input id="dynamic-published" type="datetime-local" /></div><input id="dynamic-draft-id" type="hidden" /><div class="publish-note"><strong>提交后会发生什么？</strong><span>后台创建一条动态 Markdown 文件，静态托管平台自动部署。</span></div><p id="dynamic-status" class="inline-status"></p><div class="button-stack"><button id="dynamic-draft-save" class="button button-quiet button-full" type="button">保存草稿</button><button class="button button-primary button-full" type="submit">提交到 GitHub</button></div></aside>
 					</form>
-					<section class="panel content-list-panel"><div class="panel-heading"><div><h3>已有动态</h3><p>实时读取 GitHub 仓库中的动态。</p></div></div><div id="dynamic-list" class="content-list"></div></section>
 				</div>
 			</section>
 		</main>
 		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+		<script id="vditorIconScript" src="/vendor/vditor/dist/js/icons/ant.js"></script>
+		<script src="/vendor/vditor/dist/index.min.js"></script>
 		<script src="/pages/dynamic.js" type="module"></script>
 	</body>
 </html>
