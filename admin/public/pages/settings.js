@@ -1,8 +1,10 @@
 import { saveDraftRecord, submitDraftIds, findDraft } from "../core/drafts.js";
 import { initializeAdminPage, pageQuery } from "../core/page.js";
 import { $, escapeHtml, setBusy, setStatus, showToast } from "../core/ui.js";
+import { createUnsavedChangesNotice } from "../features/unsaved-changes-notice.js";
 
 let settingsRevision = {};
+let unsavedChanges = null;
 
 function addMethodRow(method = {}) {
 	const container = $("#sponsor-methods");
@@ -72,6 +74,7 @@ async function saveSettingsDraft() {
 		baseRevision: settingsRevision,
 	});
 	settingsRevision = result.draft.baseRevision;
+	unsavedChanges?.markSaved();
 	showToast(result.message);
 	return result.draft;
 }
@@ -82,7 +85,18 @@ async function main() {
 	const draft = findDraft(context.drafts, pageQuery().get("draft"), "settings");
 	settingsRevision = draft?.baseRevision || context.config.revision;
 	renderSettings(draft?.payload.settings || context.config.settings);
-	$("#add-method").addEventListener("click", () => addMethodRow());
+	unsavedChanges = createUnsavedChangesNotice(collectSettings);
+	const scheduleUnsavedCheck = () => queueMicrotask(() => unsavedChanges?.check());
+	const form = $("#settings-form");
+	form.addEventListener("input", scheduleUnsavedCheck);
+	form.addEventListener("change", scheduleUnsavedCheck);
+	form.addEventListener("click", (event) => {
+		if (event.target.closest(".remove-method")) scheduleUnsavedCheck();
+	});
+	$("#add-method").addEventListener("click", () => {
+		addMethodRow();
+		unsavedChanges.check();
+	});
 	$("#settings-draft-save").addEventListener("click", async (event) => {
 		setBusy(event.currentTarget, true);
 		setStatus("#settings-status", "保存中…");
@@ -95,7 +109,7 @@ async function main() {
 			setBusy(event.currentTarget, false);
 		}
 	});
-	$("#settings-form").addEventListener("submit", async (event) => {
+	form.addEventListener("submit", async (event) => {
 		event.preventDefault();
 		setBusy(event.submitter, true);
 		setStatus("#settings-status", "提交中…");

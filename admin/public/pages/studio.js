@@ -2,6 +2,7 @@ import { api } from "../core/api.js";
 import { findDraft, saveDraftRecord, submitDraftIds } from "../core/drafts.js";
 import { initializeAdminPage, pageQuery } from "../core/page.js";
 import { $, escapeHtml, setBusy, setStatus, showToast } from "../core/ui.js";
+import { createUnsavedChangesNotice } from "../features/unsaved-changes-notice.js";
 import { fieldInfo } from "../field-guide.js";
 import { mountShell, updateShellContext } from "../layout/shell.js";
 import { findStudioGroup, findStudioGroupByPath } from "../studio-catalog.js";
@@ -11,6 +12,7 @@ let studio = [];
 let studioIndex = 0;
 let studioGroup = findStudioGroup(pageQuery().get("group") || "foundation").id;
 let revisionOverride = null;
+let unsavedChanges = null;
 
 function documentsForGroup() {
 	return findStudioGroup(studioGroup).items
@@ -60,6 +62,7 @@ async function saveStudioDraft() {
 		baseRevision: revisionOverride || { [document.path]: document.sha || null },
 	});
 	revisionOverride = result.draft.baseRevision;
+	unsavedChanges?.markSaved();
 	showToast(result.message);
 	return result.draft;
 }
@@ -89,17 +92,27 @@ async function main() {
 			}
 		}
 		renderStudio();
+		unsavedChanges = createUnsavedChangesNotice(() => collectStudioFormValues());
 	} catch (error) {
 		showToast(error.message, "error");
 		return;
 	}
 
+	const scheduleUnsavedCheck = () => queueMicrotask(() => unsavedChanges?.check());
+	const editor = $("#studio-editor");
+	editor.addEventListener("input", scheduleUnsavedCheck);
+	editor.addEventListener("change", scheduleUnsavedCheck);
+	editor.addEventListener("click", (event) => {
+		const action = event.target.closest("[data-studio-action]")?.dataset.studioAction;
+		if (["add", "remove", "up", "down"].includes(action)) scheduleUnsavedCheck();
+	});
 	$("#studio-config-tabs").addEventListener("click", (event) => {
 		const button = event.target.closest("[data-studio-index]");
 		if (!button) return;
 		studioIndex = Number(button.dataset.studioIndex);
 		revisionOverride = null;
 		renderStudio();
+		unsavedChanges.markSaved();
 	});
 	$("#studio-draft-save").addEventListener("click", async (event) => {
 		setBusy(event.currentTarget, true);
