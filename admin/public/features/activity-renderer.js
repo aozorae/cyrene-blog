@@ -6,7 +6,7 @@ export function commitRows(commits = [], limit = commits.length) {
 				.slice(0, limit)
 				.map(
 					(commit) =>
-						`<a class="activity-row" href="${escapeHtml(commit.url)}" target="_blank" rel="noreferrer"><span class="activity-mark"><svg class="icon" aria-hidden="true"><use href="/icons.svg#git-commit-horizontal"></use></svg></span><span class="activity-content"><strong>${escapeHtml(commit.message)}</strong><small>${formatDate(commit.date)} · ${escapeHtml(commit.sha.slice(0, 7))}</small></span></a>`,
+							`<a class="activity-row" href="${escapeHtml(commit.url)}" target="_blank" rel="noreferrer"><span class="activity-mark"><svg class="icon" aria-hidden="true"><use href="/icons.svg#git-commit-horizontal"></use></svg></span><span class="activity-content"><strong data-i18n-ignore>${escapeHtml(commit.message)}</strong><small>${formatDate(commit.date)} · ${escapeHtml(commit.sha.slice(0, 7))}</small></span></a>`,
 				)
 				.join("")
 		: '<p class="empty-copy">还没有读取到提交记录。</p>';

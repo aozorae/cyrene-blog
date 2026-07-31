@@ -1,9 +1,11 @@
+import { getLocale, translateText } from "./i18n.js";
+
 export const $ = (selector, root = document) => root.querySelector(selector);
 
 export function showToast(message, type = "success") {
 	const toast = $("#toast");
 	if (!toast) return;
-	toast.textContent = message;
+	toast.textContent = translateText(message);
 	toast.dataset.type = type;
 	toast.classList.add("toast-visible");
 	window.setTimeout(() => toast.classList.remove("toast-visible"), 3600);
@@ -12,7 +14,7 @@ export function showToast(message, type = "success") {
 export function setStatus(selector, message, type = "") {
 	const element = $(selector);
 	if (!element) return;
-	element.textContent = message;
+	element.textContent = translateText(message);
 	element.dataset.type = type;
 }
 
@@ -34,7 +36,7 @@ export function escapeHtml(value) {
 
 export function formatDate(value) {
 	if (!value) return "—";
-	return new Intl.DateTimeFormat("zh-CN", {
+	return new Intl.DateTimeFormat(getLocale(), {
 		dateStyle: "medium",
 		timeStyle: "short",
 	}).format(new Date(value));

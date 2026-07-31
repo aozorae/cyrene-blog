@@ -1,6 +1,7 @@
 import { api } from "../core/api.js";
 import { draftEditUrl, submitDraftIds } from "../core/drafts.js";
 import { initializeAdminPage } from "../core/page.js";
+import { translateText } from "../core/i18n.js";
 import { escapeHtml, formatDate, setBusy, showToast } from "../core/ui.js";
 import { findStudioGroupByPath } from "../studio-catalog.js";
 
@@ -17,7 +18,7 @@ function renderDrafts(drafts) {
 		return;
 	}
 	container.innerHTML = drafts
-		.map((draft) => `<div class="content-row pending-row"><input class="pending-checkbox" type="checkbox" value="${escapeHtml(draft.id)}" /><div class="content-row-main"><strong>${escapeHtml(draft.title)}</strong><small>${escapeHtml(draft.kind)} · ${escapeHtml(draft.path || "新内容")} · ${formatDate(draft.updatedAt)}</small></div><div class="row-actions"><a class="button button-quiet compact-button" href="${editUrl(draft)}">编辑</a><button class="button button-danger compact-button" data-delete-draft="${escapeHtml(draft.id)}">删除草稿</button></div></div>`)
+			.map((draft) => `<div class="content-row pending-row"><input class="pending-checkbox" type="checkbox" value="${escapeHtml(draft.id)}" /><div class="content-row-main"><strong data-i18n-ignore>${escapeHtml(draft.title)}</strong><small>${escapeHtml(draft.kind)} · <span data-i18n-ignore>${escapeHtml(draft.path || translateText("新内容"))}</span> · ${formatDate(draft.updatedAt)}</small></div><div class="row-actions"><a class="button button-quiet compact-button" href="${editUrl(draft)}">编辑</a><button class="button button-danger compact-button" data-delete-draft="${escapeHtml(draft.id)}">删除草稿</button></div></div>`)
 		.join("");
 	container.querySelectorAll("[data-delete-draft]").forEach((button) =>
 		button.addEventListener("click", async () => {

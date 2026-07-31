@@ -1,5 +1,9 @@
 import { api } from "../core/api.js";
+import { bindLanguageToggle, initializeI18n } from "../core/i18n.js";
 import { $, setBusy, setStatus } from "../core/ui.js";
+
+initializeI18n();
+bindLanguageToggle($("#login-language-toggle"));
 
 function destination() {
 	const value = new URLSearchParams(window.location.search).get("return") || "";

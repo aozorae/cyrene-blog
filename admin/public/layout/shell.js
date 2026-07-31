@@ -1,4 +1,5 @@
 import { api } from "../core/api.js";
+import { bindLanguageToggle } from "../core/i18n.js";
 
 const NAVIGATION = [
 	{
@@ -35,6 +36,10 @@ function icon(name) {
 	return `<svg class="icon" aria-hidden="true"><use href="/icons.svg#${name}"></use></svg>`;
 }
 
+function languageIcon() {
+	return '<img class="language-icon" src="/translate.svg" alt="" aria-hidden="true" />';
+}
+
 function navigationItem(item) {
 	const href = item.href || `/studio.html?group=${encodeURIComponent(item.group)}`;
 	const active =
@@ -55,7 +60,8 @@ export function mountShell(page) {
 	if (!sidebar || !topbar) throw new Error("后台页面缺少公共布局挂载点。");
 	sidebar.innerHTML = `<div class="brand-lockup brand-lockup-side"><span class="brand-mark" aria-hidden="true">C</span><span>CYRENE <small>ADMIN</small></span></div><nav class="side-nav" aria-label="后台导航">${NAVIGATION.map((section, index) => `<section class="nav-section" aria-labelledby="nav-section-${index}"><p id="nav-section-${index}" class="sidebar-label">${section.label}</p>${section.items.map(navigationItem).join("")}</section>`).join("")}</nav><div class="sidebar-bottom"><div class="admin-identity"><span class="admin-avatar">A</span><span><strong>Administrator</strong><small>博客管理员</small></span></div><div class="sidebar-actions"><a id="blog-link" href="#" target="_blank" rel="noreferrer" class="sidebar-action hidden" title="查看博客">${icon("external-link")}<span>查看博客</span></a><button id="logout-button" class="sidebar-action" type="button" title="退出登录">${icon("log-out")}<span>退出</span></button></div></div>`;
 	const returnPath = encodeURIComponent(`${window.location.pathname}${window.location.search}`);
-	topbar.innerHTML = `<div class="topbar-heading"><span class="topbar-icon" aria-hidden="true">${icon(page.icon)}</span><div><p class="eyebrow">${page.eyebrow}</p><h2>${page.title}</h2></div></div><a id="repo-settings" class="topbar-meta" href="/setup.html?return=${returnPath}" title="更改 GitHub 仓库">${icon("settings")}<span id="repo-meta">连接 GitHub 中…</span></a>`;
+	topbar.innerHTML = `<div class="topbar-heading"><span class="topbar-icon" aria-hidden="true">${icon(page.icon)}</span><div><p class="eyebrow">${page.eyebrow}</p><h2>${page.title}</h2></div></div><div class="topbar-actions"><button id="language-toggle" class="language-toggle" type="button">${languageIcon()}<span data-language-code>EN</span></button><a id="repo-settings" class="topbar-meta" href="/setup.html?return=${returnPath}" title="更改 GitHub 仓库">${icon("settings")}<span id="repo-meta">连接 GitHub 中…</span></a></div>`;
+	bindLanguageToggle(document.querySelector("#language-toggle"));
 	document.querySelector("#logout-button").addEventListener("click", async () => {
 		await api("/api/auth/logout", { method: "POST" }).catch(() => {});
 		window.location.replace("/");

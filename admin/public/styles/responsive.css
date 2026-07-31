@@ -145,9 +145,20 @@
 		display: none;
 	}
 	.topbar-meta {
-		max-width: 52%;
+		max-width: min(44vw, 260px);
 		min-height: 36px;
 		padding-inline: 10px;
+	}
+	.topbar-actions {
+		gap: 6px;
+	}
+	.language-toggle {
+		width: 38px;
+		height: 36px;
+		padding-inline: 5px;
+	}
+	.language-toggle span {
+		display: none;
 	}
 	.topbar-meta .icon {
 		display: none;

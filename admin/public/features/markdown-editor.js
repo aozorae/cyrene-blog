@@ -1,3 +1,5 @@
+import { isEnglish } from "../core/i18n.js";
+
 const TOOLBAR = [
 	"headings",
 	"bold",
@@ -67,7 +69,7 @@ export function createMarkdownEditor({ editorId, sourceId, placeholder }) {
 				counter: { enable: true, type: "markdown" },
 				height: 520,
 				input: (value) => syncSource(value),
-				lang: "zh_CN",
+					lang: isEnglish() ? "en_US" : "zh_CN",
 				mode: "sv",
 				placeholder,
 				preview: { delay: 300, mode: "both" },

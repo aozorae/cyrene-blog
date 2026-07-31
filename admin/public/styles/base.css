@@ -78,11 +78,49 @@ a {
 }
 .auth-card {
 	width: min(100%, 430px);
+	position: relative;
 	padding: 36px;
 	border: 1px solid var(--line);
 	border-radius: var(--radius);
 	background: var(--surface);
 	box-shadow: 0 18px 50px rgba(30, 44, 59, 0.1);
+}
+.language-toggle {
+	width: 44px;
+	height: 36px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	flex: 0 0 auto;
+	padding: 0 7px;
+	border: 1px solid var(--line);
+	border-radius: 6px;
+	background: var(--surface);
+	color: var(--ink);
+	cursor: pointer;
+}
+.language-toggle:hover {
+	border-color: var(--accent);
+	background: var(--accent-soft);
+}
+.language-toggle:focus-visible {
+	outline: 3px solid rgba(41, 118, 111, 0.18);
+	outline-offset: 2px;
+}
+.language-toggle span {
+	font-size: 9px;
+	font-weight: 800;
+}
+.language-icon {
+	width: 17px;
+	height: 17px;
+	display: block;
+}
+.auth-language-toggle {
+	position: absolute;
+	top: 20px;
+	right: 20px;
 }
 .brand-lockup {
 	display: inline-flex;

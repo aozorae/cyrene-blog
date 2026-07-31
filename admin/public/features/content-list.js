@@ -10,7 +10,7 @@ export function renderContentList(container, items, options = {}) {
 			const edit = options.onEdit
 				? `<button class="button button-quiet compact-button" data-edit-path="${escapeHtml(item.path)}">${item.editable === false ? "查看源码" : "编辑"}</button>`
 				: "";
-			return `<div class="content-row"><div class="content-row-main"><strong>${escapeHtml(item.title || item.path)}</strong><small>${escapeHtml(item.published || item.path)}${item.description ? ` · ${escapeHtml(item.description)}` : ""}</small><p>${escapeHtml(item.content || "")}</p></div><div class="row-actions">${edit}<button class="button button-danger compact-button" data-delete-path="${escapeHtml(item.path)}">删除</button></div></div>`;
+				return `<div class="content-row"><div class="content-row-main" data-i18n-ignore><strong>${escapeHtml(item.title || item.path)}</strong><small>${escapeHtml(item.published || item.path)}${item.description ? ` · ${escapeHtml(item.description)}` : ""}</small><p>${escapeHtml(item.content || "")}</p></div><div class="row-actions">${edit}<button class="button button-danger compact-button" data-delete-path="${escapeHtml(item.path)}">删除</button></div></div>`;
 		})
 		.join("");
 	container.querySelectorAll("[data-edit-path]").forEach((button) =>

@@ -1,6 +1,7 @@
 import { api } from "../core/api.js";
 import { findDraft, saveDraftRecord, submitDraftIds } from "../core/drafts.js";
 import { initializeAdminPage, pageQuery } from "../core/page.js";
+import { translateText } from "../core/i18n.js";
 import { $, setBusy, setStatus, showToast } from "../core/ui.js";
 import { articleBaseRevision } from "../features/draft-revisions.js";
 import { createMarkdownEditor } from "../features/markdown-editor.js";
@@ -10,7 +11,7 @@ let articleRevision = null;
 const articleEditor = createMarkdownEditor({
 	editorId: "article-content-editor",
 	sourceId: "article-content",
-	placeholder: "# 从这里开始\n\n记录你的想法、过程和结论。",
+	placeholder: translateText("# 从这里开始\n\n记录你的想法、过程和结论。"),
 });
 
 function slugify(value) {

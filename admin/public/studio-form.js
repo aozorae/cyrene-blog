@@ -7,6 +7,7 @@ import {
 	getStudioObjectExtraFields,
 	isStudioFieldVisible,
 } from "./studio-field-schema.js";
+import { translateText } from "./core/i18n.js";
 import { getStudioItemSummary } from "./studio-item-summary.js";
 import { getStudioCollapsibleSection } from "./studio-section-collapse.js";
 
@@ -137,7 +138,7 @@ function renderObjectArrayItem(item, path, index, depth) {
 	const expanded = active.expandedItems.has(item);
 	const bodyId = `${fieldId(itemPath)}-details`;
 	const actionLabel = formatToggleActionLabel(expanded, presentation.title);
-	return `<article class="studio-array-card ${expanded ? "is-expanded" : ""}"><div class="studio-array-card-heading"><button class="studio-array-card-toggle" type="button" title="${active.escapeHtml(actionLabel)}" aria-label="${active.escapeHtml(actionLabel)}" aria-expanded="${expanded}" aria-controls="${bodyId}" data-studio-action="toggle" data-studio-item-path="${active.escapeHtml(itemPath)}"><svg class="icon studio-array-card-chevron" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg><span class="studio-array-card-summary"><strong>${active.escapeHtml(presentation.title)}</strong><span class="studio-array-card-meta">${presentation.meta}</span></span></button>${renderArrayActions(path, index)}</div><div id="${bodyId}" class="studio-array-card-body" ${expanded ? "" : "hidden"}>${fields}</div></article>`;
+		return `<article class="studio-array-card ${expanded ? "is-expanded" : ""}"><div class="studio-array-card-heading"><button class="studio-array-card-toggle" type="button" title="${active.escapeHtml(actionLabel)}" aria-label="${active.escapeHtml(actionLabel)}" aria-expanded="${expanded}" aria-controls="${bodyId}" data-studio-action="toggle" data-studio-item-path="${active.escapeHtml(itemPath)}"><svg class="icon studio-array-card-chevron" aria-hidden="true"><use href="/icons.svg#chevron-right"></use></svg><span class="studio-array-card-summary"><strong data-i18n-ignore>${active.escapeHtml(presentation.title)}</strong><span class="studio-array-card-meta">${presentation.meta}</span></span></button>${renderArrayActions(path, index)}</div><div id="${bodyId}" class="studio-array-card-body" ${expanded ? "" : "hidden"}>${fields}</div></article>`;
 }
 
 function formatObjectArrayPresentation(itemPath, item, index) {
@@ -146,7 +147,7 @@ function formatObjectArrayPresentation(itemPath, item, index) {
 	const details = summary.details
 		.map(
 			(value) =>
-				`<span class="studio-array-card-detail" title="${active.escapeHtml(value)}">${active.escapeHtml(value)}</span>`,
+					`<span class="studio-array-card-detail" data-i18n-ignore title="${active.escapeHtml(value)}">${active.escapeHtml(value)}</span>`,
 		)
 		.join('<span class="studio-array-card-separator" aria-hidden="true">·</span>');
 	const placeholder =
@@ -181,7 +182,8 @@ function renderArrayActions(path, index) {
 function renderScalar(value, path, depth) {
 	const meta = fieldMeta(path, value);
 	if (meta.readonly) {
-		return `<div class="studio-field ${depth ? "studio-nested-field" : ""}"><label>${active.escapeHtml(meta.label)}<small>${active.escapeHtml(meta.help)}</small></label><div class="studio-readonly-value">${active.escapeHtml(value ?? "未设置")}</div></div>`;
+		const displayValue = value ?? translateText("未设置");
+		return `<div class="studio-field ${depth ? "studio-nested-field" : ""}"><label>${active.escapeHtml(meta.label)}<small>${active.escapeHtml(meta.help)}</small></label><div class="studio-readonly-value" data-i18n-ignore>${active.escapeHtml(displayValue)}</div></div>`;
 	}
 	if (typeof value === "boolean")
 		return renderBoolean(value, path, meta, depth);

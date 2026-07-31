@@ -1,5 +1,6 @@
 import { findDraft, saveDraftRecord, submitDraftIds } from "../core/drafts.js";
 import { initializeAdminPage, pageQuery } from "../core/page.js";
+import { translateText } from "../core/i18n.js";
 import { $, setBusy, setStatus, showToast } from "../core/ui.js";
 import { targetBaseRevision } from "../features/draft-revisions.js";
 import { createMarkdownEditor } from "../features/markdown-editor.js";
@@ -8,7 +9,7 @@ let dynamicRevision = null;
 const dynamicEditor = createMarkdownEditor({
 	editorId: "dynamic-content-editor",
 	sourceId: "dynamic-content",
-	placeholder: "记录此刻的想法、链接或图片。",
+	placeholder: translateText("记录此刻的想法、链接或图片。"),
 });
 
 function dynamicInput() {

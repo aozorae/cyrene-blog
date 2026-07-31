@@ -1,4 +1,5 @@
 import { api } from "./api.js";
+import { initializeI18n } from "./i18n.js";
 import { mountShell, revealShell, updateShellContext } from "../layout/shell.js";
 import { showToast } from "./ui.js";
 
@@ -11,6 +12,7 @@ export function loginUrl() {
 }
 
 export async function initializeAdminPage(page, options = {}) {
+	initializeI18n();
 	mountShell(page);
 	try {
 		const session = await api("/api/auth/me");

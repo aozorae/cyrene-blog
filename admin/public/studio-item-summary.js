@@ -1,4 +1,5 @@
 import { normalizeStudioPath } from "./studio-field-schema.js";
+import { translateText } from "./core/i18n.js";
 
 const SUMMARY_FIELDS = {
 	"siteConfig.favicon[]": ["src", "sizes"],
@@ -65,11 +66,11 @@ function formatSummaryValue(value) {
 			.filter(Boolean)
 			.join("、");
 	}
-	if (typeof value === "boolean") return value ? "是" : "否";
+	if (typeof value === "boolean") return translateText(value ? "是" : "否");
 	if (typeof value === "number") return String(value);
 	if (typeof value !== "string") return "";
 	const normalized = value.trim();
-	return VALUE_LABELS[normalized] || normalized;
+	return VALUE_LABELS[normalized] ? translateText(VALUE_LABELS[normalized]) : normalized;
 }
 
 function formatItemStatus(item) {
@@ -84,5 +85,5 @@ function formatItemStatus(item) {
 		typeof value === "string"
 			? !["", "0", "false", "off", "no"].includes(value.trim().toLowerCase())
 			: Boolean(value);
-	return { active, label: active ? "已启用" : "已停用" };
+	return { active, label: translateText(active ? "已启用" : "已停用") };
 }
