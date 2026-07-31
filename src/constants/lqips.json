@@ -1,5 +1,4 @@
 {
-  "src:assets/images/avatar.avif": "dcd8d5d1cecabea9a9",
   "public:gallery/firefly-2026/cover.avif": "7588a28a8f989e8d88",
   "public:gallery/firefly-2026/1.avif": "c8bca9dde6d2babfb5",
   "public:assets/images/sponsor/wechat.png": "d5d5d5dad9d7dbd8cf",
@@ -26,8 +25,9 @@
   "src:assets/images/MobileWallpaper/cyrene-mobile-03.avif": "cda7c2bb9fbab8a3c3",
   "src:assets/images/MobileWallpaper/cyrene-mobile-02.avif": "d9c9d8d4c6d4c5b0ca",
   "src:assets/images/MobileWallpaper/cyrene-mobile-01.avif": "bc9ac8b599c3c8acdd",
-  "src:assets/images/DesktopWallpaper/cyrene-pc-04.avif": "cfcfe0d1a4c9bea6c3",
   "src:assets/images/DesktopWallpaper/cyrene-pc-03.avif": "896e9b6d67a8abb0cd",
   "src:assets/images/DesktopWallpaper/cyrene-pc-02.avif": "a0cbe9c8afd9bba5d2",
-  "src:assets/images/DesktopWallpaper/cyrene-pc-01.avif": "b191b9b294bb9b78a2"
+  "src:assets/images/DesktopWallpaper/cyrene-pc-01.avif": "b191b9b294bb9b78a2",
+  "src:assets/images/avatar.avif": "eecae0f5d4e5f2ddeb",
+  "src:assets/images/DesktopWallpaper/cyrene-pc-05.avif": "dcb7cfbca8d4a6b0de"
 }
