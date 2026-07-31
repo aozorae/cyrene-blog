@@ -7,8 +7,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		"desktop": [
 			"assets/images/DesktopWallpaper/cyrene-pc-01.avif",
 			"assets/images/DesktopWallpaper/cyrene-pc-02.avif",
-			"assets/images/DesktopWallpaper/cyrene-pc-03.avif",
-			"assets/images/DesktopWallpaper/cyrene-pc-04.avif"
+			"assets/images/DesktopWallpaper/cyrene-pc-03.avif"
 		],
 		"mobile": [
 			"assets/images/MobileWallpaper/cyrene-mobile-01.avif",
