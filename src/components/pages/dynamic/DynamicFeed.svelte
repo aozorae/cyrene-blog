@@ -68,6 +68,117 @@ const pageEntries = $derived(
 	filtered.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage),
 );
 
+const allowedHtmlTags = new Set([
+	"a",
+	"blockquote",
+	"br",
+	"code",
+	"del",
+	"details",
+	"div",
+	"em",
+	"h1",
+	"h2",
+	"h3",
+	"h4",
+	"h5",
+	"h6",
+	"hr",
+	"kbd",
+	"li",
+	"ol",
+	"p",
+	"pre",
+	"span",
+	"strong",
+	"sub",
+	"summary",
+	"sup",
+	"table",
+	"tbody",
+	"td",
+	"th",
+	"thead",
+	"tr",
+	"ul",
+]);
+const discardedHtmlTags = new Set([
+	"iframe",
+	"math",
+	"noscript",
+	"object",
+	"script",
+	"style",
+	"svg",
+	"template",
+]);
+const globalHtmlAttributes = new Set(["class", "dir", "lang", "title"]);
+
+function isSafeLink(value: string) {
+	const normalized = [...value]
+		.filter((character) => {
+			const code = character.charCodeAt(0);
+			return code > 32 && code !== 127;
+		})
+		.join("");
+	if (normalized.startsWith("#") || normalized.startsWith("/")) return true;
+	try {
+		return ["http:", "https:", "mailto:", "tel:"].includes(
+			new URL(normalized, window.location.origin).protocol,
+		);
+	} catch {
+		return false;
+	}
+}
+
+/** Convert remote HTML to a new tree containing only safe Markdown elements. */
+function sanitizeRemoteHtml(html: string) {
+	const parsed = new DOMParser().parseFromString(html, "text/html");
+	const fragment = document.createDocumentFragment();
+
+	const appendSafeNode = (node: Node, parent: Node) => {
+		if (node.nodeType === Node.TEXT_NODE) {
+			parent.appendChild(document.createTextNode(node.textContent ?? ""));
+			return;
+		}
+		if (!(node instanceof HTMLElement)) return;
+
+		const tag = node.localName;
+		if (discardedHtmlTags.has(tag)) return;
+		if (!allowedHtmlTags.has(tag)) {
+			for (const child of [...node.childNodes]) appendSafeNode(child, parent);
+			return;
+		}
+
+		const element = document.createElement(tag);
+		for (const attribute of [...node.attributes]) {
+			const name = attribute.name.toLowerCase();
+			if (globalHtmlAttributes.has(name)) {
+				element.setAttribute(name, attribute.value);
+			} else if (
+				tag === "a" &&
+				name === "href" &&
+				isSafeLink(attribute.value)
+			) {
+				element.setAttribute("href", attribute.value);
+			} else if (
+				tag === "a" &&
+				name === "target" &&
+				attribute.value === "_blank"
+			) {
+				element.setAttribute("target", "_blank");
+				element.setAttribute("rel", "noopener noreferrer");
+			}
+		}
+		for (const child of [...node.childNodes]) appendSafeNode(child, element);
+		parent.appendChild(element);
+	};
+
+	for (const child of [...parsed.body.childNodes])
+		appendSafeNode(child, fragment);
+	return fragment;
+}
+
 function pageFromUrl() {
 	return Math.max(
 		1,
@@ -201,7 +312,7 @@ function createItem(entry: DynamicData) {
 	const content = root.querySelector<HTMLElement>("[data-dynamic-content]");
 	if (content) {
 		content.id = `${anchorId}-content`;
-		content.innerHTML = entry.html;
+		content.replaceChildren(sanitizeRemoteHtml(entry.html));
 		for (const image of entry.images) {
 			const element = document.createElement("img");
 			element.src = image.src;
