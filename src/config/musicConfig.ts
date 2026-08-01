@@ -42,16 +42,44 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 
 	// 本地音乐配置（当 mode 为 'local' 时使用）
 	// 1. 支持传入歌词文件的路径
-	// lrc: "/assets/music/lrc/使一颗心免于哀伤-哼唱.lrc",
+	// lrc: "/assets/music/lrc/再度和你.lrc",
 	// 2. 或者直接填入歌词字符串内容
 	// lrc: "[00:00.00]歌词内容...",
 	local: {
 		playlist: [
 			{
+				name: "再度和你",
+				artist: "HOYO-MiX",
+				url: "/assets/music/再度和你.mp3",
+				cover: "/assets/music/cover/再度和你.jpg",
+				lrc: "",
+			},
+			{
+				name: "昔涟",
+				artist: "张韶涵 / HOYO-MiX",
+				url: "/assets/music/昔涟.mp3",
+				cover: "/assets/music/cover/昔涟.jpg",
+				lrc: "",
+			},
+			{
+				name: "希望有羽毛和翅膀",
+				artist: "知更鸟 / HOYO-MiX / Chevy",
+				url: "/assets/music/希望有羽毛和翅膀.mp3",
+				cover: "/assets/music/cover/空气蛹-INSIDE.jpg",
+				lrc: "",
+			},
+			{
+				name: "在银河中孤独摇摆",
+				artist: "知更鸟 / HOYO-MiX / Chevy",
+				url: "/assets/music/在银河中孤独摇摆.mp3",
+				cover: "/assets/music/cover/空气蛹-INSIDE.jpg",
+				lrc: "",
+			},
+			{
 				name: "使一颗心免于哀伤",
 				artist: "知更鸟 / HOYO-MiX / Chevy",
-				url: "/assets/music/使一颗心免于哀伤-哼唱.mp3",
-				cover: "/assets/music/cover/109951169585655912.webp",
+				url: "/assets/music/使一颗心免于哀伤.mp3",
+				cover: "/assets/music/cover/空气蛹-INSIDE.jpg",
 				lrc: "",
 			},
 		],
