@@ -32,6 +32,7 @@ body {
 	color: var(--ink);
 	line-height: 1.5;
 }
+
 button,
 input,
 textarea,
@@ -320,4 +321,21 @@ textarea {
 }
 .inline-status[data-type="success"] {
 	color: var(--success);
+}
+
+/* 桌面端按用户验证过的 125% 比例放大整套后台，同时保留移动端原有的紧凑响应式布局。 */
+@media (min-width: 821px) {
+	body {
+		zoom: 1.25;
+	}
+
+	/* zoom 会同步放大视口单位，按倒数补偿后全屏布局仍准确占满浏览器高度。 */
+	.auth-layout,
+	.app-shell {
+		min-height: 80dvh;
+	}
+
+	.sidebar {
+		height: 80dvh;
+	}
 }

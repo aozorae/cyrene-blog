@@ -25,11 +25,21 @@ const showTitle = widgetConfig?.showTitle !== false;
 
 // 博客版本（从 package.json 读取）
 let blogVersion = "unknown";
+let svelteVersion = "unknown";
+let tailwindVersion = "unknown";
+let typescriptVersion = "unknown";
 try {
 	const pkg = JSON.parse(
 		readFileSync(new URL("../../../package.json", import.meta.url), "utf-8"),
 	);
 	blogVersion = pkg.version || "unknown";
+	const getPackageVersion = (name: string) =>
+		String(
+			pkg.dependencies?.[name] || pkg.devDependencies?.[name] || "unknown",
+		).replace(/^[~^]/, "");
+	svelteVersion = getPackageVersion("svelte");
+	tailwindVersion = getPackageVersion("tailwindcss");
+	typescriptVersion = getPackageVersion("typescript");
 } catch {}
 
 // Astro 版本（从已安装的 astro 包读取）
@@ -134,6 +144,21 @@ const detailItems: {
 		icon: "material-symbols:rocket-launch-outline",
 		label: i18n(I18nKey.siteInfoAstroVersion),
 		value: `v${astroVersion}`,
+	},
+	{
+		icon: "simple-icons:svelte",
+		label: "Svelte",
+		value: `v${svelteVersion}`,
+	},
+	{
+		icon: "simple-icons:tailwindcss",
+		label: "Tailwind CSS",
+		value: `v${tailwindVersion}`,
+	},
+	{
+		icon: "simple-icons:typescript",
+		label: "TypeScript",
+		value: `v${typescriptVersion}`,
 	},
 	{
 		icon: "fa7-brands:node-js",

@@ -9,16 +9,29 @@ export const siteConfig: SiteConfig = {
 	title: "昔涟",
 
 	// 站点副标题
-	subtitle: "个人博客",
+	subtitle: "技术、记录与 Cyrene",
 
 	// 站点 URL
 	site_url: "https://cyrene-blog.vercel.app",
 
 	// 站点描述
-	description: "一个仍在慢慢完善的个人博客。",
+	description:
+		"aozorae 的个人博客，记录 Cyrene 的开发迭代、Web 技术实践与日常内容。",
 
 	// 站点关键词
-	keywords: ["昔涟", "Astro", "ACGN", "博客", "技术博客", "静态博客"],
+	keywords: [
+		"昔涟",
+		"Cyrene",
+		"aozorae",
+		"Astro",
+		"Svelte",
+		"Tailwind CSS",
+		"TypeScript",
+		"Vercel",
+		"Cloudflare Workers",
+		"GitHub Actions",
+		"技术博客",
+	],
 
 	// 主题色
 	themeColor: {

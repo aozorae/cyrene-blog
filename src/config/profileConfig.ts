@@ -9,10 +9,10 @@ export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar.avif",
 
 	// 名字
-	name: "站点作者",
+	name: "aozorae",
 
 	// 个人签名
-	bio: "一句话介绍，等待补充。",
+	bio: "在 GitHub 上记录 Cyrene 的开发、部署与每一次迭代。",
 
 	// 链接配置
 	// 已经预装的图标集：fa7-brands，fa7-regular，fa7-solid，material-symbols，simple-icons
@@ -22,10 +22,16 @@ export const profileConfig: ProfileConfig = {
 	// showName: true 时显示图标和名称，false 时只显示图标
 	links: [
 		{
-			name: "GitHub",
+			name: "GitHub 主页",
 			icon: "fa7-brands:github",
+			url: "https://github.com/aozorae",
+			showName: true,
+		},
+		{
+			name: "项目源码",
+			icon: "material-symbols:code-rounded",
 			url: "https://github.com/aozorae/cyrene-blog",
-			showName: false,
+			showName: true,
 		},
 		{
 			name: "RSS",
