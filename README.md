@@ -17,6 +17,8 @@
 </div>
 
 ---
+<img width="3809" height="1961" alt="屏幕截图 2026-08-03 183349" src="https://github.com/user-attachments/assets/1cfa83cd-d259-43f8-acd2-2fa4c82163a0" />
+
 
 📖 README：
 **[简体中文](README.md)** | **[繁體中文](docs/README.zh-TW.md)** | **[English](README.en.md)** | **[日本語](docs/README.ja.md)** 
