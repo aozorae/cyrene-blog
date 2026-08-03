@@ -1,3 +1,5 @@
+<img src="./docs/images/cyrene-readme-hero.jpg" width = "350" height = "500" alt="Cyrene" align=right />
+
 <div align="center">
 
 # 昔涟 / Cyrene
@@ -17,8 +19,6 @@
 </div>
 
 ---
-<img width="1024" height="1536" alt="粉紫幻彩魔法少女" src="./docs/images/cyrene-readme-hero.jpg" />
-
 
 📖 README：
 **[简体中文](README.md)** | **[繁體中文](docs/README.zh-TW.md)** | **[English](README.en.md)** | **[日本語](docs/README.ja.md)** 
