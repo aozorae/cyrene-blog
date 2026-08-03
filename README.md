@@ -17,7 +17,7 @@
 </div>
 
 ---
-<img width="3809" height="1961" alt="屏幕截图 2026-08-03 183349" src="https://github.com/user-attachments/assets/1cfa83cd-d259-43f8-acd2-2fa4c82163a0" />
+<img width="1024" height="1536" alt="粉紫幻彩魔法少女" src="./docs/images/cyrene-readme-hero.jpg" />
 
 
 📖 README：
