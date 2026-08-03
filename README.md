@@ -35,6 +35,7 @@
 📱 移动友好: 完美的响应式体验，移动端专项优化
 
 🧭 可视化后台: 不需要手动改配置文件，也能发布内容、管理草稿和调整站点
+<img width="3809" height="1961" alt="屏幕截图 2026-08-03 183349" src="https://github.com/user-attachments/assets/9785fada-f567-414a-86f8-b899cbd898b0" />
 
 >[!TIP]
 >
