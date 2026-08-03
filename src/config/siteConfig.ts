@@ -6,7 +6,7 @@ const SITE_LANG = "zh_CN";
 
 export const siteConfig: SiteConfig = {
 	"title": "Cyrene - demo site",
-	"subtitle": "技术、记录与 Cyrene",
+	"subtitle": "Cyrene - demo site",
 	"site_url": "https://cyrene-blog.vercel.app",
 	"description": "Hello, I'm Cyrene",
 	"keywords": [
