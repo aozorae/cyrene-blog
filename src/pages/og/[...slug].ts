@@ -194,11 +194,12 @@ export async function GET({
 	}
 
 	// 站点图标处理：优先选择 png 格式的图标，回退到第一个 favicon
-	let iconPath = "./public/favicon/favicon-dark-192.png";
+	let iconPath = "./public/favicon/android-chrome-192x192.png";
 	if (siteConfig.favicon.length > 0) {
-		const pngFavicon = siteConfig.favicon.find((f) =>
-			f.src.toLowerCase().endsWith(".png"),
-		);
+		const pngFavicon =
+			siteConfig.favicon.find(
+				(f) => f.sizes === "192x192" && f.src.toLowerCase().endsWith(".png"),
+			) ?? siteConfig.favicon.find((f) => f.src.toLowerCase().endsWith(".png"));
 		iconPath = `./public${(pngFavicon ?? siteConfig.favicon[0]).src}`;
 	}
 	const iconBase64 = await imageToPngBase64(

@@ -168,6 +168,8 @@ const siteLang = lang.replace("_", "-");
         />
       ))
     }
+    <link rel="apple-touch-icon" sizes="180x180" href={url("/favicon/apple-touch-icon.png")} />
+    <link rel="manifest" href={url("/favicon/site.webmanifest")} />
 
     <!-- 为特定域名的图片添加 referrerpolicy 以解决 403 问题 -->
     <!-- 注：静态图片（ImageWrapper 组件、Markdown 正文图）已在构建期加好 referrerpolicy；

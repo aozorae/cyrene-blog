@@ -26,7 +26,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		"title": "项目仓库",
-		"imgurl": "/favicon/firefly-32.png",
+		"imgurl": "/favicon/android-chrome-192x192.png",
 		"desc": "昔涟博客的源代码与更新记录。",
 		"siteurl": "https://github.com/aozorae/cyrene-blog",
 		"tags": [
