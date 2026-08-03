@@ -5,8 +5,8 @@ import type { SiteConfig } from "@/types/siteConfig";
 const SITE_LANG = "zh_CN";
 
 export const siteConfig: SiteConfig = {
-	"title": "Cyrene - demo site",
-	"subtitle": "Cyrene - demo site",
+	"title": "Cyrene",
+	"subtitle": "demo site",
 	"site_url": "https://cyrene-blog.vercel.app",
 	"description": "Hello, I'm Cyrene",
 	"keywords": [
