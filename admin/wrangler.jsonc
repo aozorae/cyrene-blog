@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "firefly-blog-admin",
+  "name": "cyrene-personal-admin",
   "main": "src/index.ts",
   "tsconfig": "./tsconfig.json",
   "compatibility_date": "2026-07-21",
@@ -13,9 +13,10 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "firefly-blog-admin-db",
-      "database_id": "00000000-0000-0000-0000-000000000000",
-      "migrations_dir": "./migrations"
+      "database_name": "cyrene-personal-admin-db",
+      "database_id": "b3abe50a-e055-4ac9-ad60-ddc15659783c",
+      "migrations_dir": "./migrations",
+      "remote": true
     }
   ],
   "observability": {
