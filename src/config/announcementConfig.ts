@@ -1,7 +1,7 @@
 import type { AnnouncementConfig } from "../types/announcementConfig";
 
 export const announcementConfig: AnnouncementConfig = {
-	// 公告标题
+	// 保留 Cyrene 的独立标题，避免上游默认文案覆盖个人站点标识
 	title: "关于 Cyrene",
 
 	// 公告内容

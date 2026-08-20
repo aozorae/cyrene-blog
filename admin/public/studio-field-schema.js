@@ -12,6 +12,9 @@ const DOCUMENT_GUIDES = {
 	"src/config/backgroundWallpaper.ts": docsGuide(
 		"/guide/config-foundation#background-wallpaper",
 	),
+	"src/config/displaySettingsConfig.ts": docsGuide(
+		"/guide/config-foundation#display-settings",
+	),
 	"src/config/navBarConfig.ts": docsGuide("/guide/config-components#navbar"),
 	"src/config/sidebarConfig.ts": docsGuide("/guide/config-components#sidebar"),
 	"src/config/fontConfig.ts": docsGuide("/guide/config-features#font"),
@@ -23,16 +26,21 @@ const DOCUMENT_GUIDES = {
 	),
 	"src/config/musicConfig.ts": docsGuide("/guide/config-features#music-player"),
 	"src/config/commentConfig.ts": docsGuide("/guide/config-features#comments"),
-	"src/config/analyticsConfig.ts": docsGuide("/guide/config-features#analytics"),
+	"src/config/analyticsConfig.ts": docsGuide(
+		"/guide/config-features#analytics",
+	),
 	"src/config/mermaidConfig.ts": docsGuide("/guide/config-features#mermaid"),
 	"src/config/plantumlConfig.ts": docsGuide("/guide/config-features#plantuml"),
 	"src/config/dynamicConfig.ts": docsGuide("/guide/config-pages#dynamic"),
+	"src/config/booknavConfig.ts": docsGuide("/guide/config-pages#booknav"),
 	"src/config/friendsConfig.ts": docsGuide("/guide/config-pages#friends"),
 	"src/config/galleryConfig.ts": docsGuide("/guide/config-pages#gallery"),
 	"src/config/sponsorConfig.ts": docsGuide("/guide/config-pages#sponsor"),
 	"src/config/effectsConfig.ts": docsGuide("/guide/config-extensions#effects"),
 	"src/config/footerConfig.ts": docsGuide("/guide/config-extensions#footer"),
-	"src/config/FooterConfig.html": docsGuide("/guide/config-extensions#footer-html"),
+	"src/config/FooterConfig.html": docsGuide(
+		"/guide/config-extensions#footer-html",
+	),
 	"src/config/licenseConfig.ts": docsGuide("/guide/config-extensions#license"),
 	"src/config/pioConfig.ts": docsGuide("/guide/config-extensions#mascot"),
 };
@@ -62,6 +70,20 @@ const PATH_SCHEMAS = {
 	"siteConfig.navbar.menuAlign": {
 		options: [choice("left", "左对齐"), choice("center", "居中")],
 	},
+	"siteConfig.pages": {
+		readonly: true,
+		help: "运行时页面开关由同一文件中的 pageToggles 生成，请在该配置区修改。",
+	},
+	"siteConfig.categoryStyle": {
+		options: [choice("pill", "胶囊"), choice("rectangle", "矩形")],
+	},
+	"siteConfig.tagStyle": {
+		options: [
+			choice("pill", "主题色胶囊"),
+			choice("pill-gray", "灰色胶囊"),
+			choice("rectangle", "主题色矩形"),
+		],
+	},
 	"siteConfig.postListLayout.defaultMode": {
 		options: [choice("list", "列表"), choice("grid", "网格")],
 	},
@@ -70,6 +92,12 @@ const PATH_SCHEMAS = {
 	},
 	"siteConfig.postListLayout.tagsPosition": {
 		options: [choice("meta", "标题下方"), choice("bottom", "卡片底部")],
+	},
+	"siteConfig.postListLayout.coverPosition": {
+		options: [choice("left", "左侧"), choice("right", "右侧")],
+	},
+	"siteConfig.postListLayout.tagsBottomStyle": {
+		options: [choice("chip", "按钮"), choice("text", "纯文字")],
 	},
 	"siteConfig.post.rehypeCallouts.theme": {
 		options: [
@@ -80,6 +108,12 @@ const PATH_SCHEMAS = {
 		],
 	},
 	"siteConfig.bangumi.mode": {
+		options: [
+			choice("static", "构建时获取"),
+			choice("dynamic", "浏览器实时获取"),
+		],
+	},
+	"siteConfig.vndb.mode": {
 		options: [
 			choice("static", "构建时获取"),
 			choice("dynamic", "浏览器实时获取"),
@@ -146,13 +180,13 @@ const PATH_SCHEMAS = {
 	"backgroundWallpaper.common.playerMode": {
 		options: [choice("order", "顺序循环"), choice("random", "随机播放")],
 	},
-	"backgroundWallpaper.common.postInfo.mode": {
+	"backgroundWallpaper.banner.postInfo.mode": {
 		options: [
 			choice("description", "显示文章摘要"),
 			choice("meta", "显示文章信息"),
 		],
 	},
-	"backgroundWallpaper.common.navbar.transparentMode": {
+	"backgroundWallpaper.banner.navbar.transparentMode": {
 		options: [
 			choice("semi", "半透明"),
 			choice("full", "完全透明"),
@@ -170,6 +204,12 @@ const PATH_SCHEMAS = {
 	"backgroundWallpaper.common.dimOpacity": fractionSchema(),
 	"backgroundWallpaper.overlay.opacity": fractionSchema(),
 	"backgroundWallpaper.overlay.cardOpacity": fractionSchema(),
+	"displaySettingsOptions.overlaySwitchable.opacity": { type: "boolean" },
+	"displaySettingsOptions.overlaySwitchable.blur": { type: "boolean" },
+	"displaySettingsOptions.overlaySwitchable.cardOpacity": { type: "boolean" },
+	"booknavPageConfig.favicon.api": {
+		help: "地址必须包含 {domain} 占位符，前台会替换成书签目标域名。",
+	},
 	"musicPlayerConfig.mode": {
 		options: [choice("meting", "Meting API"), choice("local", "本地播放列表")],
 	},
@@ -392,6 +432,28 @@ const FIELD_PRESENTATION = {
 	parent: { label: "Memos 用户", help: "格式为 users/用户名，用于筛选动态。" },
 	method: { label: "搜索方式", help: "主题使用的站内搜索实现。" },
 	playerMode: { label: "视频播放顺序", help: "多段背景视频的切换方式。" },
+	pageToggles: {
+		label: "页面开关",
+		help: "关闭后页面返回 404，并自动隐藏对应导航入口。",
+	},
+	displaySettingsOptions: {
+		label: "访客显示设置",
+		help: "控制前台设置面板及各项可切换能力；部署平台环境变量仍可覆盖总开关。",
+	},
+	booknavPageConfig: {
+		label: "书签页面",
+		help: "配置页面标题、描述与 favicon 获取方式。",
+	},
+	booknavConfig: { label: "书签分组", help: "按权重排序书签分组和组内链接。" },
+	overlaySwitchable: {
+		label: "透明与模糊调节",
+		help: "控制访客是否可以调整壁纸与卡片参数。",
+	},
+	dynamicTransparent: {
+		label: "动态透明导航栏",
+		help: "全屏壁纸首页顶部透明，下滑后恢复背景。",
+	},
+	blurRamp: { label: "滚动模糊渐变", help: "可分别控制桌面端和移动端。" },
 	homeText: { label: "首页横幅文字", help: "控制首页壁纸上的标题和副标题。" },
 	titleSize: { label: "标题字号", help: "填写 rem、px 等 CSS 字号。" },
 	subtitleSize: { label: "副标题字号", help: "填写 rem、px 等 CSS 字号。" },
@@ -542,6 +604,23 @@ const ARRAY_TEMPLATES = {
 		password: "",
 		passwordHint: "",
 	},
+	booknavConfig: {
+		id: "",
+		name: "",
+		icon: "material-symbols:bookmarks-outline-rounded",
+		desc: "",
+		weight: 0,
+		enabled: true,
+		items: [],
+	},
+	"booknavConfig[].items": {
+		title: "",
+		url: "",
+		desc: "",
+		icon: "",
+		weight: 0,
+		enabled: true,
+	},
 	"sponsorConfig.methods": {
 		name: "",
 		icon: "material-symbols:favorite-outline",
@@ -572,6 +651,8 @@ const OBJECT_EXTRA_FIELDS = {
 	"fontsList[]": { display: "swap" },
 	"fontsList[].options.variants[]": { weight: "400", style: "normal" },
 	"galleryConfig.albums[]": { cover: "", password: "", passwordHint: "" },
+	"booknavConfig[]": { icon: "", desc: "", weight: 0, enabled: true },
+	"booknavConfig[].items[]": { desc: "", icon: "", weight: 0, enabled: true },
 };
 
 function sidebarComponentChoices() {
@@ -681,7 +762,7 @@ export function isStudioFieldVisible(path, values) {
 	if (path === "backgroundWallpaper.banner")
 		return values.backgroundWallpaper?.mode === "banner";
 	if (path === "backgroundWallpaper.overlay")
-		return values.backgroundWallpaper?.mode === "overlay";
+		return ["overlay", "fullscreen"].includes(values.backgroundWallpaper?.mode);
 	if (path === "backgroundWallpaper.fullscreen")
 		return values.backgroundWallpaper?.mode === "fullscreen";
 	return true;
@@ -700,7 +781,9 @@ export function formatStudioItemTitle(item, index) {
 			item.url,
 			item.action,
 		].find((candidate) =>
-			Array.isArray(candidate) ? candidate.length > 0 : String(candidate || "").trim(),
+			Array.isArray(candidate)
+				? candidate.length > 0
+				: String(candidate || "").trim(),
 		);
 		if (Array.isArray(value)) return value.join("、") || `项目 ${index + 1}`;
 		if (value !== undefined) return String(value);

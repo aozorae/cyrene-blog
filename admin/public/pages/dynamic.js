@@ -21,11 +21,13 @@ function dynamicInput() {
 	return {
 		content: dynamicEditor.getValue(),
 		published: `${local.replace("T", " ")}:00`,
+		location: $("#dynamic-location").value,
 	};
 }
 
 function dynamicTargetPath(input) {
-	const date = input.published || new Date().toISOString().slice(0, 19).replace("T", " ");
+	const date =
+		input.published || new Date().toISOString().slice(0, 19).replace("T", " ");
 	const digits = date.replace(/\D/g, "").padEnd(14, "0").slice(0, 14);
 	return `src/content/dynamic/${digits.slice(0, 4)}-${digits.slice(4, 6)}-${digits.slice(6, 8)}-${digits.slice(8, 14)}.md`;
 }
@@ -48,12 +50,20 @@ async function saveDynamicDraft() {
 }
 
 async function main() {
-	const context = await initializeAdminPage({ id: "dynamic", eyebrow: "CONTENT", title: "发布动态", icon: "message-square-plus" });
+	const context = await initializeAdminPage({
+		id: "dynamic",
+		eyebrow: "CONTENT",
+		title: "发布动态",
+		icon: "message-square-plus",
+	});
 	if (!context) return;
 	const draft = findDraft(context.drafts, pageQuery().get("draft"), "dynamic");
 	if (draft) {
 		dynamicEditor.setValue(draft.payload.input.content || "");
-		$("#dynamic-published").value = String(draft.payload.input.published || "").replace(" ", "T").slice(0, 16);
+		$("#dynamic-published").value = String(draft.payload.input.published || "")
+			.replace(" ", "T")
+			.slice(0, 16);
+		$("#dynamic-location").value = draft.payload.input.location || "";
 		$("#dynamic-draft-id").value = draft.id;
 		dynamicRevision = draft.baseRevision;
 	}

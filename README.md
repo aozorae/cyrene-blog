@@ -6,9 +6,9 @@
 > 一款基于 Astro 与 Firefly 深度定制，并配有独立可视化后台的个人博客
 > 
 > ![Node.js >= 22](https://img.shields.io/badge/node.js-%3E%3D22-brightgreen) 
-![pnpm >= 9](https://img.shields.io/badge/pnpm-%3E%3D9-blue)
-![Astro](https://img.shields.io/badge/Astro-7.1.3-orange)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue)
+![pnpm >= 11](https://img.shields.io/badge/pnpm-%3E%3D9-blue)
+![Astro](https://img.shields.io/badge/Astro-7.2.0-orange)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-blue)
 >
 > [![Stars](https://img.shields.io/github/stars/aozorae/cyrene-blog?style=social)](https://github.com/aozorae/cyrene-blog/stargazers)
 [![Forks](https://img.shields.io/github/forks/aozorae/cyrene-blog?style=social)](https://github.com/aozorae/cyrene-blog/network/members)
@@ -37,6 +37,21 @@
 🧭 可视化后台: 不需要手动改配置文件，也能发布内容、管理草稿和调整站点
 
 <img width="3809" height="1961" alt="屏幕截图 2026-08-03 183349" src="https://github.com/user-attachments/assets/9785fada-f567-414a-86f8-b899cbd898b0" />
+
+<table width="100%" align="center">
+  <tr>
+    <td colspan="3" align="center">
+      <img src="./docs/images/1.webp" >
+      <br>横幅模式</td>
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><img src="./docs/images/3.webp" width="300"><br>透明覆盖模式</td>
+    <td align="center"><img src="./docs/images/2.webp" width="300"><br>全屏壁纸模式</td>
+    <td align="center"><img src="./docs/images/4.webp" width="300"><br>纯色模式</td>
+  </tr>
+</table>
+<img alt="Lighthouse" src="./docs/images/Lighthouse.png" />
 
 >[!TIP]
 >
@@ -103,7 +118,7 @@ Cyrene 的重点不只是博客前台，还包括一套面向日常使用的独�
 ### 环境要求
 
 - Node.js ≥ 22
-- pnpm ≥ 9
+- pnpm ≥ 11
 
 ### 本地开发部署
 
@@ -136,9 +151,6 @@ Cyrene 的重点不只是博客前台，还包括一套面向日常使用的独�
    pnpm dev
    ```
    博客将在 `http://localhost:4321` 可用
-   
-### 社区教程
-Cloudflare Workers 部署：[【不用服务器，无需备案，零成本搭建一个自己的个人博客】](https://www.bilibili.com/video/BV1hX9XBKEhm)
 
 ### 平台托管部署
 - **参考[官方指南](https://docs.astro.build/zh-cn/guides/deploy/)将博客部署至 Vercel, Netlify, Cloudflare Pages, EdgeOne Pages 等。**

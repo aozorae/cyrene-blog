@@ -30,9 +30,23 @@ function renderSettings(settings) {
 	$("#github-url").value = settings.githubUrl || "";
 	$("#announcement").value = settings.announcement || "";
 	$("#announcement-link").value = settings.announcementLink || "/about/";
-	const pageNames = { dynamic: "动态", sponsor: "打赏", friends: "友链", guestbook: "留言", gallery: "相册", anime: "追番", bangumi: "番组计划" };
+	const pageNames = {
+		dynamic: "动态",
+		sponsor: "打赏",
+		friends: "友链",
+		guestbook: "留言",
+		gallery: "相册",
+		booknav: "书签导航",
+		bilibili: "哔哩哔哩追番",
+		bangumi: "番组计划",
+		vndb: "VNDB",
+		mal: "MyAnimeList",
+	};
 	$("#page-toggles").innerHTML = Object.entries(pageNames)
-		.map(([key, label]) => `<label class="toggle-card"><span><strong>${label}</strong><small>${key === "dynamic" ? "保留现有动态内容" : "个人数据页面"}</small></span><input type="checkbox" data-page="${key}" ${settings.pages?.[key] ? "checked" : ""} /><i></i></label>`)
+		.map(
+			([key, label]) =>
+				`<label class="toggle-card"><span><strong>${label}</strong><small>${key === "dynamic" ? "保留现有动态内容" : "个人数据页面"}</small></span><input type="checkbox" data-page="${key}" ${settings.pages?.[key] ? "checked" : ""} /><i></i></label>`,
+		)
 		.join("");
 	$("#sponsor-methods").innerHTML = "";
 	(settings.sponsorMethods || []).forEach(addMethodRow);
@@ -45,8 +59,15 @@ function collectSettings() {
 	});
 	const sponsorMethods = [...document.querySelectorAll(".method-row")]
 		.map((row) => {
-			const value = (name) => row.querySelector(`[data-method="${name}"]`)?.value.trim() || "";
-			return { name: value("name"), icon: value("icon"), qrCode: value("qrCode"), link: value("link"), description: value("description") };
+			const value = (name) =>
+				row.querySelector(`[data-method="${name}"]`)?.value.trim() || "";
+			return {
+				name: value("name"),
+				icon: value("icon"),
+				qrCode: value("qrCode"),
+				link: value("link"),
+				description: value("description"),
+			};
 		})
 		.filter((method) => method.name);
 	return {
@@ -80,13 +101,19 @@ async function saveSettingsDraft() {
 }
 
 async function main() {
-	const context = await initializeAdminPage({ id: "settings", eyebrow: "LEGACY SETTINGS", title: "兼容设置", icon: "settings-2" });
+	const context = await initializeAdminPage({
+		id: "settings",
+		eyebrow: "LEGACY SETTINGS",
+		title: "兼容设置",
+		icon: "settings-2",
+	});
 	if (!context) return;
 	const draft = findDraft(context.drafts, pageQuery().get("draft"), "settings");
 	settingsRevision = draft?.baseRevision || context.config.revision;
 	renderSettings(draft?.payload.settings || context.config.settings);
 	unsavedChanges = createUnsavedChangesNotice(collectSettings);
-	const scheduleUnsavedCheck = () => queueMicrotask(() => unsavedChanges?.check());
+	const scheduleUnsavedCheck = () =>
+		queueMicrotask(() => unsavedChanges?.check());
 	const form = $("#settings-form");
 	form.addEventListener("input", scheduleUnsavedCheck);
 	form.addEventListener("change", scheduleUnsavedCheck);

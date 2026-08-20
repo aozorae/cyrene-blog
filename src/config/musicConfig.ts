@@ -18,7 +18,7 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 	playMode: "list",
 
 	// 是否显启用歌词
-	showLyrics: true,
+	showLyrics: false,
 
 	// Meting API 配置
 	meting: {

@@ -10,6 +10,7 @@ export const STUDIO_GROUPS = [
 			{ path: "src/config/profileConfig.ts", label: "个人资料" },
 			{ path: "src/config/announcementConfig.ts", label: "公告" },
 			{ path: "src/config/backgroundWallpaper.ts", label: "背景壁纸" },
+			{ path: "src/config/displaySettingsConfig.ts", label: "显示设置面板" },
 		],
 	},
 	{
@@ -48,6 +49,7 @@ export const STUDIO_GROUPS = [
 		icon: "files",
 		items: [
 			{ path: "src/config/dynamicConfig.ts", label: "动态" },
+			{ path: "src/config/booknavConfig.ts", label: "书签导航" },
 			{ path: "src/config/friendsConfig.ts", label: "友链" },
 			{ path: "src/config/galleryConfig.ts", label: "相册" },
 			{ path: "src/config/sponsorConfig.ts", label: "打赏" },

@@ -4,9 +4,17 @@
   }
 
   .title {
-    font-family:
-      var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-      Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: var(
+      --font-code,
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      "Liberation Mono",
+      "Courier New",
+      monospace
+    );
   }
 
   /* Language Badge 样式适配主题色和亮暗色 */
@@ -99,6 +107,10 @@ body.wallpaper-transparent .expressive-code .ec-collapse__gradient {
  * 沿用插件自带的原生样式（下划线式标签），
  * 只把颜色换成主题变量，并处理横向滚动与外边距。
  */
+
+.rehype-code-group {
+  margin: 1rem 0;
+}
 
 .rehype-code-group .rcg-tab-container {
   /* 标签多时可换行，避免溢出 */

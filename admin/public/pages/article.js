@@ -8,6 +8,7 @@ import { createMarkdownEditor } from "../features/markdown-editor.js";
 
 let articleSha = null;
 let articleRevision = null;
+let articleFrontmatter = "";
 const articleEditor = createMarkdownEditor({
 	editorId: "article-content-editor",
 	sourceId: "article-content",
@@ -35,6 +36,7 @@ function collectArticle() {
 		image: $("#article-image").value,
 		published: $("#article-published").value,
 		originalPath: $("#article-original-path").value,
+		frontmatter: articleFrontmatter,
 		content: articleEditor.getValue(),
 	};
 }
@@ -54,6 +56,7 @@ function resetArticleForm() {
 	$("#article-form-title").textContent = "新文章";
 	articleSha = null;
 	articleRevision = null;
+	articleFrontmatter = "";
 	setStatus("#article-status", "");
 }
 
@@ -71,6 +74,7 @@ function populateArticle(input, revision = null, draftId = "") {
 	$("#article-draft-id").value = draftId;
 	$("#article-form-title").textContent = `编辑：${input.title || "未命名文章"}`;
 	articleRevision = revision;
+	articleFrontmatter = input.frontmatter || "";
 }
 
 async function saveArticleDraft() {
@@ -97,19 +101,37 @@ async function saveArticleDraft() {
 }
 
 async function main() {
-	const context = await initializeAdminPage({ id: "article", eyebrow: "CONTENT", title: "发布文章", icon: "file-plus-2" });
+	const context = await initializeAdminPage({
+		id: "article",
+		eyebrow: "CONTENT",
+		title: "发布文章",
+		icon: "file-plus-2",
+	});
 	if (!context) return;
 	resetArticleForm();
 	try {
 		await articleEditor.ensure();
-		const draft = findDraft(context.drafts, pageQuery().get("draft"), "article");
+		const draft = findDraft(
+			context.drafts,
+			pageQuery().get("draft"),
+			"article",
+		);
 		const path = pageQuery().get("path");
-		if (draft) populateArticle(draft.payload.input, draft.baseRevision, draft.id);
+		if (draft)
+			populateArticle(draft.payload.input, draft.baseRevision, draft.id);
 		else if (path) {
-			const article = await api(`/api/article?path=${encodeURIComponent(path)}`);
-			if (!article.editable) throw new Error("MDX 文章包含组件代码，请从管理内容页面查看源码并前往 GitHub 编辑。");
+			const article = await api(
+				`/api/article?path=${encodeURIComponent(path)}`,
+			);
+			if (!article.editable)
+				throw new Error(
+					"MDX 文章包含组件代码，请从管理内容页面查看源码并前往 GitHub 编辑。",
+				);
 			articleSha = article.sha;
-			populateArticle({ ...article, originalPath: article.path }, { [article.path]: article.sha });
+			populateArticle(
+				{ ...article, originalPath: article.path },
+				{ [article.path]: article.sha },
+			);
 		}
 	} catch (error) {
 		setStatus("#article-status", error.message, "error");

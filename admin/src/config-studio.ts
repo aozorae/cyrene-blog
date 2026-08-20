@@ -38,6 +38,11 @@ export const STUDIO_CONFIGS = [
 		description: "桌面/移动背景、视频、轮播与透明度。",
 	},
 	{
+		path: "src/config/displaySettingsConfig.ts",
+		title: "显示设置面板",
+		description: "控制访客可用的主题、布局、壁纸和特效开关。",
+	},
+	{
 		path: "src/config/musicConfig.ts",
 		title: "音乐播放器",
 		description: "音乐服务、播放列表和播放器行为。",
@@ -66,6 +71,11 @@ export const STUDIO_CONFIGS = [
 		path: "src/config/dynamicConfig.ts",
 		title: "动态页面",
 		description: "动态页面标题、评论和分页。",
+	},
+	{
+		path: "src/config/booknavConfig.ts",
+		title: "书签导航",
+		description: "书签页面信息、分组和链接条目。",
 	},
 	{
 		path: "src/config/friendsConfig.ts",
@@ -353,6 +363,7 @@ function serialize(value: unknown, depth = 0): string {
 	}
 	if (typeof value === "string")
 		return value === "SITE_LANG" ||
+			value === "resolvedPages" ||
 			/^[A-Za-z_$][\w$]*\.[A-Za-z_$][\w$]*$/.test(value)
 			? value
 			: JSON.stringify(value);
@@ -429,6 +440,12 @@ function parseDocument(
 		description: config.description,
 		exports,
 	};
+}
+
+export function parseStudioSource(path: string, source: string): unknown {
+	const config = STUDIO_CONFIGS.find((item) => item.path === path);
+	if (!config) throw new HttpError(400, "CONFIG_NOT_ALLOWED", "这个配置文件不在可视化管理白名单中。");
+	return parseDocument({ path, content: source }, config);
 }
 
 export async function readStudio(
