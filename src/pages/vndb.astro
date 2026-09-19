@@ -29,7 +29,7 @@ const vndbConfig = {
 	downloadCovers: siteConfig.vndb?.downloadCovers ?? false,
 	apiUrl: siteConfig.vndb?.apiUrl || "https://api.vndb.org/kana",
 	vnBaseUrl: siteConfig.vndb?.vnBaseUrl || "https://vndb.org/",
-	apiToken: siteConfig.vndb?.apiToken || "",
+	apiToken: import.meta.env.VNDB_API_TOKEN || "",
 	pagination: {
 		limit: 100,
 		delay: 100,
