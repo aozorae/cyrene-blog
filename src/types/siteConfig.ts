@@ -182,7 +182,6 @@ export type SiteConfig = {
 		downloadCovers?: boolean; // 构建时下载并压缩 VNDB 封面到本地
 		apiUrl?: string; // VNDB API 地址
 		vnBaseUrl?: string; // VNDB 条目详情页地址，末尾需要带 /
-		apiToken?: string; // 私密列表访问令牌，仅 static 模式下使用
 		blurNsfw?: boolean; // 对Nsfw的游戏封面模糊化，默认为true
 	};
 
