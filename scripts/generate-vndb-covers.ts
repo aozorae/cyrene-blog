@@ -122,7 +122,7 @@ async function main() {
 	const items = await fetchAllItems(
 		config.apiUrl || "https://api.vndb.org/kana",
 		userId,
-		config.apiToken || "",
+		process.env.VNDB_API_TOKEN || "",
 	);
 	const results = await mapLimit(items, CONCURRENCY, async (item, index) => {
 		const result = await downloadCover(item);
