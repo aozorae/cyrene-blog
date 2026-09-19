@@ -245,8 +245,7 @@ export const siteConfig: SiteConfig = {
 		apiUrl: "https://api.vndb.org/kana",
 		// 条目详情页地址，末尾需要带 /
 		vnBaseUrl: "https://vndb.org/",
-		// 私密列表访问令牌，仅 static 模式下使用；不要把真实令牌提交到公开仓库！
-		apiToken: "",
+		// 私密列表访问令牌仅 static 模式下使用，请通过 VNDB_API_TOKEN 环境变量配置
 		// 对Nsfw的游戏封面模糊化
 		blurNsfw: true,
 	},
